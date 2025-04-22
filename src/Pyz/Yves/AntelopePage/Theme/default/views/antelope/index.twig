@@ -1,0 +1,27 @@
+{% extends 'layout.twig' %}
+
+{% block content %}
+    <h1>List of Antelopes</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Color</th>
+                <th>Location</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for antelope in antelopes %}
+                <tr>
+                    <td>{{ antelope.name }}</td>
+                    <td>{{ antelope.color }}</td>
+                    <td>{{ antelope.location }}</td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="3">No antelopes found</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}
