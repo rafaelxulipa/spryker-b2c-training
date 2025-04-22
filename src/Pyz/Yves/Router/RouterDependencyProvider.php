@@ -64,6 +64,7 @@ use SprykerShop\Yves\ProductSetListPage\Plugin\Router\ProductSetListPageRoutePro
 use SprykerShop\Yves\SalesReturnPage\Plugin\Router\SalesReturnPageRouteProviderPlugin;
 use SprykerShop\Yves\StorageRouter\Plugin\Router\StorageRouterPlugin;
 use SprykerShop\Yves\WishlistPage\Plugin\Router\WishlistPageRouteProviderPlugin;
+use Pyz\Yves\AntelopePage\Plugin\Router\AntelopePageRouteProviderPlugin;
 
 class RouterDependencyProvider extends SprykerRouterDependencyProvider
 {
@@ -132,6 +133,7 @@ class RouterDependencyProvider extends SprykerRouterDependencyProvider
             new ProductComparisonPageRouteProviderPlugin(),
             new PaymentAppWidgetRouteProviderPlugin(),
             new CustomerDataChangeRequestRouteProviderPlugin(),
+            new AntelopePageRouteProviderPlugin(),
         ];
     }
 
