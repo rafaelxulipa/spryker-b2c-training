@@ -4,8 +4,8 @@
     "namespaces": [
         {
             "codeBucket": "",
-            "namespace": "",
-            "themes": [],
+            "namespace": "meisters",
+            "themes": ["meisters"],
             "defaultTheme": "default"
         }
     ]
