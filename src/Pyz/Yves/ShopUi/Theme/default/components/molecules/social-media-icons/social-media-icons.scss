@@ -1,0 +1,28 @@
+.social-media-icons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 20px 0;
+    gap: 15px;
+
+    &__icon {
+        margin: 0 10px;
+        color: #333;
+
+        &:hover {
+            color: #007bff;
+        }
+
+        &--facebook {
+            color: #3b5998;
+        }
+
+        &--twitter {
+            color: #1da1f2;
+        }
+
+        &--instagram {
+            color: #e1306c;
+        }
+    }
+}
