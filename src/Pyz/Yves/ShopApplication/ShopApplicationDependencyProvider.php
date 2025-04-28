@@ -119,6 +119,7 @@ use SprykerShop\Yves\TabsWidget\Widget\FullTextSearchTabsWidget;
 use SprykerShop\Yves\TraceableEventWidget\Widget\TraceableEventWidget;
 use SprykerShop\Yves\WebProfilerWidget\Plugin\Application\WebProfilerApplicationPlugin;
 use SprykerShop\Yves\WishlistWidget\Widget\WishlistMenuItemWidget;
+use Pyz\Yves\ProductSocialWidget\Widget\ProductSocialWidget;
 
 /**
  * @SuppressWarnings(PHPMD.ExcessiveMethodLength)
@@ -221,6 +222,7 @@ class ShopApplicationDependencyProvider extends SprykerShopApplicationDependency
             ExpressCheckoutPaymentWidget::class,
             TraceableEventWidget::class,
             CustomerEmailChangeRequestWidget::class,
+            ProductSocialWidget::class,
         ];
     }
 
