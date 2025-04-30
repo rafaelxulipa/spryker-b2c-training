@@ -5,8 +5,6 @@
  * For full license information, please view the LICENSE file that was distributed with this source code.
  */
 
-declare(strict_types = 1);
-
 namespace PyzTest\Zed\NavigationGui\Presentation;
 
 use Faker\Factory;
@@ -32,17 +30,6 @@ class NavigationCRUDCest
      * @var int
      */
     public const ELEMENT_TIMEOUT = 5;
-
-    /**
-     * @param \PyzTest\Zed\NavigationGui\NavigationGuiPresentationTester $i
-     *
-     * @return void
-     */
-    public function _before(NavigationGuiPresentationTester $i): void
-    {
-        $i->amZed();
-        $i->amLoggedInUser();
-    }
 
     /**
      * @param \PyzTest\Zed\NavigationGui\NavigationGuiPresentationTester $i
@@ -82,8 +69,9 @@ class NavigationCRUDCest
         $i->checkIsActiveField(true);
         $i->submitNavigationForm();
         $i->seeCurrentUrlEquals(NavigationPage::URL);
+        $idNavigation = $i->seeSuccessMessage(NavigationCreatePage::MESSAGE_SUCCESS);
 
-        return (int)$i->seeSuccessMessage(NavigationCreatePage::MESSAGE_SUCCESS);
+        return $idNavigation;
     }
 
     /**
@@ -105,7 +93,7 @@ class NavigationCRUDCest
      *
      * @return void
      */
-    protected function update(NavigationGuiPresentationTester $i, int $idNavigation): void
+    protected function update(NavigationGuiPresentationTester $i, $idNavigation): void
     {
         $i->wantTo('Update existing navigation.');
         $i->expect('Navigation is persisted in Zed');

@@ -5,8 +5,6 @@
  * For full license information, please view the LICENSE file that was distributed with this source code.
  */
 
-declare(strict_types = 1);
-
 namespace Pyz\Zed\DataImport\Business\Model\ProductImage\Writer;
 
 use Generated\Shared\Transfer\SpyProductImageEntityTransfer;
@@ -130,13 +128,11 @@ class ProductImagePropelDataSetWriter implements DataSetWriterInterface
         $productImageToImageSetRelationTransfer = $this->getProductImageToImageSetRelationTransfer($dataSet);
         $productImageSetToProductImageEntity->setSortOrder($productImageToImageSetRelationTransfer->getSortOrder());
 
-        if (!$productImageSetToProductImageEntity->isNew() && !$productImageSetToProductImageEntity->isModified()) {
-            return;
+        if ($productImageSetToProductImageEntity->isNew() || $productImageSetToProductImageEntity->isModified()) {
+            $productImageSetToProductImageEntity->save();
+
+            $this->addImagePublishEvents($productImageSetEntity);
         }
-
-        $productImageSetToProductImageEntity->save();
-
-        $this->addImagePublishEvents($productImageSetEntity);
     }
 
     /**

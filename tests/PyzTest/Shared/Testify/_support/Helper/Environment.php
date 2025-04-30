@@ -5,8 +5,6 @@
  * For full license information, please view the LICENSE file that was distributed with this source code.
  */
 
-declare(strict_types = 1);
-
 namespace PyzTest\Shared\Testify\Helper;
 
 use Codeception\Module;
@@ -29,8 +27,7 @@ class Environment extends Module
         $applicationEnv = $this->getApplicationEnv();
 
         defined('APPLICATION_ENV') || define('APPLICATION_ENV', $applicationEnv);
-
-        defined('APPLICATION_STORE') || define('APPLICATION_STORE', (isset($_SERVER['APPLICATION_STORE']) && $_SERVER['APPLICATION_STORE'] !== '') ? $_SERVER['APPLICATION_STORE'] : 'DE'); // phpcs:ignore SlevomatCodingStandard.Variables.DisallowSuperGlobalVariable
+        defined('APPLICATION_STORE') || define('APPLICATION_STORE', (isset($_SERVER['APPLICATION_STORE']) && $_SERVER['APPLICATION_STORE'] !== '') ? $_SERVER['APPLICATION_STORE'] : 'DE');
         putenv('APPLICATION_STORE=' . APPLICATION_STORE);
 
         defined('APPLICATION') || define('APPLICATION', '');

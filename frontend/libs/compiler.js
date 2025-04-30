@@ -14,7 +14,6 @@ const multiCompile = (configs) => {
     });
 
     const webpackConfigs = configs.map((item) => item.webpack);
-
     webpack(webpackConfigs, (err, multiStats) => {
         if (err) {
             console.error(err.stack || err);

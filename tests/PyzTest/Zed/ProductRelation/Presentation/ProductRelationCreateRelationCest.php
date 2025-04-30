@@ -5,8 +5,6 @@
  * For full license information, please view the LICENSE file that was distributed with this source code.
  */
 
-declare(strict_types = 1);
-
 namespace PyzTest\Zed\ProductRelation\Presentation;
 
 use PyzTest\Zed\ProductRelation\PageObject\ProductRelationCreatePage;
@@ -30,17 +28,6 @@ class ProductRelationCreateRelationCest
      *
      * @return void
      */
-    public function _before(ProductRelationPresentationTester $i): void
-    {
-        $i->amZed();
-        $i->amLoggedInUser();
-    }
-
-    /**
-     * @param \PyzTest\Zed\ProductRelation\ProductRelationPresentationTester $i
-     *
-     * @return void
-     */
     public function testICanCreateProductRelationAndSeeInYves(ProductRelationPresentationTester $i): void
     {
         $i->wantTo('I want to create up selling relation');
@@ -51,6 +38,7 @@ class ProductRelationCreateRelationCest
         $i->waitForElement('//*[@id="product_relation_productRelationKey"]');
         $productRelationKey = uniqid('key-', false);
         $i->fillField('//*[@id="product_relation_productRelationKey"]', $productRelationKey);
+
         $i->selectRelationType(ProductRelationTypes::TYPE_RELATED_PRODUCTS);
         $i->filterProductsByName(ProductRelationCreatePage::PRODUCT_RELATION_PRODUCT_1_NAME);
         $i->selectProduct(ProductRelationCreatePage::PRODUCT_RELATION_PRODUCT_1_SKU);

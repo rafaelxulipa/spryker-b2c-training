@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types = 1);
-
 use Monolog\Logger;
 use Spryker\Shared\Application\ApplicationConstants;
 use Spryker\Shared\Customer\CustomerConstants;

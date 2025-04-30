@@ -5,8 +5,6 @@
  * For full license information, please view the LICENSE file that was distributed with this source code.
  */
 
-declare(strict_types = 1);
-
 namespace Pyz\Zed\DataImport\Business\Model\DiscountStore;
 
 use Orm\Zed\Discount\Persistence\SpyDiscountQuery;
@@ -61,7 +59,7 @@ class DiscountStoreWriterStep implements DataImportStepInterface
      *
      * @return int
      */
-    protected function getIdDiscountByKey(string $discountKey): int
+    protected function getIdDiscountByKey($discountKey): int
     {
         if (!isset(static::$idDiscountBuffer[$discountKey])) {
             static::$idDiscountBuffer[$discountKey] =
@@ -76,7 +74,7 @@ class DiscountStoreWriterStep implements DataImportStepInterface
      *
      * @return int
      */
-    protected function getIdStoreByName(string $storeName): int
+    protected function getIdStoreByName($storeName): int
     {
         if (!isset(static::$idStoreBuffer[$storeName])) {
             static::$idStoreBuffer[$storeName] =

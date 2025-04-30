@@ -5,8 +5,6 @@
  * For full license information, please view the LICENSE file that was distributed with this source code.
  */
 
-declare(strict_types = 1);
-
 namespace Pyz\Zed\DataImport\Business\Model\MerchantUser;
 
 use Generated\Shared\Transfer\MerchantUserCriteriaTransfer;
@@ -58,19 +56,17 @@ class MerchantUserWriterStep implements DataImportStepInterface
                 ->setIdMerchant($idMerchant),
         );
 
-        if ($merchantUserTransfer) {
-            return;
+        if (!$merchantUserTransfer) {
+            $userTransfer = $this->merchantUserFacade->findUser(
+                (new UserCriteriaTransfer())->setIdUser($idUser),
+            );
+
+            $this->merchantUserFacade->createMerchantUser(
+                (new MerchantUserTransfer())
+                    ->setIdMerchant($idMerchant)
+                    ->setUser($userTransfer),
+            );
         }
-
-        $userTransfer = $this->merchantUserFacade->findUser(
-            (new UserCriteriaTransfer())->setIdUser($idUser),
-        );
-
-        $this->merchantUserFacade->createMerchantUser(
-            (new MerchantUserTransfer())
-                ->setIdMerchant($idMerchant)
-                ->setUser($userTransfer),
-        );
     }
 
     /**

@@ -5,8 +5,6 @@
  * For full license information, please view the LICENSE file that was distributed with this source code.
  */
 
-declare(strict_types = 1);
-
 namespace Pyz\Glue\GlueBackendApiApplicationGlueJsonApiConventionConnector;
 
 use Spryker\Glue\GlueBackendApiApplicationGlueJsonApiConventionConnector\GlueBackendApiApplicationGlueJsonApiConventionConnectorDependencyProvider as SprykerGlueBackendApiApplicationGlueJsonApiConventionConnectorDependencyProvider;
@@ -19,6 +17,11 @@ use Spryker\Glue\ProductImageSetsBackendApi\Plugin\GlueBackendApiApplicationGlue
 use Spryker\Glue\ProductsBackendApi\Plugin\GlueBackendApiApplicationGlueJsonApiConventionConnector\ConcreteProductsByPickingListItemsBackendResourceRelationshipPlugin;
 use Spryker\Glue\ProductsBackendApi\ProductsBackendApiConfig;
 use Spryker\Glue\SalesOrdersBackendApi\Plugin\GlueBackendApiApplicationGlueJsonApiConventionConnector\SalesOrdersByPickingListItemsBackendResourceRelationshipPlugin;
+use Spryker\Glue\ServicePointsBackendApi\Plugin\GlueBackendApiApplicationGlueJsonApiConventionConnector\ServicePointAddressesByServicePointsBackendResourceRelationshipPlugin;
+use Spryker\Glue\ServicePointsBackendApi\Plugin\GlueBackendApiApplicationGlueJsonApiConventionConnector\ServicePointsByServicesBackendResourceRelationshipPlugin;
+use Spryker\Glue\ServicePointsBackendApi\Plugin\GlueBackendApiApplicationGlueJsonApiConventionConnector\ServicesByServicePointsBackendResourceRelationshipPlugin;
+use Spryker\Glue\ServicePointsBackendApi\Plugin\GlueBackendApiApplicationGlueJsonApiConventionConnector\ServiceTypesByServicesBackendResourceRelationshipPlugin;
+use Spryker\Glue\ServicePointsBackendApi\ServicePointsBackendApiConfig;
 use Spryker\Glue\ShipmentsBackendApi\Plugin\GlueBackendApiApplicationGlueJsonApiConventionConnector\SalesShipmentsByPickingListsBackendResourceRelationshipPlugin;
 use Spryker\Glue\UsersBackendApi\Plugin\GlueBackendApiApplicationGlueJsonApiConventionConnector\UserByWarehouseUserAssignmentBackendResourceRelationshipPlugin;
 use Spryker\Glue\WarehouseUsersBackendApi\WarehouseUsersBackendApiConfig;
@@ -66,6 +69,26 @@ class GlueBackendApiApplicationGlueJsonApiConventionConnectorDependencyProvider 
         $resourceRelationshipCollection->addRelationship(
             PickingListsBackendApiConfig::RESOURCE_PICKING_LISTS,
             new WarehousesByPickingListsBackendResourceRelationshipPlugin(),
+        );
+
+        $resourceRelationshipCollection->addRelationship(
+            ServicePointsBackendApiConfig::RESOURCE_SERVICE_POINTS,
+            new ServicePointAddressesByServicePointsBackendResourceRelationshipPlugin(),
+        );
+
+        $resourceRelationshipCollection->addRelationship(
+            ServicePointsBackendApiConfig::RESOURCE_SERVICE_POINTS,
+            new ServicesByServicePointsBackendResourceRelationshipPlugin(),
+        );
+
+        $resourceRelationshipCollection->addRelationship(
+            ServicePointsBackendApiConfig::RESOURCE_SERVICES,
+            new ServicePointsByServicesBackendResourceRelationshipPlugin(),
+        );
+
+        $resourceRelationshipCollection->addRelationship(
+            ServicePointsBackendApiConfig::RESOURCE_SERVICES,
+            new ServiceTypesByServicesBackendResourceRelationshipPlugin(),
         );
 
         $resourceRelationshipCollection->addRelationship(

@@ -39,6 +39,14 @@
                 <action>index</action>
                 <visible>1</visible>
             </order-list>
+            <merchant-sales-order>
+                <label>My Orders</label>
+                <title>My Orders</title>
+                <bundle>merchant-sales-order-merchant-user-gui</bundle>
+                <controller>index</controller>
+                <action>index</action>
+                <visible>1</visible>
+            </merchant-sales-order>
             <sales-reclamations>
                 <label>Reclamations</label>
                 <title>Reclamations</title>
@@ -55,6 +63,14 @@
                 <action>index</action>
                 <visible>1</visible>
             </returns>
+            <merchant-sales-return>
+                <label>My Returns</label>
+                <title>My Returns</title>
+                <bundle>merchant-sales-return-merchant-user-gui</bundle>
+                <controller>index</controller>
+                <action>index</action>
+                <visible>1</visible>
+            </merchant-sales-return>
             <table>
                 <label>Refunds</label>
                 <title>Refunds</title>
@@ -307,6 +323,34 @@
             </category-filters>
         </pages>
     </merchandising>
+    <marketplace>
+        <label>Marketplace</label>
+        <title>Marketplace</title>
+        <icon>fa-shopping-basket</icon>
+        <pages>
+            <merchant>
+                <label>Merchants</label>
+                <title>Merchants</title>
+                <bundle>merchant-gui</bundle>
+                <controller>list-merchant</controller>
+                <action>index</action>
+            </merchant>
+            <merchant-commission-gui>
+                <label>Merchant Commissions</label>
+                <title>Merchant Commissions</title>
+                <bundle>merchant-commission-gui</bundle>
+                <controller>list</controller>
+                <action>index</action>
+            </merchant-commission-gui>
+            <product-offer-gui>
+                <label>Offers</label>
+                <title>Offers</title>
+                <bundle>product-offer-gui</bundle>
+                <controller>list</controller>
+                <action>index</action>
+            </product-offer-gui>
+        </pages>
+    </marketplace>
     <users>
         <label>Users</label>
         <title>Users</title>
@@ -343,7 +387,6 @@
         <controller>index</controller>
         <action>index</action>
     </app-catalog-gui>
-
     <dynamic-entities-gui>
         <label>Data Exchange API Configuration</label>
         <title>Data Exchange API Configuration</title>

@@ -25,9 +25,6 @@ sections:
         router-cache-warmup-backoffice:
             command: 'vendor/bin/console router:cache:warm-up:backoffice'
 
-        oms-process-cache-warmup:
-            command: 'vendor/bin/console oms:process-cache:warm-up'
-
         router-cache-warmup-backend-gateway:
             command: 'vendor/bin/console router:cache:warm-up:backend-gateway'
 
@@ -41,13 +38,13 @@ sections:
             command: 'vendor/bin/console rest-api:build-request-validation-cache'
 
         generate-page-source-map:
-            command: 'vendor/bin/console search:setup:source-map'
+            command: "vendor/bin/console search:setup:source-map"
 
         translator-generate-cache:
-            command: 'vendor/bin/console translator:generate-cache'
+            command: "vendor/bin/console translator:generate-cache"
 
         class-resolver-build:
-            command: 'vendor/bin/console cache:class-resolver:build'
+            command: "vendor/bin/console cache:class-resolver:build"
 
     queue-flush:
         set-permissions:
@@ -120,6 +117,7 @@ sections:
         update-product-labels:
             command: 'vendor/bin/console product-label:relations:update'
 
+    setup-glue:
         controller-cache-warmup:
             command: 'vendor/bin/glue glue-api:controller:cache:warm-up'
 
@@ -144,6 +142,3 @@ sections:
 
         zed-build-frontend:
             command: 'vendor/bin/console frontend:zed:build'
-
-        date-time-product-configurator:
-            command: 'vendor/bin/console frontend:date-time-product-configurator:build'

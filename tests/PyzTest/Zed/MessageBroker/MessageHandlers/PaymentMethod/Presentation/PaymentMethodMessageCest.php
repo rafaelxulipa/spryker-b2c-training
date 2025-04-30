@@ -5,15 +5,12 @@
  * For full license information, please view the LICENSE file that was distributed with this source code.
  */
 
-declare(strict_types = 1);
-
 namespace PyzTest\Zed\MessageBroker\MessageHandlers\PaymentMethod\Presentation;
 
 use Generated\Shared\Transfer\AddPaymentMethodTransfer;
 use Generated\Shared\Transfer\DeletePaymentMethodTransfer;
 use PyzTest\Zed\MessageBroker\PageObject\PaymentMethodPage;
 use PyzTest\Zed\MessageBroker\PaymentMethodPresentationTester;
-use Spryker\Zed\MessageBroker\MessageBrokerDependencyProvider;
 
 /**
  * Auto-generated group annotations
@@ -57,8 +54,6 @@ class PaymentMethodMessageCest
         // Act
         $channelName = 'payment-method-commands';
         $I->setupMessageBroker(AddPaymentMethodTransfer::class, $channelName);
-        $I->setDependency(MessageBrokerDependencyProvider::PLUGINS_EXTERNAL_VALIDATOR, []);
-        $I->setDependency(MessageBrokerDependencyProvider::PLUGINS_FILTER_MESSAGE_CHANNEL, []);
         $messageBrokerFacade->sendMessage(
             $I->haveAddPaymentMethodTransfer(
                 [
@@ -100,8 +95,6 @@ class PaymentMethodMessageCest
 
         $channelName = 'payment-method-commands';
         $I->setupMessageBroker(AddPaymentMethodTransfer::class, $channelName);
-        $I->setDependency(MessageBrokerDependencyProvider::PLUGINS_EXTERNAL_VALIDATOR, []);
-        $I->setDependency(MessageBrokerDependencyProvider::PLUGINS_FILTER_MESSAGE_CHANNEL, []);
         $messageBrokerFacade->sendMessage(
             $I->haveAddPaymentMethodTransfer(
                 [

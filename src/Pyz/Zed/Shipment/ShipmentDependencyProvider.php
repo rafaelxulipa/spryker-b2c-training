@@ -5,8 +5,6 @@
  * For full license information, please view the LICENSE file that was distributed with this source code.
  */
 
-declare(strict_types = 1);
-
 namespace Pyz\Zed\Shipment;
 
 use Spryker\Zed\GiftCard\Communication\Plugin\Shipment\GiftCardShipmentGroupMethodFilterPlugin;
@@ -23,7 +21,7 @@ class ShipmentDependencyProvider extends SprykerShipmentDependencyProvider
      *
      * @return array<\Spryker\Zed\Shipment\Communication\Plugin\ShipmentMethodAvailabilityPluginInterface>|array<\Spryker\Zed\ShipmentExtension\Dependency\Plugin\ShipmentMethodAvailabilityPluginInterface>
      */
-    protected function getAvailabilityPlugins(Container $container): array // phpcs:ignore SlevomatCodingStandard.Functions.UnusedParameter
+    protected function getAvailabilityPlugins(Container $container): array
     {
         return [];
     }
@@ -33,7 +31,7 @@ class ShipmentDependencyProvider extends SprykerShipmentDependencyProvider
      *
      * @return array<\Spryker\Zed\Shipment\Communication\Plugin\ShipmentMethodPricePluginInterface>|array<\Spryker\Zed\ShipmentExtension\Dependency\Plugin\ShipmentMethodPricePluginInterface>
      */
-    protected function getPricePlugins(Container $container): array // phpcs:ignore SlevomatCodingStandard.Functions.UnusedParameter
+    protected function getPricePlugins(Container $container): array
     {
         return [];
     }
@@ -43,7 +41,7 @@ class ShipmentDependencyProvider extends SprykerShipmentDependencyProvider
      *
      * @return array<\Spryker\Zed\Shipment\Communication\Plugin\ShipmentMethodDeliveryTimePluginInterface>|array<\Spryker\Zed\ShipmentExtension\Dependency\Plugin\ShipmentMethodDeliveryTimePluginInterface>
      */
-    protected function getDeliveryTimePlugins(Container $container): array // phpcs:ignore SlevomatCodingStandard.Functions.UnusedParameter
+    protected function getDeliveryTimePlugins(Container $container): array
     {
         return [];
     }
@@ -53,7 +51,7 @@ class ShipmentDependencyProvider extends SprykerShipmentDependencyProvider
      *
      * @return array<\Spryker\Zed\ShipmentExtension\Dependency\Plugin\ShipmentMethodFilterPluginInterface>
      */
-    protected function getMethodFilterPlugins(Container $container): array // phpcs:ignore SlevomatCodingStandard.Functions.UnusedParameter
+    protected function getMethodFilterPlugins(Container $container): array
     {
         return [
             new GiftCardShipmentGroupMethodFilterPlugin(),

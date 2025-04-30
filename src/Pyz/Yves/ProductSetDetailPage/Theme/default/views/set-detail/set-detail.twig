@@ -1,4 +1,13 @@
-{% extends view('set-detail', '@SprykerShop:ProductSetDetailPage') %}
+{% extends template('page-layout-main') %}
+
+{% define data = {
+    set: _view.productSet,
+    views: _view.productViews,
+
+    title: _view.productSet.name
+} %}
+
+{% block breadcrumbs %}{% endblock %}
 
 {% block content %}
     {% include organism('product-set-details', 'ProductSetWidget') ignore missing with {

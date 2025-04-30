@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types = 1);
-
 $stores = [];
 
 if (getenv('SPRYKER_ACTIVE_STORES')) {

@@ -1,15 +1,15 @@
-# Spryker B2C Demo Shop
-[![Build Status](https://github.com/spryker-shop/b2c-demo-shop/actions/workflows/ci.yml/badge.svg?branch=master)](https://github.com/spryker-shop/b2c-demo-shop/actions?query=branch:master)
-[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/spryker-shop/b2c-demo-shop/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/spryker-shop/b2c-demo-shop/?branch=master)
+# Spryker B2C Demo Marketplace
+[![Build Status](https://github.com/spryker-shop/b2c-demo-marketplace/workflows/CI/badge.svg)](https://github.com/spryker-shop/b2c-demo-marketplace/actions?query=workflow%3ACI)
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/spryker-shop/b2c-demo-marketplace/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/spryker-shop/b2c-demo-marketplace/?branch=master)
 [![Minimum PHP Version](https://img.shields.io/badge/php-%3E%3D%208.2-8892BF.svg)](https://php.net/)
 
 ## Description
 
-Spryker B2C Demo Shop is a collection of Spryker B2C-specific features. It suits most projects as a starting point of development and can be used to explore Spryker.
+Spryker B2C Demo Marketplace is a collection of Spryker B2C-specific marketplace features. It suits most projects as a starting point of development and can be used to explore Spryker.
 
-## B2C Demo Shop quick start
+## B2C Demo Marketplace quick start
 
-This section describes how to get started with the B2C Demo Shop quickly.
+This section describes how to get started with the B2C Demo Marketplace quickly.
 
 For detailed installation instructions, see [Install Spryker](https://docs.spryker.com/docs/dg/dev/set-up-spryker-locally/install-spryker/install-spryker.html).
 
@@ -27,12 +27,12 @@ Recommended system requirements for MacOS:
 |15'|	4	|6GB|
 |13'|	2	|4GB|
 
-### Install the B2C Demo Shop
+### Install the B2C Demo Marketplace
 
-1. Create a project folder and clone the B2C Demo Shop and the Docker SDK:
+1. Create a project folder and clone the B2C Demo Marketplace and the Docker SDK:
 ```bash
-mkdir spryker-b2c && cd spryker-b2c
-git clone https://github.com/spryker-shop/b2c-demo-shop.git ./
+mkdir spryker-b2c-marketplace && cd spryker-b2c-marketplace
+git clone https://github.com/spryker-shop/b2c-demo-marketplace.git ./
 git clone git@github.com:spryker/docker-sdk.git docker
 ```
 
@@ -68,7 +68,7 @@ docker/sdk up --build --assets --data
 > - `--assets` - build assets
 > - `--data` - get new demo data
 
-You've set up your Spryker B2C Demo Shop and can access your applications.
+You've set up your Spryker B2C Demo Marketplace and can access your applications.
 
 
 ### Set up a production-like environment
@@ -117,11 +117,11 @@ docker/sdk clean-data && docker/sdk up && docker/sdk console q:w:s -v -s
 ```
 
 
-You've set up your Spryker B2C Demo Shop and can access your applications.
+You've set up your Spryker B2C Demo Marketplace and can access your applications.
 
-## Troubleshooting installation of the B2C Demo Shop
+## Troubleshooting installation of the B2C Demo Marketplace
 
-This section describes the most common issues related to the installation of the B2C Demo Shop.
+This section describes the most common issues related to the installation of the B2C Demo Marketplace.
 
 For a complete troubleshooting, see [Troubleshooting Spryker installation issues](https://docs.spryker.com/docs/dg/dev/set-up-spryker-locally/troubleshooting-installation/an-error-during-front-end-setup.html).
 
@@ -158,7 +158,6 @@ docker/sdk trouble
 docker/sdk boot -s deploy.dev.yml
 docker/sdk up --build --assets --data
 ```
-
 
 ## Contributing to the repository
 

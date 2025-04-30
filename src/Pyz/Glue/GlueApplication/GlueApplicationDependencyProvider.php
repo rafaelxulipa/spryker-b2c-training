@@ -5,8 +5,6 @@
  * For full license information, please view the LICENSE file that was distributed with this source code.
  */
 
-declare(strict_types = 1);
-
 namespace Pyz\Glue\GlueApplication;
 
 use Spryker\Glue\AgentAuthRestApi\Plugin\GlueApplication\AgentAccessTokenRestRequestValidatorPlugin;
@@ -117,6 +115,17 @@ use Spryker\Glue\GlueStorefrontApiApplicationAuthorizationConnector\Plugin\GlueA
 use Spryker\Glue\HealthCheck\Plugin\HealthCheckResourceRoutePlugin;
 use Spryker\Glue\Http\Plugin\Application\HttpApplicationPlugin;
 use Spryker\Glue\Locale\Plugin\Application\LocaleApplicationPlugin;
+use Spryker\Glue\MerchantOpeningHoursRestApi\Plugin\GlueApplication\MerchantOpeningHoursByMerchantReferenceResourceRelationshipPlugin;
+use Spryker\Glue\MerchantOpeningHoursRestApi\Plugin\GlueApplication\MerchantOpeningHoursResourceRoutePlugin;
+use Spryker\Glue\MerchantProductOffersRestApi\MerchantProductOffersRestApiConfig;
+use Spryker\Glue\MerchantProductOffersRestApi\Plugin\GlueApplication\ConcreteProductsProductOffersResourceRoutePlugin;
+use Spryker\Glue\MerchantProductOffersRestApi\Plugin\GlueApplication\ProductOffersByProductConcreteSkuResourceRelationshipPlugin;
+use Spryker\Glue\MerchantProductOffersRestApi\Plugin\GlueApplication\ProductOffersResourceRoutePlugin;
+use Spryker\Glue\MerchantsRestApi\MerchantsRestApiConfig;
+use Spryker\Glue\MerchantsRestApi\Plugin\GlueApplication\MerchantAddressByMerchantReferenceResourceRelationshipPlugin;
+use Spryker\Glue\MerchantsRestApi\Plugin\GlueApplication\MerchantAddressesResourceRoutePlugin;
+use Spryker\Glue\MerchantsRestApi\Plugin\GlueApplication\MerchantByMerchantReferenceResourceRelationshipPlugin;
+use Spryker\Glue\MerchantsRestApi\Plugin\GlueApplication\MerchantsResourceRoutePlugin;
 use Spryker\Glue\NavigationsCategoryNodesResourceRelationship\Plugin\GlueApplication\CategoryNodeByResourceIdResourceRelationshipPlugin;
 use Spryker\Glue\NavigationsRestApi\NavigationsRestApiConfig;
 use Spryker\Glue\NavigationsRestApi\Plugin\ResourceRoute\NavigationsResourceRoutePlugin;
@@ -126,10 +135,7 @@ use Spryker\Glue\OrdersRestApi\Plugin\CustomerOrdersResourceRoutePlugin;
 use Spryker\Glue\OrdersRestApi\Plugin\OrderItemByResourceIdResourceRelationshipPlugin;
 use Spryker\Glue\OrdersRestApi\Plugin\OrderRelationshipByOrderReferencePlugin;
 use Spryker\Glue\OrdersRestApi\Plugin\OrdersResourceRoutePlugin;
-use Spryker\Glue\PaymentsRestApi\Plugin\GlueApplication\PaymentCancellationsResourceRoutePlugin;
-use Spryker\Glue\PaymentsRestApi\Plugin\GlueApplication\PaymentCustomersResourceRoutePlugin;
 use Spryker\Glue\PaymentsRestApi\Plugin\GlueApplication\PaymentMethodsByCheckoutDataResourceRelationshipPlugin;
-use Spryker\Glue\PaymentsRestApi\Plugin\GlueApplication\PaymentsResourceRoutePlugin;
 use Spryker\Glue\ProductAttributesRestApi\Plugin\GlueApplication\ProductManagementAttributesResourceRoutePlugin;
 use Spryker\Glue\ProductAvailabilitiesRestApi\Plugin\AbstractProductAvailabilitiesRoutePlugin;
 use Spryker\Glue\ProductAvailabilitiesRestApi\Plugin\ConcreteProductAvailabilitiesRoutePlugin;
@@ -150,6 +156,11 @@ use Spryker\Glue\ProductImageSetsRestApi\Plugin\Relationship\ConcreteProductsPro
 use Spryker\Glue\ProductLabelsRestApi\Plugin\GlueApplication\ProductLabelByProductConcreteSkuResourceRelationshipPlugin;
 use Spryker\Glue\ProductLabelsRestApi\Plugin\GlueApplication\ProductLabelsRelationshipByResourceIdPlugin;
 use Spryker\Glue\ProductLabelsRestApi\Plugin\GlueApplication\ProductLabelsResourceRoutePlugin;
+use Spryker\Glue\ProductOfferAvailabilitiesRestApi\Plugin\GlueApplication\ProductOfferAvailabilitiesByProductOfferReferenceResourceRelationshipPlugin;
+use Spryker\Glue\ProductOfferAvailabilitiesRestApi\Plugin\GlueApplication\ProductOfferAvailabilitiesResourceRoutePlugin;
+use Spryker\Glue\ProductOfferPricesRestApi\Plugin\GlueApplication\ProductOfferPriceByProductOfferReferenceResourceRelationshipPlugin;
+use Spryker\Glue\ProductOfferPricesRestApi\Plugin\GlueApplication\ProductOfferPricesResourceRoutePlugin;
+use Spryker\Glue\ProductOfferServicePointAvailabilitiesRestApi\Plugin\GlueApplication\ProductOfferServicePointAvailabilitiesResourceRoutePlugin;
 use Spryker\Glue\ProductOptionsRestApi\Plugin\GlueApplication\ProductOptionsByProductAbstractSkuResourceRelationshipPlugin;
 use Spryker\Glue\ProductOptionsRestApi\Plugin\GlueApplication\ProductOptionsByProductConcreteSkuResourceRelationshipPlugin;
 use Spryker\Glue\ProductPricesRestApi\Plugin\AbstractProductPricesRoutePlugin;
@@ -183,14 +194,22 @@ use Spryker\Glue\SecurityBlockerRestApi\Plugin\GlueApplication\SecurityBlockerAg
 use Spryker\Glue\SecurityBlockerRestApi\Plugin\GlueApplication\SecurityBlockerAgentRestRequestValidatorPlugin;
 use Spryker\Glue\SecurityBlockerRestApi\Plugin\GlueApplication\SecurityBlockerCustomerControllerAfterActionPlugin;
 use Spryker\Glue\SecurityBlockerRestApi\Plugin\GlueApplication\SecurityBlockerCustomerRestRequestValidatorPlugin;
+use Spryker\Glue\ServicePointsRestApi\Plugin\GlueApplication\ServicePointAddressesByServicePointUuidResourceRelationshipPlugin;
+use Spryker\Glue\ServicePointsRestApi\Plugin\GlueApplication\ServicePointAddressesResourceRoutePlugin;
+use Spryker\Glue\ServicePointsRestApi\Plugin\GlueApplication\ServicePointsByCheckoutDataResourceRelationshipPlugin;
+use Spryker\Glue\ServicePointsRestApi\Plugin\GlueApplication\ServicePointsResourceRoutePlugin;
+use Spryker\Glue\ServicePointsRestApi\ServicePointsRestApiConfig;
 use Spryker\Glue\Session\Plugin\Application\SessionApplicationPlugin;
 use Spryker\Glue\ShipmentsRestApi\Plugin\GlueApplication\OrderShipmentByOrderResourceRelationshipPlugin;
 use Spryker\Glue\ShipmentsRestApi\Plugin\GlueApplication\ShipmentMethodsByShipmentResourceRelationshipPlugin;
 use Spryker\Glue\ShipmentsRestApi\Plugin\GlueApplication\ShipmentsByCheckoutDataResourceRelationshipPlugin;
 use Spryker\Glue\ShipmentsRestApi\ShipmentsRestApiConfig;
+use Spryker\Glue\ShipmentTypeServicePointsRestApi\Plugin\GlueApplication\ServiceTypeByShipmentTypesResourceRelationshipPlugin;
+use Spryker\Glue\ShipmentTypesRestApi\Plugin\GlueApplication\ShipmentTypesByShipmentMethodsResourceRelationshipPlugin;
+use Spryker\Glue\ShipmentTypesRestApi\Plugin\GlueApplication\ShipmentTypesResourceRoutePlugin;
+use Spryker\Glue\ShipmentTypesRestApi\ShipmentTypesRestApiConfig;
 use Spryker\Glue\StoresApi\Plugin\GlueStorefrontApiApplication\StoreApplicationPlugin;
 use Spryker\Glue\StoresRestApi\Plugin\StoresResourceRoutePlugin;
-use Spryker\Glue\TaxAppRestApi\Plugin\TaxValidateIdResourceRoutePlugin;
 use Spryker\Glue\UpSellingProductsRestApi\Plugin\GlueApplication\CartUpSellingProductsResourceRoutePlugin;
 use Spryker\Glue\UpSellingProductsRestApi\Plugin\GlueApplication\GuestCartUpSellingProductsResourceRoutePlugin;
 use Spryker\Glue\UrlsRestApi\Plugin\GlueApplication\UrlResolverResourceRoutePlugin;
@@ -281,10 +300,17 @@ class GlueApplicationDependencyProvider extends SprykerGlueApplicationDependency
             new MyAvailabilityNotificationsResourceRoutePlugin(),
             new ConfiguredBundlesResourceRoutePlugin(),
             new GuestConfiguredBundlesResourceRoutePlugin(),
-            new PaymentsResourceRoutePlugin(),
-            new PaymentCancellationsResourceRoutePlugin(),
-            new PaymentCustomersResourceRoutePlugin(),
-            new TaxValidateIdResourceRoutePlugin(),
+            new MerchantsResourceRoutePlugin(),
+            new MerchantAddressesResourceRoutePlugin(),
+            new ProductOffersResourceRoutePlugin(),
+            new ConcreteProductsProductOffersResourceRoutePlugin(),
+            new MerchantOpeningHoursResourceRoutePlugin(),
+            new ProductOfferPricesResourceRoutePlugin(),
+            new ProductOfferAvailabilitiesResourceRoutePlugin(),
+            new ServicePointsResourceRoutePlugin(),
+            new ServicePointAddressesResourceRoutePlugin(),
+            new ShipmentTypesResourceRoutePlugin(),
+            new ProductOfferServicePointAvailabilitiesResourceRoutePlugin(),
         ];
     }
 
@@ -458,6 +484,10 @@ class GlueApplicationDependencyProvider extends SprykerGlueApplicationDependency
             new ConcreteProductBySkuResourceRelationshipPlugin(),
         );
         $resourceRelationshipCollection->addRelationship(
+            WishlistsRestApiConfig::RESOURCE_WISHLIST_ITEMS,
+            new MerchantByMerchantReferenceResourceRelationshipPlugin(),
+        );
+        $resourceRelationshipCollection->addRelationship(
             CatalogSearchRestApiConfig::RESOURCE_CATALOG_SEARCH,
             new CatalogSearchAbstractProductsResourceRelationshipPlugin(),
         );
@@ -510,8 +540,16 @@ class GlueApplicationDependencyProvider extends SprykerGlueApplicationDependency
             new ConcreteProductBySkuResourceRelationshipPlugin(),
         );
         $resourceRelationshipCollection->addRelationship(
+            CartsRestApiConfig::RESOURCE_CART_ITEMS,
+            new MerchantByMerchantReferenceResourceRelationshipPlugin(),
+        );
+        $resourceRelationshipCollection->addRelationship(
             CartsRestApiConfig::RESOURCE_GUEST_CARTS_ITEMS,
             new ConcreteProductBySkuResourceRelationshipPlugin(),
+        );
+        $resourceRelationshipCollection->addRelationship(
+            CartsRestApiConfig::RESOURCE_GUEST_CARTS_ITEMS,
+            new MerchantByMerchantReferenceResourceRelationshipPlugin(),
         );
         $resourceRelationshipCollection->addRelationship(
             NavigationsRestApiConfig::RESOURCE_NAVIGATIONS,
@@ -598,6 +636,10 @@ class GlueApplicationDependencyProvider extends SprykerGlueApplicationDependency
             new ReturnItemByReturnResourceRelationshipPlugin(),
         );
         $resourceRelationshipCollection->addRelationship(
+            SalesReturnsRestApiConfig::RESOURCE_RETURNS,
+            new MerchantByMerchantReferenceResourceRelationshipPlugin(),
+        );
+        $resourceRelationshipCollection->addRelationship(
             OrdersRestApiConfig::RESOURCE_ORDERS,
             new OrderShipmentByOrderResourceRelationshipPlugin(),
         );
@@ -674,6 +716,60 @@ class GlueApplicationDependencyProvider extends SprykerGlueApplicationDependency
         $resourceRelationshipCollection->addRelationship(
             ContentProductAbstractListsRestApiConfig::RESOURCE_CONTENT_PRODUCT_ABSTRACT_LISTS,
             new ProductAbstractByContentProductAbstractListResourceRelationshipPlugin(),
+        );
+
+        $resourceRelationshipCollection->addRelationship(
+            MerchantsRestApiConfig::RESOURCE_MERCHANTS,
+            new MerchantAddressByMerchantReferenceResourceRelationshipPlugin(),
+        );
+
+        $resourceRelationshipCollection->addRelationship(
+            ProductsRestApiConfig::RESOURCE_CONCRETE_PRODUCTS,
+            new ProductOffersByProductConcreteSkuResourceRelationshipPlugin(),
+        );
+        $resourceRelationshipCollection->addRelationship(
+            MerchantProductOffersRestApiConfig::RESOURCE_PRODUCT_OFFERS,
+            new MerchantByMerchantReferenceResourceRelationshipPlugin(),
+        );
+
+        $resourceRelationshipCollection->addRelationship(
+            MerchantsRestApiConfig::RESOURCE_MERCHANTS,
+            new MerchantOpeningHoursByMerchantReferenceResourceRelationshipPlugin(),
+        );
+
+        $resourceRelationshipCollection->addRelationship(
+            ProductsRestApiConfig::RESOURCE_ABSTRACT_PRODUCTS,
+            new MerchantByMerchantReferenceResourceRelationshipPlugin(),
+        );
+
+        $resourceRelationshipCollection->addRelationship(
+            MerchantProductOffersRestApiConfig::RESOURCE_PRODUCT_OFFERS,
+            new ProductOfferPriceByProductOfferReferenceResourceRelationshipPlugin(),
+        );
+
+        $resourceRelationshipCollection->addRelationship(
+            MerchantProductOffersRestApiConfig::RESOURCE_PRODUCT_OFFERS,
+            new ProductOfferAvailabilitiesByProductOfferReferenceResourceRelationshipPlugin(),
+        );
+
+        $resourceRelationshipCollection->addRelationship(
+            ServicePointsRestApiConfig::RESOURCE_SERVICE_POINTS,
+            new ServicePointAddressesByServicePointUuidResourceRelationshipPlugin(),
+        );
+
+        $resourceRelationshipCollection->addRelationship(
+            CheckoutRestApiConfig::RESOURCE_CHECKOUT_DATA,
+            new ServicePointsByCheckoutDataResourceRelationshipPlugin(),
+        );
+
+        $resourceRelationshipCollection->addRelationship(
+            ShipmentTypesRestApiConfig::RESOURCE_SHIPMENT_TYPES,
+            new ServiceTypeByShipmentTypesResourceRelationshipPlugin(),
+        );
+
+        $resourceRelationshipCollection->addRelationship(
+            ShipmentsRestApiConfig::RESOURCE_SHIPMENT_METHODS,
+            new ShipmentTypesByShipmentMethodsResourceRelationshipPlugin(),
         );
 
         return $resourceRelationshipCollection;

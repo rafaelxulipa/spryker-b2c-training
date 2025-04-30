@@ -5,8 +5,6 @@
  * For full license information, please view the LICENSE file that was distributed with this source code.
  */
 
-declare(strict_types = 1);
-
 namespace Pyz\Zed\ProductStorage\Communication\Plugin\Event\Listener;
 
 use Orm\Zed\ProductBundle\Persistence\Map\SpyProductBundleTableMap;
@@ -34,7 +32,7 @@ class ProductBundleStoragePublishListener extends AbstractPlugin implements Even
      *
      * @return void
      */
-    public function handleBulk(array $eventTransfers, $eventName): void // phpcs:ignore SlevomatCodingStandard.Functions.UnusedParameter
+    public function handleBulk(array $eventTransfers, $eventName): void
     {
         $this->preventTransaction();
         $productIds = $this->getFactory()

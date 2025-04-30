@@ -5,8 +5,6 @@
  * For full license information, please view the LICENSE file that was distributed with this source code.
  */
 
-declare(strict_types = 1);
-
 namespace PyzTest\Zed\Console\Helper;
 
 use Codeception\Module;
@@ -33,7 +31,7 @@ class ConsoleHelper extends Module
      *
      * @return void
      */
-    public function _after(TestInterface $test): void // phpcs:ignore SlevomatCodingStandard.Functions.UnusedParameter
+    public function _after(TestInterface $test): void
     {
         foreach ($this->config['cleanup_dirs'] as $dir) {
             $dir = codecept_data_dir() . self::SANDBOX_DIR . $dir;
@@ -47,7 +45,7 @@ class ConsoleHelper extends Module
      *
      * @return void
      */
-    public function runSprykerCommand(string $command): void
+    public function runSprykerCommand($command): void
     {
         $command = 'php ' . codecept_data_dir() . self::RUNNER . " $command";
         $this->getCli()->runShellCommand($command);

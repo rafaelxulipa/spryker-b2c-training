@@ -24,14 +24,13 @@
 
 {% block body %}
     <h3 class="title title--review-summary title--regular">{{ 'product_review.product_ratings' | trans }}</h3>
-
+    
     {% include molecule('review-average-display', 'ProductReviewWidget') with {
         data: {
             summary: data.summary,
             ratingMaxValue: data.ratingMaxValue,
         },
     } only %}
-
     {% include molecule('review-distribution-display', 'ProductReviewWidget') with {
         data: {
             summary: data.summary,
@@ -75,5 +74,6 @@
                 data: data.pagination,
             } only %}
         {% endif %}
+
     {% endif %}
 {% endblock %}

@@ -5,8 +5,6 @@
  * For full license information, please view the LICENSE file that was distributed with this source code.
  */
 
-declare(strict_types = 1);
-
 namespace PyzTest\Shared\Testify\Helper;
 
 use Codeception\Exception\ModuleConfigException;
@@ -35,7 +33,7 @@ class YvesBootstrap extends Framework
      *
      * @return void
      */
-    public function _beforeSuite($settings = []): void // phpcs:ignore
+    public function _beforeSuite($settings = []): void
     {
         $this->client = new HttpKernelBrowser($this->yvesBootstrap->boot());
     }

@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types = 1);
-
 use Monolog\Logger;
 use Pyz\Shared\Console\ConsoleConstants;
 use Spryker\Shared\AppCatalogGui\AppCatalogGuiConstants;
@@ -19,6 +17,7 @@ use Spryker\Shared\Http\HttpConstants;
 use Spryker\Shared\Kernel\KernelConstants;
 use Spryker\Shared\Kernel\Store;
 use Spryker\Shared\Log\LogConstants;
+use Spryker\Shared\MerchantPortalApplication\MerchantPortalConstants;
 use Spryker\Shared\MessageBroker\MessageBrokerConstants;
 use Spryker\Shared\Newsletter\NewsletterConstants;
 use Spryker\Shared\OauthClient\OauthClientConstants;
@@ -52,6 +51,7 @@ $glueHost = $dynamicStoreEnabled ? 'glue.eu.spryker.test' : 'glue.de.spryker.tes
 $glueBackendHost = $dynamicStoreEnabled ? 'gluebackend.eu.spryker.test' : 'gluebackend.de.spryker.test';
 $glueStorefrontHost = $dynamicStoreEnabled ? 'gluestorefront.eu.spryker.test' : 'gluestorefront.de.spryker.test';
 $backofficeHost = $dynamicStoreEnabled ? 'backoffice.eu.spryker.test' : 'backoffice.de.spryker.test';
+$merchantPortalHost = $dynamicStoreEnabled ? 'mp.eu.spryker.test' : 'mp.de.spryker.test';
 $backendGatewayHost = $dynamicStoreEnabled ? 'backend-gateway.eu.spryker.test' : 'backend-gateway.de.spryker.test';
 $backendApiHost = $dynamicStoreEnabled ? 'backend-api.eu.spryker.test' : 'backend-api.de.spryker.test';
 
@@ -233,6 +233,15 @@ $config[ApplicationConstants::BASE_URL_ZED] = sprintf(
 );
 
 // ----------------------------------------------------------------------------
+// ------------------------------ MERCHANT PORTAL -----------------------------
+// ----------------------------------------------------------------------------
+
+$config[MerchantPortalConstants::BASE_URL_MP] = sprintf(
+    'http://%s',
+    $merchantPortalHost,
+);
+
+// ----------------------------------------------------------------------------
 // ------------------------------ FRONTEND ------------------------------------
 // ----------------------------------------------------------------------------
 
@@ -278,15 +287,15 @@ $config[OauthClientConstants::OAUTH_PROVIDER_NAME_FOR_MESSAGE_BROKER] = OauthDum
 $config[OauthClientConstants::OAUTH_PROVIDER_NAME_FOR_PAYMENT_AUTHORIZE] = OauthDummyConfig::PROVIDER_NAME;
 $config[AppCatalogGuiConstants::OAUTH_PROVIDER_NAME] = OauthDummyConfig::PROVIDER_NAME;
 
-//-----------------------------------------------------------------------------
-//----------------------------------- ACP -------------------------------------
-//-----------------------------------------------------------------------------
-$config[ProductConstants::PUBLISHING_TO_MESSAGE_BROKER_ENABLED] = false;
-
 // ----------------------------------------------------------------------------
 // ------------------------------ MessageBroker -----------------------------------------
 // ----------------------------------------------------------------------------
 $config[MessageBrokerConstants::IS_ENABLED] = true;
+
+//-----------------------------------------------------------------------------
+//----------------------------------- ACP -------------------------------------
+//-----------------------------------------------------------------------------
+$config[ProductConstants::PUBLISHING_TO_MESSAGE_BROKER_ENABLED] = false;
 
 // ----------------------------------------------------------------------------
 // ------------------------------ Glue Backend API -------------------------------

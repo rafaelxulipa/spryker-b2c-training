@@ -17,6 +17,7 @@ use Spryker\Shared\ZedNavigation\ZedNavigationConstants;
 use Spryker\Shared\ZedRequest\ZedRequestConstants;
 use Twig\Cache\FilesystemCache;
 
+
 $config[SessionConstants::YVES_SESSION_COOKIE_DOMAIN] = $config[ApplicationConstants::HOST_YVES];
 $config[SessionConstants::YVES_SESSION_COOKIE_SECURE] = false;
 

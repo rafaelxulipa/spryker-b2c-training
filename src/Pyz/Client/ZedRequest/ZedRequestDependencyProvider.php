@@ -5,8 +5,6 @@
  * For full license information, please view the LICENSE file that was distributed with this source code.
  */
 
-declare(strict_types = 1);
-
 namespace Pyz\Client\ZedRequest;
 
 use Spryker\Client\Currency\Plugin\ZedRequestMetaDataProviderPlugin;
@@ -20,7 +18,7 @@ use Spryker\Client\ZedRequest\ZedRequestDependencyProvider as SprykerZedRequestD
 class ZedRequestDependencyProvider extends SprykerZedRequestDependencyProvider
 {
     /**
-     * @return array<string, \Spryker\Client\ZedRequestExtension\Dependency\Plugin\MetaDataProviderPluginInterface>
+     * @return array<\Spryker\Client\ZedRequestExtension\Dependency\Plugin\MetaDataProviderPluginInterface>
      */
     protected function getMetaDataProviderPlugins(): array
     {

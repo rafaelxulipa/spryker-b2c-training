@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types = 1);
-
 use Spryker\Shared\Event\EventConstants;
 use Spryker\Shared\Log\LogConstants;
 use Spryker\Shared\Propel\PropelConstants;

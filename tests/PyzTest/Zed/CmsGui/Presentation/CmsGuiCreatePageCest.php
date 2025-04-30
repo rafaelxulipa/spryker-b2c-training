@@ -5,8 +5,6 @@
  * For full license information, please view the LICENSE file that was distributed with this source code.
  */
 
-declare(strict_types = 1);
-
 namespace PyzTest\Zed\CmsGui\Presentation;
 
 use Codeception\Scenario;
@@ -28,17 +26,6 @@ use PyzTest\Zed\CmsGui\PageObject\CmsEditPage;
 class CmsGuiCreatePageCest
 {
     /**
-     * @param \PyzTest\Zed\CmsGui\CmsGuiPresentationTester $i
-     *
-     * @return void
-     */
-    public function _before(CmsGuiPresentationTester $i): void
-    {
-        $i->amZed();
-        $i->amLoggedInUser();
-    }
-
-    /**
      * @todo Add P&S check after it is available
      *
      * @param \PyzTest\Zed\CmsGui\CmsGuiPresentationTester $i
@@ -46,7 +33,7 @@ class CmsGuiCreatePageCest
      *
      * @return void
      */
-    public function testICanCreateCmsPageWithTranslatedPlaceholders(CmsGuiPresentationTester $i, Scenario $scenario): void // phpcs:ignore SlevomatCodingStandard.Functions.UnusedParameter
+    public function testICanCreateCmsPageWithTranslatedPlaceholders(CmsGuiPresentationTester $i, Scenario $scenario): void
     {
         $i->wantTo('Create cms page with multiple translations');
         $i->expect('Page is persisted in Zed, exported to Yves and is accessible.');

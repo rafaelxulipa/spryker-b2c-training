@@ -20,7 +20,7 @@ RUN pip3 install  \
     robotframework-jsonlibrary \
     tk
 
-RUN rfbrowser init chromium
+RUN rfbrowser init
 
 WORKDIR ${ROBOT_WORK_DIR}
 

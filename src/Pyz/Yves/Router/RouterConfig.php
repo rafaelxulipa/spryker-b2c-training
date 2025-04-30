@@ -5,8 +5,6 @@
  * For full license information, please view the LICENSE file that was distributed with this source code.
  */
 
-declare(strict_types = 1);
-
 namespace Pyz\Yves\Router;
 
 use Spryker\Client\Kernel\Container;
@@ -25,13 +23,5 @@ class RouterConfig extends SprykerRouterConfig
     public function getAllowedLanguages(): array
     {
         return (new Container())->getLocator()->locale()->client()->getAllowedLanguages();
-    }
-
-    /**
-     * @return array<string>
-     */
-    public function getAllowedStores(): array
-    {
-        return (new Container())->getLocator()->storeStorage()->client()->getStoreNames();
     }
 }

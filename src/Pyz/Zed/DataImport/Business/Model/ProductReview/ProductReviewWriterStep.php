@@ -5,8 +5,6 @@
  * For full license information, please view the LICENSE file that was distributed with this source code.
  */
 
-declare(strict_types = 1);
-
 namespace Pyz\Zed\DataImport\Business\Model\ProductReview;
 
 use Orm\Zed\ProductReview\Persistence\Map\SpyProductReviewTableMap;
@@ -61,16 +59,14 @@ class ProductReviewWriterStep extends PublishAwareStep implements DataImportStep
 
         $productReviewEntity->fromArray($dataSet->getArrayCopy());
 
-        if (!$productReviewEntity->isNew() && !$productReviewEntity->isModified()) {
-            return;
-        }
+        if ($productReviewEntity->isNew() || $productReviewEntity->isModified()) {
+            $productReviewEntity->save();
 
-        $productReviewEntity->save();
-
-        if ($productReviewEntity->getStatus() === SpyProductReviewTableMap::COL_STATUS_APPROVED) {
-            $this->addPublishEvents(ProductReviewEvents::PRODUCT_REVIEW_PUBLISH, $productReviewEntity->getIdProductReview());
+            if ($productReviewEntity->getStatus() === SpyProductReviewTableMap::COL_STATUS_APPROVED) {
+                $this->addPublishEvents(ProductReviewEvents::PRODUCT_REVIEW_PUBLISH, $productReviewEntity->getIdProductReview());
+            }
+            $this->addPublishEvents(ProductReviewEvents::PRODUCT_ABSTRACT_REVIEW_PUBLISH, $productReviewEntity->getFkProductAbstract());
         }
-        $this->addPublishEvents(ProductReviewEvents::PRODUCT_ABSTRACT_REVIEW_PUBLISH, $productReviewEntity->getFkProductAbstract());
     }
 
     /**

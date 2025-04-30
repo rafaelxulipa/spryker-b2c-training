@@ -5,8 +5,6 @@
  * For full license information, please view the LICENSE file that was distributed with this source code.
  */
 
-declare(strict_types = 1);
-
 namespace Pyz\Zed\DataImport\Business\Model\Country\Repository;
 
 interface CountryRepositoryInterface
@@ -16,12 +14,12 @@ interface CountryRepositoryInterface
      *
      * @return bool
      */
-    public function hasCountryByName(string $countryName): bool;
+    public function hasCountryByName($countryName): bool;
 
     /**
      * @param string $countryName
      *
      * @return int
      */
-    public function getIdCountryByName(string $countryName): int;
+    public function getIdCountryByName($countryName): int;
 }

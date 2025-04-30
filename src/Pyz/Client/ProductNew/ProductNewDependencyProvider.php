@@ -5,8 +5,6 @@
  * For full license information, please view the LICENSE file that was distributed with this source code.
  */
 
-declare(strict_types = 1);
-
 namespace Pyz\Client\ProductNew;
 
 use Spryker\Client\Catalog\Plugin\Elasticsearch\ResultFormatter\RawCatalogSearchResultFormatterPlugin;
@@ -25,7 +23,7 @@ use Spryker\Client\SearchElasticsearch\Plugin\ResultFormatter\SortedResultFormat
 class ProductNewDependencyProvider extends SprykerProductNewDependencyProvider
 {
     /**
-     * @return array<\Spryker\Client\SearchExtension\Dependency\Plugin\QueryExpanderPluginInterface>|array<\Spryker\Client\Search\Dependency\Plugin\QueryExpanderPluginInterface>
+     * @return array<\Spryker\Client\Search\Dependency\Plugin\QueryExpanderPluginInterface>|array<\Spryker\Client\SearchExtension\Dependency\Plugin\QueryExpanderPluginInterface>
      */
     protected function getNewProductsQueryExpanderPlugins(): array
     {
@@ -44,6 +42,8 @@ class ProductNewDependencyProvider extends SprykerProductNewDependencyProvider
     }
 
     /**
+     * @phpstan-return array<\Spryker\Client\SearchExtension\Dependency\Plugin\ResultFormatterPluginInterface>
+     *
      * @return array<\Spryker\Client\Search\Dependency\Plugin\ResultFormatterPluginInterface>|array<\Spryker\Client\SearchExtension\Dependency\Plugin\ResultFormatterPluginInterface>
      */
     protected function getNewProductsResultFormatterPlugins(): array

@@ -5,13 +5,14 @@
  * For full license information, please view the LICENSE file that was distributed with this source code.
  */
 
-declare(strict_types = 1);
-
 namespace PyzTest\Glue\Checkout\RestApi\Fixtures;
 
 use Generated\Shared\Transfer\CustomerTransfer;
 use Generated\Shared\Transfer\QuoteTransfer;
 use Generated\Shared\Transfer\ShipmentMethodTransfer;
+use Generated\Shared\Transfer\ShipmentTypeTransfer;
+use Generated\Shared\Transfer\StoreRelationTransfer;
+use Generated\Shared\Transfer\StoreTransfer;
 use PyzTest\Glue\Checkout\CheckoutApiTester;
 use SprykerTest\Shared\Shipment\Helper\ShipmentMethodDataHelper;
 use SprykerTest\Shared\Testify\Fixtures\FixturesBuilderInterface;
@@ -56,6 +57,11 @@ class CheckoutDataShipmentRelationshipsFixtures implements FixturesBuilderInterf
     protected ShipmentMethodTransfer $shipmentMethodTransfer;
 
     /**
+     * @var \Generated\Shared\Transfer\ShipmentTypeTransfer
+     */
+    protected ShipmentTypeTransfer $shipmentTypeTransfer;
+
+    /**
      * @return \Generated\Shared\Transfer\QuoteTransfer
      */
     public function getQuoteTransfer(): QuoteTransfer
@@ -77,6 +83,14 @@ class CheckoutDataShipmentRelationshipsFixtures implements FixturesBuilderInterf
     public function getShipmentMethodTransfer(): ShipmentMethodTransfer
     {
         return $this->shipmentMethodTransfer;
+    }
+
+    /**
+     * @return \Generated\Shared\Transfer\ShipmentTypeTransfer
+     */
+    public function getShipmentTypeTransfer(): ShipmentTypeTransfer
+    {
+        return $this->shipmentTypeTransfer;
     }
 
     /**
@@ -106,6 +120,16 @@ class CheckoutDataShipmentRelationshipsFixtures implements FixturesBuilderInterf
             [
                 $I->getStoreFacade()->getCurrentStore()->getIdStore(),
             ],
+        );
+
+        $this->shipmentTypeTransfer = $I->haveShipmentType([
+            ShipmentTypeTransfer::IS_ACTIVE => true,
+            ShipmentTypeTransfer::STORE_RELATION => (new StoreRelationTransfer())
+                ->addStores($I->haveStore([StoreTransfer::NAME => 'DE'])),
+        ]);
+        $I->haveShipmentMethodShipmentTypeRelation(
+            $this->shipmentMethodTransfer->getIdShipmentMethodOrFail(),
+            $this->shipmentTypeTransfer->getIdShipmentTypeOrFail(),
         );
 
         $this->quoteTransfer = $I->havePersistentQuoteWithItemsAndItemLevelShipment(

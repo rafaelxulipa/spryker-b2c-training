@@ -150,12 +150,11 @@
 
         &__additional-info {
             width: 100%;
-            padding-top: rem(15);
 
             @include helper-breakpoint-media-min($lg-min) {
                 padding-left: rem(15);
-                padding-top: 0;
                 max-width: $additional-info-width;
+                margin-top: rem(-8);
             }
         }
 

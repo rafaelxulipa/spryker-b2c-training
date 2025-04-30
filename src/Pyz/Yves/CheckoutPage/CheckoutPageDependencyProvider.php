@@ -5,16 +5,19 @@
  * For full license information, please view the LICENSE file that was distributed with this source code.
  */
 
-declare(strict_types = 1);
-
 namespace Pyz\Yves\CheckoutPage;
 
 use Generated\Shared\Transfer\PaymentTransfer;
+use Spryker\Shared\DummyMarketplacePayment\DummyMarketplacePaymentConfig;
 use Spryker\Shared\Kernel\Container\GlobalContainer;
 use Spryker\Shared\Nopayment\NopaymentConfig;
+use Spryker\Yves\DummyMarketplacePayment\Plugin\StepEngine\DummyMarketplacePaymentHandlerPlugin;
+use Spryker\Yves\DummyMarketplacePayment\Plugin\StepEngine\SubForm\DummyMarketplacePaymentInvoiceSubFormPlugin;
 use Spryker\Yves\Kernel\Container;
+use Spryker\Yves\MerchantShipment\Plugin\CheckoutPage\MerchantShipmentCheckoutPageStepEnginePreRenderPlugin;
 use Spryker\Yves\Nopayment\Plugin\NopaymentHandlerPlugin;
 use Spryker\Yves\StepEngine\Dependency\Form\StepEngineFormDataProviderInterface;
+use Spryker\Yves\StepEngine\Dependency\Plugin\Form\SubFormPluginCollection;
 use Spryker\Yves\StepEngine\Dependency\Plugin\Handler\StepHandlerPluginCollection;
 use Spryker\Yves\StepEngine\Dependency\Plugin\Handler\StepHandlerPluginInterface;
 use SprykerShop\Yves\CheckoutPage\CheckoutPageDependencyProvider as SprykerShopCheckoutPageDependencyProvider;
@@ -27,9 +30,10 @@ use SprykerShop\Yves\CustomerPage\Form\RegisterForm;
 use SprykerShop\Yves\CustomerPage\Plugin\CheckoutPage\CheckoutAddressFormDataProviderPlugin;
 use SprykerShop\Yves\CustomerPage\Plugin\CheckoutPage\CustomerAddressExpanderPlugin;
 use SprykerShop\Yves\CustomerPage\Plugin\CustomerStepHandler;
-use SprykerShop\Yves\PaymentAppWidget\Plugin\CheckoutPage\PaymentAppExpressCheckoutWorkflowCheckoutStepResolverStrategyPlugin;
 use SprykerShop\Yves\PaymentPage\Plugin\PaymentPage\PaymentForeignPaymentCollectionExtenderPlugin;
 use SprykerShop\Yves\SalesOrderThresholdWidget\Plugin\CheckoutPage\SalesOrderThresholdWidgetPlugin;
+use SprykerShop\Yves\ServicePointCartPage\Plugin\CartPage\ServicePointCheckoutAddressStepPostExecutePlugin;
+use SprykerShop\Yves\ShipmentTypeWidget\Plugin\CheckoutPage\ShipmentTypeCheckoutPageStepEnginePreRenderPlugin;
 use Symfony\Component\Form\FormFactory;
 use Symfony\Component\Form\FormInterface;
 
@@ -51,6 +55,7 @@ class CheckoutPageDependencyProvider extends SprykerShopCheckoutPageDependencyPr
     {
         $container = parent::provideDependencies($container);
         $container = $this->extendPaymentMethodHandler($container);
+        $container = $this->extendSubFormPluginCollection($container);
 
         return $container;
     }
@@ -66,9 +71,9 @@ class CheckoutPageDependencyProvider extends SprykerShopCheckoutPageDependencyPr
     }
 
     /**
-     * @phpstan-return array<int, class-string<\Symfony\Component\Form\FormTypeInterface>|\Symfony\Component\Form\FormInterface>
+     * @phpstan-return array<class-string<\Symfony\Component\Form\FormTypeInterface>|\Symfony\Component\Form\FormInterface>
      *
-     * @return array<\Symfony\Component\Form\FormTypeInterface>|array<string>
+     * @return array<\Symfony\Component\Form\FormTypeInterface|string>
      */
     protected function getCustomerStepSubForms(): array
     {
@@ -85,7 +90,7 @@ class CheckoutPageDependencyProvider extends SprykerShopCheckoutPageDependencyPr
      *
      * @return \Symfony\Component\Form\FormInterface
      */
-    protected function getCustomerCheckoutForm(string $subForm, string $blockPrefix): FormInterface
+    protected function getCustomerCheckoutForm($subForm, $blockPrefix): FormInterface
     {
         return $this->getFormFactory()->createNamed(
             $blockPrefix,
@@ -122,9 +127,29 @@ class CheckoutPageDependencyProvider extends SprykerShopCheckoutPageDependencyPr
     {
         $container->extend(static::PAYMENT_METHOD_HANDLER, function (StepHandlerPluginCollection $paymentMethodHandler) {
             $paymentMethodHandler->add(new NopaymentHandlerPlugin(), NopaymentConfig::PAYMENT_PROVIDER_NAME);
+            $paymentMethodHandler->add(
+                new DummyMarketplacePaymentHandlerPlugin(),
+                DummyMarketplacePaymentConfig::PAYMENT_METHOD_DUMMY_MARKETPLACE_PAYMENT_INVOICE,
+            );
             $paymentMethodHandler->add(new PaymentForeignHandlerPlugin(), PaymentTransfer::FOREIGN_PAYMENTS);
 
             return $paymentMethodHandler;
+        });
+
+        return $container;
+    }
+
+    /**
+     * @param \Spryker\Yves\Kernel\Container $container
+     *
+     * @return \Spryker\Yves\Kernel\Container
+     */
+    protected function extendSubFormPluginCollection(Container $container): Container
+    {
+        $container->extend(static::PAYMENT_SUB_FORMS, function (SubFormPluginCollection $paymentSubFormPluginCollection) {
+            $paymentSubFormPluginCollection->add(new DummyMarketplacePaymentInvoiceSubFormPlugin());
+
+            return $paymentSubFormPluginCollection;
         });
 
         return $container;
@@ -157,6 +182,17 @@ class CheckoutPageDependencyProvider extends SprykerShopCheckoutPageDependencyPr
     }
 
     /**
+     * @return array<\SprykerShop\Yves\CheckoutPageExtension\Dependency\Plugin\StepEngine\CheckoutPageStepEnginePreRenderPluginInterface>
+     */
+    protected function getCheckoutPageStepEnginePreRenderPlugins(): array
+    {
+        return [
+            new MerchantShipmentCheckoutPageStepEnginePreRenderPlugin(),
+            new ShipmentTypeCheckoutPageStepEnginePreRenderPlugin(),
+        ];
+    }
+
+    /**
      * @return array<\SprykerShop\Yves\CheckoutPageExtension\Dependency\Plugin\PaymentCollectionExtenderPluginInterface>
      */
     protected function getPaymentCollectionExtenderPlugins(): array
@@ -167,12 +203,12 @@ class CheckoutPageDependencyProvider extends SprykerShopCheckoutPageDependencyPr
     }
 
     /**
-     * @return array<\SprykerShop\Yves\CheckoutPageExtension\Dependency\Plugin\CheckoutStepResolverStrategyPluginInterface>
+     * @return list<\SprykerShop\Yves\CheckoutPageExtension\Dependency\Plugin\CheckoutAddressStepPostExecutePluginInterface>
      */
-    protected function getCheckoutStepResolverStrategyPlugins(): array
+    protected function getCheckoutAddressStepPostExecutePlugins(): array
     {
         return [
-            new PaymentAppExpressCheckoutWorkflowCheckoutStepResolverStrategyPlugin(),
+            new ServicePointCheckoutAddressStepPostExecutePlugin(),
         ];
     }
 }

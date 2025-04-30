@@ -123,6 +123,7 @@ groups:
                         store: DE
                     glue-backend.at.spryker.local:
                         store: AT
+
 services:
     database:
         engine: postgres
@@ -142,6 +143,12 @@ services:
     search:
         engine: elastic
         version: '7.10'
+    scheduler:
+        engine: jenkins
+        version: '2.442'
+        csrf-protection-enabled: true
+    mail_catcher:
+        engine: mailhog
 
 docker:
 

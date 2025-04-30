@@ -1,1 +1,0 @@
-import './comparison-table';

@@ -5,8 +5,6 @@
  * For full license information, please view the LICENSE file that was distributed with this source code.
  */
 
-declare(strict_types = 1);
-
 namespace Pyz\Service\ProductConfiguration;
 
 use Generated\Shared\Transfer\ProductConfigurationInstanceTransfer;
@@ -15,7 +13,7 @@ use Spryker\Service\ProductConfiguration\ProductConfigurationConfig as SprykerPr
 class ProductConfigurationConfig extends SprykerProductConfigurationConfig
 {
     /**
-     * @return array<string>
+     * @return list<string>
      */
     public function getConfigurationFieldsNotAllowedForEncoding(): array
     {

@@ -5,8 +5,6 @@
  * For full license information, please view the LICENSE file that was distributed with this source code.
  */
 
-declare(strict_types = 1);
-
 namespace Pyz\Zed\MerchantSalesOrder;
 
 use Spryker\Zed\DiscountMerchantSalesOrder\Communication\Plugin\MerchantSalesOrder\DiscountMerchantOrderFilterPlugin;
@@ -15,7 +13,6 @@ use Spryker\Zed\MerchantOms\Communication\Plugin\MerchantSalesOrder\EventTrigger
 use Spryker\Zed\MerchantOms\Communication\Plugin\MerchantSalesOrder\MerchantOmsMerchantOrderExpanderPlugin;
 use Spryker\Zed\MerchantSalesOrder\MerchantSalesOrderDependencyProvider as SprykerMerchantSalesOrderDependencyProvider;
 use Spryker\Zed\MerchantSalesOrderSalesMerchantCommission\Communication\Plugin\MerchantSalesOrder\UpdateMerchantCommissionTotalsMerchantOrderPostCreatePlugin;
-use Spryker\Zed\SalesDiscountConnector\Communication\Plugin\MerchantSalesOrder\CopyOrderContextMerchantOrderTotalsPreRecalculatePlugin;
 
 class MerchantSalesOrderDependencyProvider extends SprykerMerchantSalesOrderDependencyProvider
 {
@@ -61,16 +58,6 @@ class MerchantSalesOrderDependencyProvider extends SprykerMerchantSalesOrderDepe
     {
         return [
             new DiscountMerchantOrderFilterPlugin(),
-        ];
-    }
-
-    /**
-     * @return list<\Spryker\Zed\MerchantSalesOrderExtension\Dependency\Plugin\MerchantOrderTotalsPreRecalculatePluginInterface>
-     */
-    protected function getMerchantOrderTotalsPreRecalculatePlugins(): array
-    {
-        return [
-            new CopyOrderContextMerchantOrderTotalsPreRecalculatePlugin(),
         ];
     }
 }

@@ -5,8 +5,6 @@
  * For full license information, please view the LICENSE file that was distributed with this source code.
  */
 
-declare(strict_types = 1);
-
 namespace Pyz\Zed\User;
 
 use Spryker\Zed\Acl\Communication\Plugin\GroupPlugin;
@@ -36,7 +34,7 @@ class UserDependencyProvider extends SprykerUserDependencyProvider
      */
     protected function addGroupPlugin(Container $container): Container
     {
-        $container->set(static::PLUGIN_GROUP, function (Container $container) { // phpcs:ignore SlevomatCodingStandard.Functions.UnusedParameter
+        $container->set(static::PLUGIN_GROUP, function (Container $container) {
             return new GroupPlugin();
         });
 

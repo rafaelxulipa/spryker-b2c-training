@@ -5,8 +5,6 @@
  * For full license information, please view the LICENSE file that was distributed with this source code.
  */
 
-declare(strict_types = 1);
-
 namespace PyzTest\Zed\Product\Business;
 
 use Generated\Shared\Transfer\PriceProductTransfer;
@@ -90,7 +88,7 @@ class ProductConcreteManagerTest extends ProductTestAbstract
      *
      * @return \Orm\Zed\Product\Persistence\SpyProduct
      */
-    protected function getProductConcreteEntityById(int $idProductConcrete): SpyProduct
+    protected function getProductConcreteEntityById($idProductConcrete): SpyProduct
     {
         return $this->productQueryContainer
             ->queryProduct()

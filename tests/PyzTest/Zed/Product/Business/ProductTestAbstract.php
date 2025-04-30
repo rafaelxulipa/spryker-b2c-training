@@ -5,8 +5,6 @@
  * For full license information, please view the LICENSE file that was distributed with this source code.
  */
 
-declare(strict_types = 1);
-
 namespace PyzTest\Zed\Product\Business;
 
 use ArrayObject;
@@ -436,7 +434,7 @@ abstract class ProductTestAbstract extends Unit
      *
      * @return \Orm\Zed\Product\Persistence\SpyProductAbstract
      */
-    protected function getProductAbstractEntityById(int $idProductAbstract): SpyProductAbstract
+    protected function getProductAbstractEntityById($idProductAbstract): SpyProductAbstract
     {
         return $this->productQueryContainer
             ->queryProductAbstract()
@@ -449,7 +447,7 @@ abstract class ProductTestAbstract extends Unit
      *
      * @return \Orm\Zed\Product\Persistence\SpyProduct
      */
-    protected function getProductConcreteEntityByAbstractId(int $idProductAbstract): SpyProduct
+    protected function getProductConcreteEntityByAbstractId($idProductAbstract): SpyProduct
     {
         return $this->productQueryContainer
             ->queryProduct()

@@ -5,11 +5,10 @@
  * For full license information, please view the LICENSE file that was distributed with this source code.
  */
 
-declare(strict_types = 1);
-
 namespace Pyz\Client\ProductStorage;
 
 use Spryker\Client\AvailabilityStorage\Plugin\ProductViewAvailabilityStorageExpanderPlugin;
+use Spryker\Client\MerchantProductStorage\Plugin\ProductStorage\ProductViewMerchantProductExpanderPlugin;
 use Spryker\Client\PriceProductStorage\Plugin\ProductViewPriceExpanderPlugin;
 use Spryker\Client\ProductBundleStorage\Plugin\ProductStorage\ProductBundleProductViewExpanderPlugin;
 use Spryker\Client\ProductConfigurationStorage\Plugin\ProductStorage\ProductViewProductConfigurationExpanderPlugin;
@@ -20,6 +19,7 @@ use Spryker\Client\ProductListStorage\Plugin\ProductStorageExtension\ProductAbst
 use Spryker\Client\ProductListStorage\Plugin\ProductStorageExtension\ProductAbstractRestrictionPlugin;
 use Spryker\Client\ProductListStorage\Plugin\ProductStorageExtension\ProductConcreteListStorageRestrictionFilterPlugin;
 use Spryker\Client\ProductListStorage\Plugin\ProductStorageExtension\ProductConcreteRestrictionPlugin;
+use Spryker\Client\ProductOfferStorage\Plugin\ProductStorage\ProductViewProductOfferExpanderPlugin;
 use Spryker\Client\ProductStorage\Plugin\ProductVariantProductViewExpanderPlugin;
 use Spryker\Client\ProductStorage\ProductStorageDependencyProvider as SprykerProductStorageDependencyProvider;
 
@@ -34,11 +34,13 @@ class ProductStorageDependencyProvider extends SprykerProductStorageDependencyPr
         $plugins = [
             new ProductViewDiscontinuedOptionsExpanderPlugin(),
             new ProductVariantProductViewExpanderPlugin(),
+            new ProductViewProductOfferExpanderPlugin(),
             new ProductViewProductConfigurationExpanderPlugin(),
             new ProductViewPriceExpanderPlugin(),
             new ProductViewAvailabilityStorageExpanderPlugin(),
             new ProductDiscontinuedProductAvailabilityExpanderPlugin(), #ProductDiscontinuedFeature
             new ProductViewImageExpanderPlugin(),
+            new ProductViewMerchantProductExpanderPlugin(),
             new ProductBundleProductViewExpanderPlugin(),
         ];
 

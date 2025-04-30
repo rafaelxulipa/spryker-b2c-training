@@ -5,11 +5,10 @@
  * For full license information, please view the LICENSE file that was distributed with this source code.
  */
 
-declare(strict_types = 1);
-
 namespace PyzTest\Zed\MessageBroker;
 
 use Codeception\Actor;
+use Codeception\Scenario;
 use Generated\Shared\Transfer\CurrencyTransfer;
 use Orm\Zed\Oms\Persistence\SpyOmsOrderItemState;
 use Orm\Zed\Oms\Persistence\SpyOmsOrderItemStateQuery;
@@ -49,6 +48,17 @@ class PaymentPresentationTester extends Actor
      * @var string
      */
     protected const DEFAULT_OMS_PROCESS_NAME = 'ForeignPaymentStateMachine01';
+
+    /**
+     * @param \Codeception\Scenario $scenario
+     */
+    public function __construct(Scenario $scenario)
+    {
+        parent::__construct($scenario);
+
+        $this->amZed();
+        $this->amLoggedInUser();
+    }
 
     /**
      * @param string $initialItemState
@@ -94,7 +104,6 @@ class PaymentPresentationTester extends Actor
     {
         $channelName = 'payment-commands';
         $this->setupMessageBroker($paymentMessageTransfer::class, $channelName);
-        $this->setupMessageBrokerPlugins();
         $messageBrokerFacade = $this->getLocator()->messageBroker()->facade();
         $messageBrokerFacade->sendMessage($paymentMessageTransfer);
         $messageBrokerFacade->startWorker(

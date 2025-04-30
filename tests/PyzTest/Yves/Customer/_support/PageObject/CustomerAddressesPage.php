@@ -5,8 +5,6 @@
  * For full license information, please view the LICENSE file that was distributed with this source code.
  */
 
-declare(strict_types = 1);
-
 namespace PyzTest\Yves\Customer\PageObject;
 
 use Generated\Shared\Transfer\AddressTransfer;
@@ -70,7 +68,7 @@ class CustomerAddressesPage extends Customer
      *
      * @return \Generated\Shared\Transfer\AddressTransfer
      */
-    public static function getAddressData(string $address): AddressTransfer
+    public static function getAddressData($address): AddressTransfer
     {
         $addressTransfer = new AddressTransfer();
         $addressTransfer->fromArray(self::$addresses[$address]);

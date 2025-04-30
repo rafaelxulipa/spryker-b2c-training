@@ -1,8 +1,8 @@
 <?php
 
-use Spryker\Shared\Kernel\Store;
 use Spryker\Shared\Propel\PropelConstants;
 use Spryker\Zed\Propel\PropelConfig;
+
 
 $dsn = sprintf(
     '%s:host=%s;port=%d;dbname=%s',

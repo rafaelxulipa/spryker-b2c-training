@@ -5,8 +5,6 @@
  * For full license information, please view the LICENSE file that was distributed with this source code.
  */
 
-declare(strict_types = 1);
-
 namespace Pyz\Zed\ExampleChart\Plugin;
 
 use Generated\Shared\Transfer\ChartDataTraceTransfer;
@@ -35,7 +33,7 @@ class ExampleChartPlugin implements ChartPluginInterface, ChartLayoutablePluginI
      *
      * @return \Generated\Shared\Transfer\ChartDataTransfer
      */
-    public function getChartData($dataIdentifier = null): ChartDataTransfer // phpcs:ignore
+    public function getChartData($dataIdentifier = null): ChartDataTransfer
     {
         $data = new ChartDataTransfer();
         $data->setTitle('test');

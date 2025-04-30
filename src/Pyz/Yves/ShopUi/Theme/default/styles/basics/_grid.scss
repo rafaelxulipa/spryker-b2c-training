@@ -55,6 +55,10 @@
             flex-grow: 1;
         }
 
+        &--reset-min-width {
+            min-width: 0;
+        }
+
         &--top {
             align-self: flex-start;
             margin-bottom: auto;
@@ -165,11 +169,11 @@
             max-width: $setting-grid-max-width;
         }
 
-        &--no-wrap {
+        &--nowrap {
             flex-wrap: nowrap;
         }
 
-        &--desktop-no-wrap {
+        &--desktop-nowrap {
             @include helper-breakpoint-media-min($md-min) {
                 flex-wrap: nowrap;
             }

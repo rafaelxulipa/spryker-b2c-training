@@ -25,6 +25,10 @@ composer:
 regions:
     EU:
         services:
+            mail:
+                sender:
+                    name: Spryker No-Reply
+                    email: no-reply@spryker.local
             database:
                 database: eu-docker
                 username: spryker
@@ -83,6 +87,7 @@ groups:
                 endpoints:
                     glue-backend.eu.spryker.local:
                         region: EU
+
 services:
     database:
         engine: mysql
@@ -103,6 +108,14 @@ services:
     search:
         engine: elastic
         version: '7.10'
+    scheduler:
+        engine: jenkins
+        version: '2.442'
+        csrf-protection-enabled: true
+    mail_catcher:
+        engine: mailhog
+    webdriver:
+        engine: chromedriver
 
 docker:
     ssl:

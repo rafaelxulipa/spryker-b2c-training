@@ -301,6 +301,8 @@ product.filter.price,Preis,de_DE
 product.filter.price,Price,en_US
 product.filter.rating,Ratings,en_US
 product.filter.rating,Bewertungen,de_DE
+product.filter.merchant_name,Merchant,en_US
+product.filter.merchant_name,Händler,de_DE
 shipment.dhl,DHL,de_DE
 shipment.dhl,DHL,en_US
 shipment.dhl.paket.name,Paket,de_DE
@@ -327,12 +329,6 @@ customer.salutation.ms,Frau,de_DE
 customer.salutation.ms,Ms.,en_US
 customer.salutation.dr,Dr.,en_US
 customer.salutation.dr,Dr.,de_DE
-customer.salutation.invalid,Salutation is invalid,en_US
-customer.salutation.invalid,Anrede ist ungültig,de_DE
-customer.billing_address.salutation.invalid,Salutation is invalid,en_US
-customer.billing_address.salutation.invalid,Anrede ist ungültig,de_DE
-customer.shipping_address.salutation.invalid,Salutation is invalid,en_US
-customer.shipping_address.salutation.invalid,Anrede ist ungültig,de_DE
 customer.birth_date,Geburtsdatum (TT.MM.YYYY),de_DE
 customer.birth_date,Date of birth (DD.MM.YYYY),en_US
 customer.email,E-Mail Adresse,de_DE
@@ -355,6 +351,10 @@ payment_foreign.go_to_my_account,Gehe zum "Benutzerkonto",de_DE
 payment_foreign.go_to_my_account,Go to "My Account",en_US
 payment_foreign.success.order.placement.message,Deine Bestellung ist erfolgreich bei uns eingegangen. Die Bestellbestätigung wurde soeben per E-Mail versendet. In deinem Benutzerkonto kannst deine Bestellung überprüfen und nachverfolgen.,de_DE
 payment_foreign.success.order.placement.message,Your order has been paid successfully. You will receive your order confirmation email in a few minutes. You can check and track your order in your account.,en_US
+dummyMarketplacePaymentInvoice,"Auf Rechnung (Marktplatz)",de_DE
+dummyMarketplacePaymentInvoice,"Invoice (Marketplace)",en_US
+checkout.payment.provider.DummyMarketplacePayment,Dummy Marketplace Payment,en_US
+checkout.payment.provider.DummyMarketplacePayment,Beispiel Marktplatz Zahlungsmethode,de_DE
 address.street,Straße,de_DE
 address.street,Street,en_US
 address.street_nr,Nummer,de_DE
@@ -387,10 +387,6 @@ global.order.descendent,Z_A,de_DE
 global.order.descendent,Z-A,en_US
 global.close,Schließen,de_DE
 global.close,Close,en_US
-global.show,Show All,en_US
-global.show,Show All,de_DE
-global.hide,Hide,en_US
-global.hide,Ausblenden,de_DE
 global.search,Suche,de_DE
 global.search,Search,en_US
 global.search.results,Suchergebnisse,de_DE
@@ -433,8 +429,6 @@ global.email.address,E-Mail Adresse,de_DE
 global.email.address,Email Address,en_US
 global.password,Passwort,de_DE
 global.password,Password,en_US
-global.password.invalid_password,"Your password must include at least one uppercase letter, one lowercase letter, one number, and one special character from the following list: !@#$%^&*()_-+=[]{}|;:<>.,/?\~. Non-Latin and other special characters are not allowed.",en_US
-global.password.invalid_password,"Das Passwort muss mindestens einen Großbuchstaben, einen Kleinbuchstaben, eine Zahl und ein Sonderzeichen aus der folgenden Liste enthalten: !@#$%^&*()_-+=[]{}|;:<>.,/?\~. Nicht-lateinische und andere Sonderzeichen sind nicht erlaubt.",de_DE
 global.permission.failed,Diese Aktion ist nicht erlaubt,de_DE
 global.permission.failed,This action is forbidden,en_US
 global.recover.password,Passwort vergessen,de_DE
@@ -461,6 +455,10 @@ global.quantity_symbol,x,en_US
 global.quantity_symbol,x,de_DE
 global.partners,Partners,en_US
 global.partners,Partner,de_DE
+global.show,Show All,en_US
+global.show,Show All,de_DE
+global.hide,Hide,en_US
+global.hide,Ausblenden,de_DE
 error.404,Error 404,de_DE
 error.404,Error 404,en_US
 error_page.title,Seite nicht gefunden.,de_DE
@@ -715,8 +713,6 @@ profile.form.salutation,Salutation,en_US
 profile.form.salutation,Anrede,de_DE
 customer.salutation.dr,Dr.,en_US
 customer.salutation.dr,Dr.,de_DE
-customer.salutation.n/a,n/a,en_US
-customer.salutation.n/a,n/a,de_DE
 customer.customer_id,ID,en_US
 customer.customer_id,ID,de_DE
 forms.submit-btn,Submit,en_US
@@ -751,14 +747,6 @@ customer.login.failed,Login failed,en_US
 customer.login.failed,Login fehlgeschlagen,de_DE
 customer.email.already.used,"If this E-mail address is already in use, you will receive a password reset link. Otherwise, you must first validate your E-mail address to finish registration. Please check your E-mail.",en_US
 customer.email.already.used,"Wenn die E-Mail bereits genutzt wird, werden Sie einen Passwortresetlink erhalten. Wenn nicht dann müssen Sie erst Ihre Emailadresse verifizieren. Bitte prüfen Sie ihre Email.",de_DE
-customer.data_change_request.email_change.success,"Your email address was successfully changed.",en_US
-customer.data_change_request.email_change.success,"Ihre E-Mail-Adresse wurde erfolgreich geändert.",de_DE
-customer.data_change_request.email_change.requested,"You requested to change your e-mail to `%newEmail%`. Confirm it by clicking the verification link sent to this address. Please note that the link is valid for %minutes% minutes.",en_US
-customer.data_change_request.email_change.requested,"Sie haben eine Änderung Ihrer E-Mail-Adresse zu `%newEmail%` angefordert. Bestätigen Sie dies, indem Sie auf den Bestätigungslink klicken, der an diese Adresse gesendet wurde. Bitte beachten Sie, dass der Link %minutes% Minuten gültig ist.",de_DE
-customer.data_change_request.email_change.error,"Something went wrong. Please try again.",en_US
-customer.data_change_request.email_change.error,"Etwas ist schief gelaufen. Bitte versuchen Sie es erneut.",de_DE
-customer.data_change_request.invalid,"No valid data change request found.",en_US
-customer.data_change_request.invalid,"Keine gültige Datenänderungsanforderung gefunden.",de_DE
 general.back.button,Back,en_US
 general.back.button,Zurück,de_DE
 general.cancel.button,Cancel,en_US
@@ -931,8 +919,8 @@ discount.quote_change.discount.not_available,"The discounts you have chosen for 
 discount.quote_change.discount.not_available,"The discounts you have chosen for the following items skus is no longer available",de_DE
 discount.quote_change.discount.amount_changed,"The discounts you selected for the following items skus have changed",en_US
 discount.quote_change.discount.amount_changed,"The discounts you selected for the following items skus have changed",de_DE
-product.unavailable,Product is out of stock,en_US
-product.unavailable,Keine Produkte mehr auf Lager,de_DE
+product.unavailable,Product '%sku%' is not available at the moment,en_US
+product.unavailable,Das Produkt mit der Artikelnummer '%sku%' ist momentan nicht verfügbar.,de_DE
 product.attribute.slug,slug,en_US
 product.attribute.slug,slug,de_DE
 product.attribute.variant_id,ID,en_US
@@ -1165,8 +1153,12 @@ mail.customer.restore_password_confirmation.subject,Dein Passwort wurde erfolgre
 mail.customer.restore_password_confirmation.subject,Your password was changed successfully!,en_US
 mail.customer.restore_password_confirmation.text,Dein Passwort wurde erfolgreich geändert!,de_DE
 mail.customer.restore_password_confirmation.text,Your password was changed successfully!,en_US
-mail.customer.customer_email_change_verification.text.second_part ,"Make sure you are logged into the system before clicking the link.",en_US
-mail.customer.customer_email_change_verification.text.second_part ,"Stellen Sie sicher, dass Sie im System angemeldet sind, bevor Sie auf den Link klicken.",de_DE
+mail.merchant.restore_password.subject,Neues Passwort für Ihren Spryker Merchant Portal Account,de_DE
+mail.merchant.restore_password.subject,New password for your Spryker Merchant Portal account,en_US
+mail.merchant.restore_password.text,"""Es wurde ein neues Passwort für Ihren Spryker Merchant Portal Account angefordert. Wenn Sie nicht um um eine Neueinrichtung des Passworts gebeten haben, ignorieren Sie bitte diese Email. Klicken Sie auf den folgedenen Link, um Ihr Passwort zu ändern:""",de_DE
+mail.merchant.restore_password.text,"""Somebody has requested a new password for your Spryker Merchant Portal account. If it's not you, just ignore this email. If it's you, please follow the link bellow:""",en_US
+mail.merchant.restore_password.label,Passwort ändern,de_DE
+mail.merchant.restore_password.label,Change Password,en_US
 mail.newsletter.subscribed.subject,Willkommen beim Spryker Newsletter,de_DE
 mail.newsletter.subscribed.subject,Welcome to Spryker newsletter,en_US
 mail.newsletter.subscribed.text,"Wir freuen uns, dass du dich für unseren Newsletter registriert hast. Wir werden unser bestes geben, um dich mich relevanten und spannenden News und Updates zu versorgen.",de_DE
@@ -1321,10 +1313,6 @@ dummyPaymentCreditCard.card_security_code,CVC,en_US
 dummyPaymentCreditCard.card_security_code,CVC,de_DE
 dummyPaymentCreditCard.hidden_numbers,*********,en_US
 dummyPaymentCreditCard.hidden_numbers,*********,de_DE
-DummyPaymentInvoice,Invoice,en_US
-DummyPaymentInvoice,Auf Rechnung,de_DE
-dummyPaymentInvoice.invoice,Pay with invoice:,en_US
-dummyPaymentInvoice.invoice,Auf Rechnung bezahlen:,de_DE
 dummyPaymentInvoice.date_of_birth,Date of Birth,en_US
 dummyPaymentInvoice.date_of_birth,Geburtsdatum,de_DE
 cart.item.item_price,Item price,en_US
@@ -1389,8 +1377,8 @@ checkout.payment.provider.DummyPayment,Payment Methods,en_US
 checkout.payment.provider.DummyPayment,Zahlungsarten,de_DE
 checkout.order.duplicate,Order with given reference {{reference}} already exists,en_US
 checkout.order.duplicate,Bestellung mit gegebener Referenz {{reference}} existiert bereits,de_DE
-checkout.order.checkout.error.duplicate-order-processing,Cart with given uid %quote-uid% has already been processed,en_US
-checkout.order.checkout.error.duplicate-order-processing,Der Warenkorb mit der angegebenen UID %quote-uid% wurde bereits verarbeitet,de_DE
+checkout.item.option.pre.condition.validation.error.exists,"Product option of %name% is not available anymore.",en_US
+checkout.item.option.pre.condition.validation.error.exists,"Produktoption von %name% ist nicht mehr verfügbar.",de_DE
 cms.preview.access_denied,You are not logged in or you do not have permission to access this page.,en_US
 cms.preview.access_denied,Du bist nicht eingeloggt oder hast keine Berechtigung diese Seite zu betreten.,de_DE
 product-cart.validation.error.abstract-product-exists,"Product ""sku"" not found",en_US
@@ -1405,6 +1393,8 @@ product-cart.validation.error.concrete-product-inactive,"Product %sku% is not ac
 product-cart.validation.error.concrete-product-inactive,"Produkt %sku% ist nicht aktiv.",de_DE
 product-cart.info.concrete-product-inactive.removed,"Inactive item %sku% was removed from your shopping cart.",en_US
 product-cart.info.concrete-product-inactive.removed,"Der inaktive Artikel %sku% wurde aus deinem Warenkorb entfernt.",de_DE
+product-approval.message.not-approved,Product sku %sku% is not active.,en_US
+product-approval.message.not-approved,Produkt sku %sku% ist nicht aktiv.,de_DE
 product.filter.label,Label,en_US
 product.filter.label,Label,de_DE
 product.filter.price-default-chf-gross_mode,Preis,de_DE
@@ -2362,6 +2352,8 @@ agent.account.page_title,Agent,en_US
 agent.account.page_title,Agent,de_DE
 agent.account.profile_data,Agent Profile,en_US
 agent.account.profile_data,Agent-Profil,de_DE
+agent_security_blocker_merchant_portal_gui.error.account_blocked,"Too many log in attempts from your address. Please wait %minutes% minutes before trying again.",en_US
+agent_security_blocker_merchant_portal_gui.error.account_blocked,"Warten Sie bitte %minutes% Minuten, bevor Sie es erneut versuchen.",de_DE
 autocomplete.placeholder,Search,en_US
 autocomplete.placeholder,Suche,de_DE
 footer.logo.text,Built with,en_US
@@ -2780,6 +2772,8 @@ oms.state.shipped,Shipped,en_US
 oms.state.shipped,Versandt,de_DE
 oms.state.delivered,Delivered,en_US
 oms.state.delivered,Geliefert,de_DE
+oms.state.payout-failed,Merchant Payout failed,en_US
+oms.state.payout-failed,Merchant Auszahlung fehlgeschlagen,de_DE
 oms.state.ready-for-return,Ready for return,en_US
 oms.state.ready-for-return,Bereit zum Retournieren,de_DE
 oms.state.refunded,Refunded,en_US
@@ -2810,6 +2804,8 @@ oms.state.reservation-cancelled,Reservation Cancelled,en_US
 oms.state.reservation-cancelled,Reservation Cancelled,de_DE
 oms.state.reservation-cancellation-pending,Reservation Cancellation Pending,en_US
 oms.state.reservation-cancellation-pending,Reservation Cancellation Pending,de_DE
+oms.state.tax-pending,Tax pending,en_US
+oms.state.tax-pending,Steuer ausstehend,de_DE
 return.create_return.validation.returnable_items_error,Return cannot be created as it contains non-returnable items,en_US
 return.create_return.validation.returnable_items_error,"Retoure kann nicht angestellt werden, weil sie die Artikel beinhaltet, die nicht retourniert werden können",de_DE
 return.create_return.validation.store_error,Return cannot be created - a wrong store has been selected,en_US
@@ -2948,14 +2944,86 @@ mail.trans.company_status.title,The status of your company has been changed to,e
 mail.trans.company_status.title,Der Status deines Unternehmens wurde geändert auf,de_DE
 mail.trans.customer_registration.confirmation_link,Validate your email address,en_US
 mail.trans.customer_registration.confirmation_link,Bestätigen Sie Ihre E-Mail-Adresse,de_DE
-mail.customer.customer_email_change_verification.text,"Please validate your email address by clicking the",en_US
-mail.customer.customer_email_change_verification.text,"Bitte bestätigen Sie Ihre E-Mail-Adresse, indem Sie auf den",de_DE
-mail.customer.customer_email_change_notification.text,"We would like to inform you that the email address associated with your account has been successfully changed. If you made this change, no further action is required. However, if you did not request this change, please contact the store owner immediately to secure your account.",en_US
-mail.customer.customer_email_change_notification.text,"Wir möchten Sie darüber informieren, dass die mit Ihrem Konto verknüpfte E-Mail-Adresse erfolgreich geändert wurde. Wenn Sie diese Änderung vorgenommen haben, ist keine weitere Aktion erforderlich. Wenn Sie diese Änderung jedoch nicht angefordert haben, wenden Sie sich bitte umgehend an den Shop-Besitzer, um Ihr Konto zu sichern.",de_DE
-mail.customer.customer_email_change_notification.subject,Your Email Address Has Been Changed,en_US
-mail.customer.customer_email_change_notification.subject,Ihre E-Mail-Adresse wurde geändert,de_DE
-mail.customer.customer_email_change_verification.subject,Validate your email address,en_US
-mail.customer.customer_email_change_verification.subject,Valideer uw e-mailadre,de_DE
+merchant_opening_hours.opening_hours_title,Opening Hours,en_US
+merchant_opening_hours.opening_hours_title,Öffnungszeiten,de_DE
+merchant_opening_hours.special_opening_hours_title,Special Opening Hours,en_US
+merchant_opening_hours.special_opening_hours_title,Besondere Öffnungszeiten,de_DE
+merchant_opening_hours.public_holidays_title,Public Holidays,en_US
+merchant_opening_hours.public_holidays_title,Feiertage,de_DE
+merchant_opening_hours.opening_hours_closed,Closed,en_US
+merchant_opening_hours.opening_hours_closed,Geschlossen,de_DE
+merchant_opening_hours.day.title.monday,Monday,en_US
+merchant_opening_hours.day.title.monday,Montag,de_DE
+merchant_opening_hours.day.title.tuesday,Tuesday,en_US
+merchant_opening_hours.day.title.tuesday,Dienstag,de_DE
+merchant_opening_hours.day.title.wednesday,Wednesday,en_US
+merchant_opening_hours.day.title.wednesday,Mittwoch,de_DE
+merchant_opening_hours.day.title.thursday,Thursday,en_US
+merchant_opening_hours.day.title.thursday,Donnerstag,de_DE
+merchant_opening_hours.day.title.friday,Friday,en_US
+merchant_opening_hours.day.title.friday,Freitag,de_DE
+merchant_opening_hours.day.title.saturday,Saturday,en_US
+merchant_opening_hours.day.title.saturday,Samstag,de_DE
+merchant_opening_hours.day.title.sunday,Sunday,en_US
+merchant_opening_hours.day.title.sunday,Sonntag,de_DE
+merchant_weekday_schedule.new_year,New Year's Day,en_US
+merchant_weekday_schedule.new_year,Neujahrstag,de_DE
+merchant_weekday_schedule.good_friday,Good Friday,en_US
+merchant_weekday_schedule.good_friday,Karfreitag,de_DE
+merchant_weekday_schedule.easter_sunday,Easter Sunday,en_US
+merchant_weekday_schedule.easter_sunday,Ostersonntag,de_DE
+merchant_weekday_schedule.easter_monday,Easter Monday,en_US
+merchant_weekday_schedule.easter_monday,Ostermontag,de_DE
+merchant_weekday_schedule.may_day,May Day,en_US
+merchant_weekday_schedule.may_day,Maifeiertag,de_DE
+merchant_weekday_schedule.ascension_of_christ,Ascension of Christ,en_US
+merchant_weekday_schedule.ascension_of_christ,Christi Himmelfahrt,de_DE
+merchant_weekday_schedule.whit_sunday,Whit Sunday,en_US
+merchant_weekday_schedule.whit_sunday,Pfingstsonntag,de_DE
+merchant_weekday_schedule.whit_monday,Whit Monday,en_US
+merchant_weekday_schedule.whit_monday,Pfingstmontag,de_DE
+merchant_weekday_schedule.corpus_christi,Corpus Christi,en_US
+merchant_weekday_schedule.corpus_christi,Fronleichnam,de_DE
+merchant_weekday_schedule.day_of_german_unity,Day of German unity,en_US
+merchant_weekday_schedule.day_of_german_unity,Tag der Deutschen Einheit,de_DE
+merchant_weekday_schedule.all_saints_day,All Saints' Day,en_US
+merchant_weekday_schedule.all_saints_day,Allerheiligen,de_DE
+merchant_weekday_schedule.1st_christmas_day,1st Christmas day,en_US
+merchant_weekday_schedule.1st_christmas_day,1. Weihnachtstag,de_DE
+merchant_weekday_schedule.2nd_christmas_day,2nd Christmas day,en_US
+merchant_weekday_schedule.2nd_christmas_day,2. Weihnachtstag,de_DE
+merchant_weekday_schedule.sunday_opening,Sunday Opening,en_US
+merchant_weekday_schedule.sunday_opening,Verkaufsoffener Sonntag,de_DE
+merchant_product.message.invalid,Product "%sku%" with Merchant "%merchant_reference%" not found.,en_US
+merchant_product.message.invalid,Der Produkt "%sku%" mit dem Händler "%merchant_reference%" ist nicht gefunden.,de_DE
+merchant_product.sold_by,Sold by,en_US
+merchant_product.sold_by,Verkauft durch,de_DE
+merchant_product_offer.view_seller,View Seller,en_US
+merchant_product_offer.view_seller,Händler ansehen,de_DE
+merchant_product_offer.sold_by,Sold by,en_US
+merchant_product_offer.sold_by,Verkauft durch,de_DE
+merchant.sold_by,Sold by:,en_US
+merchant.sold_by,Verkauft durch:,de_DE
+merchant_profile.email,Email Address,en_US
+merchant_profile.email,E-Mail,de_DE
+merchant_profile.address,Address,en_US
+merchant_profile.address,Adresse,de_DE
+merchant_profile.phone,Phone,en_US
+merchant_profile.phone,Telefon,de_DE
+merchant_profile.terms_and_conditions,Terms & Conditions,en_US
+merchant_profile.terms_and_conditions,AGB,de_DE
+merchant_profile.cancellation_policy,Cancellation Policy,en_US
+merchant_profile.cancellation_policy,Widerrufsbelehrung,de_DE
+merchant_profile.imprint,Imprint,en_US
+merchant_profile.imprint,Impressum,de_DE
+merchant_profile.privacy,Data Privacy,en_US
+merchant_profile.privacy,Datenschutz,de_DE
+merchant_profile.delivery_time,Delivery Time,en_US
+merchant_profile.delivery_time,Lieferzeit,de_DE
+merchant_sales_return.message.items_from_different_merchant_detected,"There are products from different merchants in your order. You can only return products from one merchant at a time.",en_US
+merchant_sales_return.message.items_from_different_merchant_detected,"Diese Bestellung enthält Artikel von verschiedenen Händlern. Sie können nur Artikel von einem Händler zur selben Zeit zurückschicken.",de_DE
+merchant_sales_return_widget.create_form.different_merchants_info,There are products from different merchants in your order. You can only return products from one merchant at a time.,en_US
+merchant_sales_return_widget.create_form.different_merchants_info,Diese Bestellung enthält Artikel von verschiedenen Händlern. Sie können nur Artikel von einem Händler zur selben Zeit zurückschicken.,de_DE
 customer.error.confirm_email_link.invalid_or_used,This email verification link is invalid or has been already used.,en_US
 customer.error.confirm_email_link.invalid_or_used,Dieser E-Mail-Verifizierungslink ist ungültig oder wurde bereits verwendet.,de_DE
 customer.authorization.validate_email_address,"Almost there! We send you an email to validate your email address. Please confirm it to be able to log in.",en_US
@@ -2982,6 +3050,8 @@ security_blocker_page.error.account_blocked,"Too many log in attempts from your 
 security_blocker_page.error.account_blocked,"Warten Sie bitte %minutes% Minuten, bevor Sie es erneut versuchen.",de_DE
 security_blocker_backoffice_gui.error.account_blocked,"Too many log in attempts from your address. Please wait %minutes% minutes before trying again.",en_US
 security_blocker_backoffice_gui.error.account_blocked,"Warten Sie bitte %minutes% Minuten, bevor Sie es erneut versuchen.",de_DE
+security_blocker_merchant_portal_gui.error.account_blocked,"Too many log in attempts from your address. Please wait %minutes% minutes before trying again.",en_US
+security_blocker_merchant_portal_gui.error.account_blocked,"Warten Sie bitte %minutes% Minuten, bevor Sie es erneut versuchen.",de_DE
 agent_page.error.customer_already_logged_in,"Sie sind bereits als Kunde angemeldet. Bitte loggen Sie sich zuerst aus und fahren Sie dann fort",de_DE
 agent_page.error.customer_already_logged_in,"You are already logged in as customer, please logout first, then proceed",en_US
 customer.login.remember_me,"Remember me",en_US
@@ -2990,12 +3060,34 @@ sales-order-threshold.hard-minimum-threshold.us.usd.message,You should add items
 sales-order-threshold.hard-maximum-threshold.us.usd.message,The cart value cannot be higher than {{threshold}}. Please remove some items to proceed with the order,en_US
 sales-order-threshold.soft-minimum-threshold.us.usd.message,"You need to add items for {{threshold}} to pass a recommended threshold, but if you want can proceed to checkout.",en_US
 countries.iso.US,United States of America,en_US
-store_widget.switcher.store,Store:,en_US
-store_widget.switcher.store,Shop:,de_DE
+product-offer.info.product-offer-inactive.removed,Inactive item %sku% was removed from your shopping cart.,en_US
+product-offer.info.product-offer-inactive.removed,Der inaktive Artikel %sku% wurde aus Ihrem Warenkorb entfernt.,de_DE
+product-offer.info.reference.invalid,Product offer reference not found for product with SKU '%sku%'.,en_US
+product-offer.info.reference.invalid,Produktangebotsreferenz für Produkt mit SKU '% sku%' nicht gefunden.,de_DE
+product-offer.message.not-active-or-approved,Product offer not active for product with SKU '%sku%'.,en_US
+product-offer.message.not-active-or-approved,Produktangebot ist inaktiv für Produkt mit SKU '% sku%'.,de_DE
+merchant_sales_order.merchant_order_id,Merchant Order ID,en_US
+merchant_sales_order.merchant_order_id,Händlerbestell-ID,de_DE
 product_bundle_product_detail_page_items_list_widget.title.bundle_includes,Bundle includes,en_US
 product_bundle_product_detail_page_items_list_widget.title.bundle_includes,Bündel beinhaltet,de_DE
 product_configuration.checkout.validation.error.is_not_complete,"Product configuration is not completed.",en_US
 product_configuration.checkout.validation.error.is_not_complete,"Die Produktkonfiguration ist nicht abgeschlossen.",de_DE
+product_configuration.validation.error.not_valid_response_checksum,"Not valid response checksum provided",en_US
+product_configuration.validation.error.not_valid_response_checksum,"Keine gültige Antwortprüfsumme angegeben",de_DE
+product_configuration.validation.error.expired_timestamp,"Expired timestamp was provided",en_US
+product_configuration.validation.error.expired_timestamp,"Der abgelaufene Zeitstempel wurde bereitgestellt",de_DE
+product_configuration.access_token.request.error.can_not_obtain_access_token,"Can not obtain access token",en_US
+product_configuration.access_token.request.error.can_not_obtain_access_token,"Zugriffstoken kann nicht abgerufen werden",de_DE
+product_configuration.error.configured_item_not_found_in_cart,Configured product '%sku%' was not found.,en_US
+product_configuration.error.configured_item_not_found_in_cart,'%sku%' des kofigurierbaren Produkts wurde nicht gefunden.,de_DE
+product_configuration.error.availability.failed,The product has an availability of %availability%.,en_US
+product_configuration.error.availability.failed,Das Produkt hat eine Verfügbarkeit von %availability%.,de_DE
+product_configuration.response.validation.error,Failed to validate product configurator response.,en_US
+product_configuration.response.validation.error,Die Antwort vom Produktkonfigurator konnte nicht validiret werden.,de_DE
+product_configuration.error.configuration_not_found,Product configuration was not found for product '%sku%'.,en_US
+product_configuration.error.configuration_not_found,Produktkonfiguration wurde nicht für Produkt '%sku%' gefunden.,de_DE
+product_configuration_storage.validation.error.group_key_is_not_provided,"Group key must be provided",en_US
+product_configuration_storage.validation.error.group_key_is_not_provided,"Gruppenschlüssel muss angegeben werden",de_DE
 product_configuration_widget.configure,Configure,en_US
 product_configuration_widget.configure,Konfigurieren,de_DE
 product_configuration_widget.complete,"Configuration complete!",en_US
@@ -3004,16 +3096,30 @@ product_configuration_widget.not_complete,"Configuration is not complete.",en_US
 product_configuration_widget.not_complete,"Die Konfiguration ist nicht abgeschlossen.",de_DE
 product_configuration_widget.quote_not_valid,"This cart can't be processed. Please configure items inside the cart.",en_US
 product_configuration_widget.quote_not_valid,"Dieser Warenkorb kann nicht bearbeitet werden. Bitte konfigurieren Sie Artikel im Warenkorb.",de_DE
+product_configuration_wishlist.error.configuration_not_found,"Product configuration was not found for wishlist item '%id%'.",en_US
+product_configuration_wishlist.error.configuration_not_found,"Für den Wunschlistenartikel '%id%' wurde keine Produktkonfiguration gefunden.",de_DE
 product_configurator_gateway_page.source_type_not_blank,"Source is required parameter",en_US
 product_configurator_gateway_page.source_type_not_blank,"Source ist erforderlicher Parameter",de_DE
 product_configurator_gateway_page.sku_not_blank,"Product SKU is required parameter",en_US
 product_configurator_gateway_page.sku_not_blank,"Produkt-SKU ist ein erforderlicher Parameter",de_DE
+product_configurator_gateway_page.configurator_key_not_blank,"Configurator key is required parameter",en_US
+product_configurator_gateway_page.configurator_key_not_blank,"Konfiguratorschlüssel ist ein erforderlicher Parameter",de_DE
 product_configurator_gateway_page.quantity_required,"Quantity is required parameter",en_US
 product_configurator_gateway_page.quantity_required,"Menge ist Parameter erforderlich",de_DE
-product_configuration.error.availability.failed,The product has an availability of %availability%.,en_US
-product_configuration.error.availability.failed,Das Produkt hat eine Verfügbarkeit von %availability%.,de_DE
-product_configuration.quote_request.validation.error.incomplete,You must finish the configuration of the products to validate the quote.,en_US
-product_configuration.quote_request.validation.error.incomplete,"Sie müssen die Konfiguration der Produkte abschließen, um das Angebot zu validieren.",de_DE
+product_configurator_gateway_page.item_group_key_required,"Group Key is required parameter",en_US
+product_configurator_gateway_page.item_group_key_required,"Gruppenschlüssel ist erforderlicher Parameter",de_DE
+product_configurator_gateway_page.wishlist_item_id_required,"Wishlist item ID is required parameter.",en_US
+product_configurator_gateway_page.wishlist_item_id_required,"Die ID des Wunschartikels ist ein erforderlicher Parameter.",de_DE
+product_configurator_gateway_page.configurator_key_is_not_supported,"Configurator key is not supported.",en_US
+product_configurator_gateway_page.configurator_key_is_not_supported,"Konfiguratorschlüssel wird nicht unterstützt.",de_DE
+demo_date_time_configurator_page.checkout.validation.error.price_is_not_valid,"Product configuration price is not valid",en_US
+demo_date_time_configurator_page.checkout.validation.error.price_is_not_valid,"Der Produktkonfigurationspreis ist ungültig",de_DE
+wishlist.validation.error.wishlist_item_not_found,Wishlist item not found.,en_US
+wishlist.validation.error.wishlist_item_not_found,Wunschliste Artikel nicht gefunden.,de_DE
+wishlist.validation.error.wishlist_item_cannot_be_updated,Wishlist item cannot be updated.,en_US
+wishlist.validation.error.wishlist_item_cannot_be_updated,Wunschliste kann nicht aktualisiert werden.,de_DE
+store_widget.switcher.store,Store:,en_US
+store_widget.switcher.store,Shop:,de_DE
 store.validation.store_not_found,"Store not found",en_US
 store.validation.store_not_found,"Store nicht gefunden",de_DE
 push_notification.validation.error.push_notification_provider_not_found,The push notification provider was not found.,en_US
@@ -3076,31 +3182,183 @@ picking_list.validation.picking_list.validation.picking_list_item_duplicated,Pic
 picking_list.validation.picking_list.validation.picking_list_item_duplicated,PickingListItem dupliziert.,de_DE
 picking_list_push_notification.validation.warehouse_entity_not_found,Warehouse not found.,en_US
 picking_list_push_notification.validation.warehouse_entity_not_found,Lager nicht gefunden.,de_DE
+service_point.validation.service_point_key_exists,A service point with the same key already exists.,en_US
+service_point.validation.service_point_key_exists,Es existiert bereits eine Servicestelle mit dem gleichen Schlüssel.,de_DE
+service_point.validation.service_point_key_is_not_unique,A service point with the same key already exists in request.,en_US
+service_point.validation.service_point_key_is_not_unique,Es existiert bereits eine Servicestelle mit dem gleichen Schlüssel in einer Abfrage.,de_DE
+service_point.validation.service_point_key_wrong_length,A service point key must have length from %min% to %max% characters.,en_US
+service_point.validation.service_point_key_wrong_length,Ein Servicestellen-Schlüssel muss eine Länge von %min% bis %max% Zeichen haben.,de_DE
+service_point.validation.service_point_name_wrong_length,A service point name must have length from %min% to %max% characters.,en_US
+service_point.validation.service_point_name_wrong_length,Ein Servicestellen-Name muss eine Länge von %min% bis %max% Zeichen haben.,de_DE
+service_point.validation.store_does_not_exist,Store with name '%name%' does not exist.,en_US
+service_point.validation.store_does_not_exist,Store mit dem Namen '%name%' existiert nicht.,de_DE
+service_point.validation.service_point_entity_not_found,Service point entity was not found.,en_US
+service_point.validation.service_point_entity_not_found,Servicestelle wurde nicht gefunden.,de_DE
+service_point.validation.wrong_request_body,Wrong request body.,en_US
+service_point.validation.wrong_request_body,Falscher Anforderungstext.,de_DE
+service_point.validation.country_entity_not_found,Country with iso2 code '%iso2Code%' does not exist.,en_US
+service_point.validation.country_entity_not_found,Das Land mit dem iso2-Code '%iso2Code%' existiert nicht.,de_DE
+service_point.validation.region_entity_not_found,Region with uuid '%uuid%' does not exist for country with iso2 code '%countryIso2Code%'.,en_US
+service_point.validation.region_entity_not_found,Region mit uuid '%uuid%' existiert nicht für Land mit iso2-Code '%countryIso2Code%',de_DE
+service_point.validation.service_point_address_address1_wrong_length,Service Point Address Input address1 must have a length of %min% to %max% characters.,en_US
+service_point.validation.service_point_address_address1_wrong_length,Service Point Adresse Input address1 muss eine Länge von %min% bis %max% Zeichen haben.,de_DE
+service_point.validation.service_point_address_address2_wrong_length,Service Point Address Input address2 must have a length of %min% to %max% characters.,en_US
+service_point.validation.service_point_address_address2_wrong_length,Service Point Adresse Input address2 muss eine Länge von %min% bis %max% Zeichen haben.,de_DE
+service_point.validation.service_point_address_address3_wrong_length,Service Point Address Input address3 must have a length of %min% to %max% characters.,en_US
+service_point.validation.service_point_address_address3_wrong_length,Service Point Adresse Input address3 muss eine Länge von %min% bis %max% Zeichen haben.,de_DE
+service_point.validation.service_point_address_city_wrong_length,A service point address city must have length from %min% to %max% characters.,en_US
+service_point.validation.service_point_address_city_wrong_length,Eine Service Point Adresse Stadt muss eine Länge von %min% bis %max% Zeichen haben.,de_DE
+service_point.validation.service_point_address_entity_not_found,Service point address entity was not found.,en_US
+service_point.validation.service_point_address_entity_not_found,Die Entität Service Point Adresse wurde nicht gefunden.,de_DE
+service_point.validation.service_point_address_zip_code_wrong_length,A service point address zip code must have length from %min% to %max% characters.,en_US
+service_point.validation.service_point_address_zip_code_wrong_length,Die Postleitzahl einer Service Point Adresse muss eine Länge von %min% bis %max% Zeichen haben.,de_DE
+service_point.validation.service_point_address_already_exists,A service point address for the service point already exists.,en_US
+service_point.validation.service_point_address_already_exists,Es existiert bereits eine Service Point Adresse für den Service Point.,de_DE
+service_point.validation.service_point_uuid_is_not_unique,A service point with the same uuid already exists in request.,en_US
+service_point.validation.service_point_uuid_is_not_unique,Ein Service Point mit der gleichen uuid existiert bereits in der Anfrage.,de_DE
+service_point.validation.service_type_key_exists,A service type with the same key already exists.,en_US
+service_point.validation.service_type_key_exists,Ein Service-Typ mit demselben Schlüssel existiert bereits.,de_DE
+service_point.validation.service_type_key_wrong_length,A service type key must have length from %min% to %max% characters.,en_US
+service_point.validation.service_type_key_wrong_length,Ein Service-Typ-Schlüssel muss eine Länge von %min% bis %max% Zeichen haben.,de_DE
+service_point.validation.service_type_key_is_not_unique,A service type with the same key already exists in request.,en_US
+service_point.validation.service_type_key_is_not_unique,Ein Service-Typ mit demselben Schlüssel existiert bereits in der Anfrage.,de_DE
+service_point.validation.service_type_name_exists,A service type with the same name already exists.,en_US
+service_point.validation.service_type_name_exists,Ein Service-Typ mit demselben Namen existiert bereits.,de_DE
+service_point.validation.service_type_name_wrong_length,A service type name must have length from %min% to %max% characters.,en_US
+service_point.validation.service_type_name_wrong_length,Ein Service-Typ-Name muss eine Länge von %min% bis %max% Zeichen haben.,de_DE
+service_point.validation.service_type_name_is_not_unique,A service type with the same name already exists in request.,en_US
+service_point.validation.service_type_name_is_not_unique,Ein Service-Typ mit demselben Namen existiert bereits in der Anfrage.,de_DE
+service_point.validation.service_type_entity_not_found,The service type entity was not found.,en_US
+service_point.validation.service_type_entity_not_found,Die Service-Typ-Entität wurde nicht gefunden.,de_DE
+service_point.validation.service_poinst_service_key_exists,A service with the same key already exists.,en_US
+service_point.validation.service_poinst_service_key_exists,Ein Service mit demselben Schlüssel existiert bereits.,de_DE
+service_point.validation.service_key_wrong_length,A service key must have length from %min% to %max% characters.,en_US
+service_point.validation.service_key_wrong_length,Ein Service-Schlüssel muss eine Länge von %min% bis %max% Zeichen haben.,de_DE
+service_point.validation.service_key_is_not_unique,A service with the same key already exists in request.,en_US
+service_point.validation.service_key_is_not_unique,Ein Service mit demselben Schlüssel existiert bereits in der Anfrage.,de_DE
+service_point.validation.service_type_relation_already_exists,A service with defined relation of service point and service type already exists.,en_US
+service_point.validation.service_type_relation_already_exists,Ein Service mit einer definierten Beziehung von Servicepunkt und Service-Typ existiert bereits.,de_DE
+service_point.validation.service_type_relation_is_not_unique,A service with defined relation of service pint and service type already exists in request.,en_US
+service_point.validation.service_type_relation_is_not_unique,Ein Service mit definierter Beziehung von Servicepunkt und Service-Typ existiert bereits in der Anfrage.,de_DE
+service_point.validation.service_entity_not_found,The service entity was not found.,en_US
+service_point.validation.service_entity_not_found,Die Service-Entität wurde nicht gefunden.,de_DE
+service_point.validation.service_key_immutability,The service key is immutable.,en_US
+service_point.validation.service_key_immutability,Der Service-Schlüssel ist unveränderlich.,de_DE
+service_point.validation.service_type_key_immutability,The service type key is immutable.,en_US
+service_point.validation.service_type_key_immutability,Der Service-Typ-Schlüssel ist unveränderlich.,de_DE
+service_point.validation.service_key_exists,A service with the same key already exists.,en_US
+service_point.validation.service_key_exists,Ein Service mit demselben Schlüssel existiert bereits.,de_DE
+product_offer_service_point.validation.product_offer_reference_not_found,Product offer '%product_offer_reference%' not found.,en_US
+product_offer_service_point.validation.product_offer_reference_not_found,Product offer '%product_offer_reference%' nicht gefunden.,de_DE
+product_offer_service_point.validation.product_offer_has_multiple_service_points,Product offer '%product_offer_reference%' can have only one service point.,en_US
+product_offer_service_point.validation.product_offer_has_multiple_service_points,Das Product Offer '%product_offer_reference%' kann nur einen Service Point haben.,de_DE
+product_offer_service_point.validation.service_uuid_not_found,Services with uuids '%service_uuids%' not found.,en_US
+product_offer_service_point.validation.service_uuid_not_found,Services mit den uuids '%service_uuids%' wurde nicht gefunden.,de_DE
+product_offer_service_point.validation.service_not_unique,A service for product offer '%product_offer_reference%' with the same uuid already exists in request.,de_DE
+product_offer_service_point.validation.service_not_unique,Ein Service für Product Offer '%product_offer_reference%' mit derselben UUID ist bereits in der Anfrage vorhanden.,de_DE
+product_offer_service_point.validation.product_offer_not_unique,A product offer with the same reference already exists in request.,de_DE
+product_offer_service_point.validation.product_offer_not_unique,Ein Product Offer mit der gleichen Referenz liegt bereits in der Anfrage vor.,de_DE
+shipment_type.name.shipment_type_delivery,Delivery,en_US
+shipment_type.name.shipment_type_delivery,Lieferung,de_DE
+shipment_type.name.shipment_type_pickup,Pickup,en_US
+shipment_type.name.shipment_type_pickup,Abholung,de_DE
+shipment_type.validation.shipment_type_entity_not_found,A delivery type entity was not found.,en_US
+shipment_type.validation.shipment_type_entity_not_found,Lieferart wurde nicht gefunden.,de_DE
+shipment_type.validation.shipment_type_key_exists,A delivery type with the same key already exists.,en_US
+shipment_type.validation.shipment_type_key_exists,Es existiert bereits eine Lieferart mit dem gleichen Schlüssel.,de_DE
+shipment_type.validation.shipment_type_key_is_not_unique,At least two delivery types in this request have the same key.,en_US
+shipment_type.validation.shipment_type_key_is_not_unique,Mindestens zwei Lieferarten in dieser Anfrage haben den gleichen Schlüssel.,de_DE
+shipment_type.validation.shipment_type_key_invalid_length,A delivery type key must have a length from %min% to %max% characters.,en_US
+shipment_type.validation.shipment_type_key_invalid_length,Der Lieferart-Schlüssel muss eine Länge von %min% bis %max% Zeichen haben.,de_DE
+shipment_type.validation.shipment_type_name_invalid_length,A delivery type name must have a length from %min% to %max% characters.,en_US
+shipment_type.validation.shipment_type_name_invalid_length,Der Lieferart-Name muss eine Länge von %min% bis %max% Zeichen haben.,de_DE
+shipment_type.validation.store_does_not_exist,A store with the name ‘%name%’ does not exist.,en_US
+shipment_type.validation.store_does_not_exist,Store mit dem Namen ‘%name%’ existiert nicht.,de_DE
+service_point_widget.search,"Search for Store, zip code or city...",en_US
+service_point_widget.search,"Suche nach Store, PLZ oder Stadt...",de_DE
+service_point_widget.select_store_action,Select store,en_US
+service_point_widget.select_store_action,Store auswählen,de_DE
+service_point_widget.no_results,"Nothing found...",en_US
+service_point_widget.no_results,"Nichts gefunden...",de_DE
+service_point_widget.validation.error.service_point_not_selected,Please select service point.,en_US
+service_point_widget.validation.error.service_point_not_selected,Bitte Servicestelle auswählen.,de_DE
+service_point_widget.validation.error.billing_address_not_provided,Please add billing address manually.,en_US
+service_point_widget.validation.error.billing_address_not_provided,Bitte fügen Sie die Rechnungsadresse manuell hinzu.,de_DE
+page.checkout.address.single_address,Single address,en_US
+page.checkout.address.single_address,Eine Adresse,de_DE
+page.checkout.address.multiple_addresses,Multiple addresses,en_US
+page.checkout.address.multiple_addresses,Mehrere Adressen,de_DE
+service_point_widget.select_location_action,Select a location,en_US
+service_point_widget.select_location_action,Wählen Sie einen Standort,de_DE
+service_point_widget.change_action,Change,en_US
+service_point_widget.change_action,Ändern,de_DE
+service_point_widget.location_label,Location:,en_US
+service_point_widget.location_label,Standort:,de_DE
+service_point_widget.select_your_store_title,Select your store,en_US
+service_point_widget.select_your_store_title,Wählen Sie Ihren Store,de_DE
+service_points_rest_api.error.endpoint_not_found,The endpoint is not found.,en_US
+service_points_rest_api.error.endpoint_not_found,Der Endpunkt wurde nicht gefunden.,de_DE
+service_points_rest_api.error.service_point_identifier_is_not_specified,The service point identifier is not specified.,en_US
+service_points_rest_api.error.service_point_identifier_is_not_specified,Der Servicestellen-Identifikator ist ungültig.,de_DE
+shipment_type_cart.checkout.validation.error,Selected delivery type "%name%" is not available,en_US
+shipment_type_cart.checkout.validation.error,Die ausgewählte Lieferart "%name%" ist nicht verfügbar,de_DE
+service_point_cart.checkout.validation.error,Selected service point "%uuid%" is not available for the store "%store_name%",en_US
+service_point_cart.checkout.validation.error,Der ausgewählte Servicepunkt "%uuid%" ist für den Shop "%store_name%" nicht verfügbar,de_DE
+product_offer_service_point_availability_widget.all_items_available,All items are available.,en_US
+product_offer_service_point_availability_widget.all_items_available,Alle Produkte sind verfügbar.,de_DE
+product_offer_service_point_availability_widget.some_items_not_available,Some items are not available.,en_US
+product_offer_service_point_availability_widget.some_items_not_available,Einige der Produkte sind nicht verfügbar.,de_DE
+product_offer_service_point_availability_widget.all_items_not_available,Not available.,en_US
+product_offer_service_point_availability_widget.all_items_not_available,Keine der Produkte sind verfügbar.,de_DE
+shipment_types_rest_api.error.shipment_type_not_available,Selected delivery type "%name%" is not available.,en_US
+shipment_types_rest_api.error.shipment_type_not_available,Die ausgewählte Lieferart "%name%" ist nicht verfügbar.,de_DE
+click_and_collect_example.error.item_replacement_not_found,Item "%item%" is unavailable for delivery with the selected delivery type. Please choose an alternative way to deliver the item or remove it from the cart.,en_US
+click_and_collect_example.error.item_replacement_not_found,Artikel "%item%" kann nicht mit der ausgewählten Versandart geliefert werden. Bitte wählen Sie eine alternative Versandart oder entfernen Sie den Artikel aus dem Warenkorb.,de_DE
+product_offer_shipment_type.validation.product_offer_reference_not_found,Product offer '%product_offer_reference%' not found.,en_US
+product_offer_shipment_type.validation.product_offer_reference_not_found,Product offer '%product_offer_reference%' nicht gefunden.,de_DE
+product_offer_shipment_type.validation.shipment_type_uuid_not_found,Delivery types with uuids '%shipment_type_uuids%' not found.,en_US
+product_offer_shipment_type.validation.shipment_type_uuid_not_found,Lieferarten mit den uuids '%shipment_type_uuids%' wurde nicht gefunden.,de_DE
+product_offer_shipment_type.validation.product_offer_not_unique,A product offer with the same reference already exists in request.,de_DE
+product_offer_shipment_type.validation.product_offer_not_unique,Ein Product Offer mit der gleichen Referenz liegt bereits in der Anfrage vor.,de_DE
+product_offer_shipment_type.validation.shipment_type_not_unique,A delivery type for product offer '%product_offer_reference%' with the same uuid already exists in request.,de_DE
+product_offer_shipment_type.validation.shipment_type_not_unique,Ein Lieferart für Product Offer '%product_offer_reference%' mit derselben UUID ist bereits in der Anfrage vorhanden.,de_DE
 category.validation.category_node_entity_not_found,The category node ID '%category_node_id%' cannot be relocated because this category node no longer exists.,en_US
 category.validation.category_node_entity_not_found,"Die Kategorieknoten-ID '%category_node_id%' kann nicht verschoben werden, da dieser Kategorieknoten nicht mehr existiert.",de_DE
-product_comparison_page.page_title,Artikel vergleichen,de_DE
-product_comparison_page.page_title,Compare products,en_US
-product_comparison_page.empty_comparison,Vergleichsliste ist leer.,de_DE
-product_comparison_page.empty_comparison,Comparison list is empty.,en_US
-product_comparison_page.clear-compare-list,Vergleichsliste leeren,de_DE
-product_comparison_page.clear-compare-list,Clear the comparison list,en_US
-product_comparison_page.add_to_comparison-list,Vergleichen,de_DE
-product_comparison_page.add_to_comparison-list,Compare,en_US
-product_comparison_page.remove_from_comparison-list,Aus Vergleich entfernen,de_DE
-product_comparison_page.remove_from_comparison-list,Remove from Compare,en_US
-product_comparison_page.list_link,Artikelvergleich,de_DE
-product_comparison_page.list_link,Product comparison,en_US
-product_comparison_page.add_to_comparison.success,Zum Vergleich hinzugefügt,de_DE
-product_comparison_page.add_to_comparison.success,Added to comparison,en_US
-product_comparison_page.add_to_comparison.error.max,Das Limit ist bereits erreicht,de_DE
-product_comparison_page.add_to_comparison.error.max,The limit has already been reached,en_US
-product_comparison_page.removed_from_the_list,Artikel wurde aus der Vergleichsliste entfernt.,de_DE
-product_comparison_page.removed_from_the_list,Product was removed from the comparison list.,en_US
-payment_app_widget.validation.quote_is_empty, Quote is empty.,en_US
-payment_app_widget.validation.quote_is_empty, Angebot ist leer.,de_DE
-payment_app_widget.error.payment_failed,Payment failed,en_US
-payment_app_widget.error.payment_failed,Zahlung fehlgeschlagen,de_DE
-payment_app_widget.error.incorrect_quote,"Quote not found, session may have expired",en_US
-payment_app_widget.error.incorrect_quote,"Angebot nicht gefunden, Sitzung ist möglicherweise abgelaufen",de_DE
-customer.change_customer_email_mail_sent,"Almost there! We send you an email to validate your email address. Please confirm it to be able to log in.",en_US
-customer.change_customer_email_mail_sent,"Fast dort! Wir senden Ihnen eine E-Mail, um Ihre E-Mail-Adresse zu bestätigen. Bitte bestätigen Sie dies, um sich anmelden zu können.",de_DE
+merchant_commission.validation.currency_does_not_exist,A currency with the code ‘%code%’ does not exist.,en_US
+merchant_commission.validation.currency_does_not_exist,Eine Währung mit dem Code ‘%code%’ existiert nicht.,de_DE
+merchant_commission.validation.merchant_commission_description_invalid_length,A merchant commission description must have a length from %min% to %max% characters.,en_US
+merchant_commission.validation.merchant_commission_description_invalid_length,Die Beschreibung einer Händlerprovision muss eine Länge von %min% bis %max% Zeichen haben.,de_DE
+merchant_commission.validation.merchant_commission_key_exists,A merchant commission with the key ‘%key%’ already exists.,en_US
+merchant_commission.validation.merchant_commission_key_exists,Es existiert bereits eine Händlerprovision mit dem Schlüssel ‘%key%’.,de_DE
+merchant_commission.validation.merchant_commission_key_invalid_length,A merchant commission key must have a length from %min% to %max% characters.,en_US
+merchant_commission.validation.merchant_commission_key_invalid_length,Ein Händlerprovisionsschlüssel muss eine Länge von %min% bis %max% Zeichen haben.,de_DE
+merchant_commission.validation.merchant_commission_key_is_not_unique,At least two merchant commissions in this request have the same key.,en_US
+merchant_commission.validation.merchant_commission_key_is_not_unique,Mindestens zwei Händlerprovisionen in dieser Anfrage haben den gleichen Schlüssel.,de_DE
+merchant_commission.validation.merchant_commission_does_not_exist,A merchant commission with the key ‘%key%’ was not found.,en_US
+merchant_commission.validation.merchant_commission_does_not_exist,Die Händlerprovision mit dem Schlüssel ‘%key%’ wurde nicht gefunden.,de_DE
+merchant_commission.validation.merchant_commission_group_does_not_exist,A merchant commission group was not found.,en_US
+merchant_commission.validation.merchant_commission_group_does_not_exist,Es wurde keine Händlerprovisionsgruppe gefunden.,de_DE
+merchant_commission.validation.merchant_commission_group_key_does_not_exist,A merchant commission group with the key ‘%key%’ was not found.,en_US
+merchant_commission.validation.merchant_commission_group_does_not_exist,Die Händlerprovisionsgruppe mit dem Schlüssel ‘%key%’ wurde nicht gefunden.,de_DE
+merchant_commission.validation.merchant_does_not_exist,A merchant with the reference ‘%merchant_reference%’ does not exist.,en_US
+merchant_commission.validation.merchant_does_not_exist,Ein Händler mit der Referenz ‘%merchant_reference%’ existiert nicht.,de_DE
+merchant_commission.validation.merchant_commission_name_invalid_length,A merchant commission name must have a length from %min% to %max% characters.,en_US
+merchant_commission.validation.merchant_commission_name_invalid_length,Der Händlerprovisionsname muss eine Länge von %min% bis %max% Zeichen haben.,de_DE
+merchant_commission.validation.merchant_commission_priority_not_in_range,A merchant commission priority must be within a range from %min% to %max%.,en_US
+merchant_commission.validation.merchant_commission_priority_not_in_range,Die Priorität der Händlerprovision muss im Bereich von %min% bis %max% liegen.,de_DE
+merchant_commission.validation.store_does_not_exist,A store with the name ‘%name%’ does not exist.,en_US
+merchant_commission.validation.store_does_not_exist,Ein Shop mit dem Namen ‘%name%’ existiert nicht.,de_DE
+merchant_commission.validation.merchant_commission_valid_from_invalid_datetime,A merchant commission ‘valid from’ date is not a valid format.,en_US
+merchant_commission.validation.merchant_commission_valid_from_invalid_datetime,Das ‘Gültig von’-Datum ist nicht im gültigen Format.,de_DE
+merchant_commission.validation.merchant_commission_valid_to_invalid_datetime,A merchant commission ‘valid to’ date is not a valid format.,en_US
+merchant_commission.validation.merchant_commission_valid_to_invalid_datetime,Das ‘Gültig bis’-Datum ist nicht im gültigen Format.,de_DE
+merchant_commission.validation.merchant_commission_validity_period_invalid,A merchant commission ‘valid to’ date must be later than the ‘valid from’ date.,en_US
+merchant_commission.validation.merchant_commission_validity_period_invalid,Das ‘Gültig bis’-Datum muss nach dem ‘Gültig von’-Datum liegen.,de_DE
+merchant_commission.validation.invalid_query_string,The provided query string has an invalid format in %field%.,en_US
+merchant_commission.validation.invalid_query_string,Die angegebene Abfragezeichenfolge hat ein ungültiges Format in %field%.,de_DE
+merchant_commission.validation.invalid_compare_operator,The provided compare operator is invalid in %field%.,en_US
+merchant_commission.validation.invalid_compare_operator,Der angegebene Vergleichsoperator ist ungültig in %field%.,de_DE
+rule_engine.validation.invalid_query_string,The provided query string has an invalid format.,en_US
+rule_engine.validation.invalid_query_string,Die angegebene Abfragezeichenfolge hat ein ungültiges Format.,de_DE
+rule_engine.validation.invalid_compare_operator_value,The provided compare operator is invalid.,en_US
+rule_engine.validation.invalid_compare_operator_value,Der angegebene Vergleichsoperator ist ungültig.,de_DE

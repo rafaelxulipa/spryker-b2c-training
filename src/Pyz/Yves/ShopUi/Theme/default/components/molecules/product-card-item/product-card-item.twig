@@ -14,7 +14,7 @@
     idQuote: data.product.idQuote | default(null),
     isPromotionItem: false,
     canEditCart: true,
-    additionalContainerClass: 'grid--justify grid--no-wrap',
+    additionalContainerClass: 'grid--justify grid--nowrap',
     productOptionsModifiers: [],
     ajaxTriggerAttribute: null,
 } %}
@@ -66,6 +66,12 @@
                             {% endif %}
                         {% endblock %}
                     </div>
+
+                    {% block soldBy %}
+                        {% if widgetGlobalExists('SoldByMerchantWidget') %}
+                            {% widget 'SoldByMerchantWidget' args [data.productItem] only %}{% endwidget %}
+                        {% endif %}
+                    {% endblock %}
 
                     {% if not data.isPromotionItem %}
                         <div class="{{ component.renderClass(config.name ~ '__options', modifiers) }}">
@@ -123,7 +129,7 @@
                             </div>
 
                             {% if canEditCart %}
-                               {% widget 'RemoveFromCartFormWidget' args [data.productItem, random()] with {
+                                {% widget 'RemoveFromCartFormWidget' args [data.productItem, random()] with {
                                     data: {
                                         ajaxTriggerAttribute: data.ajaxTriggerAttribute,
                                     },

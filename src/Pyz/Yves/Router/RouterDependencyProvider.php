@@ -5,12 +5,9 @@
  * For full license information, please view the LICENSE file that was distributed with this source code.
  */
 
-declare(strict_types = 1);
-
 namespace Pyz\Yves\Router;
 
 use Pyz\Yves\ExampleProductSalePage\Plugin\Router\ExampleProductSaleRouteProviderPlugin;
-use Spryker\Yves\CustomerDataChangeRequest\Plugin\Router\CustomerDataChangeRequestRouteProviderPlugin;
 use Spryker\Yves\HealthCheck\Plugin\Router\HealthCheckRouteProviderPlugin;
 use Spryker\Yves\Router\Plugin\RouteManipulator\LanguageDefaultPostAddRouteManipulatorPlugin;
 use Spryker\Yves\Router\Plugin\RouteManipulator\SslPostAddRouteManipulatorPlugin;
@@ -52,16 +49,15 @@ use SprykerShop\Yves\NewsletterWidget\Plugin\Router\NewsletterWidgetRouteProvide
 use SprykerShop\Yves\OrderCancelWidget\Plugin\Router\OrderCancelWidgetRouteProviderPlugin;
 use SprykerShop\Yves\OrderCustomReferenceWidget\Plugin\Router\OrderCustomReferenceWidgetAsyncRouteProviderPlugin;
 use SprykerShop\Yves\OrderCustomReferenceWidget\Plugin\Router\OrderCustomReferenceWidgetRouteProviderPlugin;
-use SprykerShop\Yves\PaymentAppWidget\Plugin\Router\PaymentAppWidgetRouteProviderPlugin;
 use SprykerShop\Yves\PaymentPage\Plugin\Router\PaymentPageRouteProviderPlugin;
 use SprykerShop\Yves\PriceWidget\Plugin\Router\PriceWidgetRouteProviderPlugin;
-use SprykerShop\Yves\ProductComparisonPage\Plugin\Router\ProductComparisonPageRouteProviderPlugin;
 use SprykerShop\Yves\ProductConfiguratorGatewayPage\Plugin\Router\ProductConfiguratorGatewayPageRouteProviderPlugin;
 use SprykerShop\Yves\ProductNewPage\Plugin\Router\ProductNewPageRouteProviderPlugin;
 use SprykerShop\Yves\ProductReviewWidget\Plugin\Router\ProductReviewWidgetRouteProviderPlugin;
 use SprykerShop\Yves\ProductSearchWidget\Plugin\Router\ProductSearchWidgetRouteProviderPlugin;
 use SprykerShop\Yves\ProductSetListPage\Plugin\Router\ProductSetListPageRouteProviderPlugin;
 use SprykerShop\Yves\SalesReturnPage\Plugin\Router\SalesReturnPageRouteProviderPlugin;
+use SprykerShop\Yves\ServicePointWidget\Plugin\Router\ServicePointWidgetRouteProviderPlugin;
 use SprykerShop\Yves\StorageRouter\Plugin\Router\StorageRouterPlugin;
 use SprykerShop\Yves\WishlistPage\Plugin\Router\WishlistPageRouteProviderPlugin;
 
@@ -123,15 +119,13 @@ class RouterDependencyProvider extends SprykerRouterDependencyProvider
             new OrderCancelWidgetRouteProviderPlugin(),
             new PaymentPageRouteProviderPlugin(),
             new ProductConfiguratorGatewayPageRouteProviderPlugin(),
+            new ServicePointWidgetRouteProviderPlugin(),
             new CartCodeAsyncWidgetRouteProviderPlugin(),
             new CartNoteWidgetAsyncRouteProviderPlugin(),
             new CartPageAsyncRouteProviderPlugin(),
             new ConfigurableBundleNoteWidgetAsyncRouteProviderPlugin(),
             new ConfigurableBundleWidgetAsyncRouteProviderPlugin(),
             new OrderCustomReferenceWidgetAsyncRouteProviderPlugin(),
-            new ProductComparisonPageRouteProviderPlugin(),
-            new PaymentAppWidgetRouteProviderPlugin(),
-            new CustomerDataChangeRequestRouteProviderPlugin(),
         ];
     }
 
@@ -153,8 +147,8 @@ class RouterDependencyProvider extends SprykerRouterDependencyProvider
     protected function getRouterEnhancerPlugins(): array
     {
         return [
-            new StorePrefixRouterEnhancerPlugin(),
             new LanguagePrefixRouterEnhancerPlugin(),
+            new StorePrefixRouterEnhancerPlugin(),
         ];
     }
 }

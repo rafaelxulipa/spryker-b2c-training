@@ -5,8 +5,6 @@
  * For full license information, please view the LICENSE file that was distributed with this source code.
  */
 
-declare(strict_types = 1);
-
 namespace Pyz\Zed\ProductStorage\Persistence;
 
 use Orm\Zed\ProductBundle\Persistence\SpyProductBundleQuery;
@@ -21,7 +19,7 @@ interface ProductStorageQueryContainerInterface extends SprykerProductStorageQue
      *
      * @return \Orm\Zed\ProductBundle\Persistence\SpyProductBundleQuery
      */
-    public function queryBundledProductIdsByProductConcreteId(int $idProductConcrete): SpyProductBundleQuery;
+    public function queryBundledProductIdsByProductConcreteId($idProductConcrete): SpyProductBundleQuery;
 
     /**
      * @api
@@ -30,5 +28,5 @@ interface ProductStorageQueryContainerInterface extends SprykerProductStorageQue
      *
      * @return \Orm\Zed\ProductBundle\Persistence\SpyProductBundleQuery
      */
-    public function queryBundleProduct(int $idProductConcrete): SpyProductBundleQuery;
+    public function queryBundleProduct($idProductConcrete): SpyProductBundleQuery;
 }

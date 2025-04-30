@@ -5,8 +5,6 @@
  * For full license information, please view the LICENSE file that was distributed with this source code.
  */
 
-declare(strict_types = 1);
-
 namespace PyzTest\Yves\Customer\Helper;
 
 use Codeception\Module;
@@ -46,7 +44,7 @@ class CustomerHelper extends Module
      *
      * @return void
      */
-    public function _before(TestInterface $step): void // phpcs:ignore SlevomatCodingStandard.Functions.UnusedParameter
+    public function _before(TestInterface $step): void
     {
         $this->cleanUpDatabase();
     }
@@ -71,17 +69,15 @@ class CustomerHelper extends Module
      *
      * @return void
      */
-    protected function deleteCustomerByEmail(string $email): void
+    protected function deleteCustomerByEmail($email): void
     {
         $customerEntity = $this->loadCustomerByEmail($email);
-        if (!$customerEntity) {
-            return;
+        if ($customerEntity) {
+            $this->deleteCustomerAddresses($customerEntity);
+            $this->deleteNewsletterSubscription($customerEntity);
+
+            $customerEntity->delete();
         }
-
-        $this->deleteCustomerAddresses($customerEntity);
-        $this->deleteNewsletterSubscription($customerEntity);
-
-        $customerEntity->delete();
     }
 
     /**
@@ -92,11 +88,9 @@ class CustomerHelper extends Module
     protected function deleteCustomerAddresses(SpyCustomer $customerEntity): void
     {
         $addresses = $customerEntity->getAddresses();
-        if (!$addresses) {
-            return;
+        if ($addresses) {
+            $addresses->delete();
         }
-
-        $addresses->delete();
     }
 
     /**
@@ -107,15 +101,13 @@ class CustomerHelper extends Module
     protected function deleteNewsletterSubscription(SpyCustomer $customerEntity): void
     {
         $newsletterSubscriptions = $customerEntity->getSpyNewsletterSubscribers();
-        if (!$newsletterSubscriptions) {
-            return;
-        }
-
-        foreach ($newsletterSubscriptions as $newsletterSubscription) {
-            foreach ($newsletterSubscription->getSpyNewsletterSubscriptions() as $spyNewsletterSubscription) {
-                $spyNewsletterSubscription->delete();
+        if ($newsletterSubscriptions) {
+            foreach ($newsletterSubscriptions as $newsletterSubscription) {
+                foreach ($newsletterSubscription->getSpyNewsletterSubscriptions() as $spyNewsletterSubscription) {
+                    $spyNewsletterSubscription->delete();
+                }
+                $newsletterSubscription->delete();
             }
-            $newsletterSubscription->delete();
         }
     }
 
@@ -124,11 +116,12 @@ class CustomerHelper extends Module
      *
      * @return \Orm\Zed\Customer\Persistence\SpyCustomer|null
      */
-    public function loadCustomerByEmail(string $email): ?SpyCustomer
+    public function loadCustomerByEmail($email): ?SpyCustomer
     {
         $customerQuery = new SpyCustomerQuery();
+        $customerEntity = $customerQuery->findOneByEmail($email);
 
-        return $customerQuery->findOneByEmail($email);
+        return $customerEntity;
     }
 
     /**
@@ -178,7 +171,7 @@ class CustomerHelper extends Module
      *
      * @return void
      */
-    public function addAddressToCustomer(string $email, string $address, bool $isDefaultShipping = true, bool $isDefaultBilling = true): void
+    public function addAddressToCustomer($email, $address, $isDefaultShipping = true, $isDefaultBilling = true): void
     {
         $customerEntity = $this->loadCustomerByEmail($email);
         $addressTransfer = CustomerAddressesPage::getAddressData($address);
@@ -207,7 +200,7 @@ class CustomerHelper extends Module
      *
      * @return void
      */
-    public function addNewsletterSubscription(string $email, string $type = NewsletterConstants::DEFAULT_NEWSLETTER_TYPE): void
+    public function addNewsletterSubscription($email, $type = NewsletterConstants::DEFAULT_NEWSLETTER_TYPE): void
     {
         $customerEntity = $this->loadCustomerByEmail($email);
         $newsletterSubscriberTransfer = new NewsletterSubscriberTransfer();

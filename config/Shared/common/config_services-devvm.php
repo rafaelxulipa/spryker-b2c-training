@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types = 1);
-
 use Pyz\Shared\Scheduler\SchedulerConfig;
 use Spryker\Shared\Event\EventConstants;
 use Spryker\Shared\Propel\PropelConstants;

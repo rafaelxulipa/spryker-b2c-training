@@ -5,11 +5,10 @@
  * For full license information, please view the LICENSE file that was distributed with this source code.
  */
 
-declare(strict_types = 1);
-
 namespace PyzTest\Zed\CmsGui;
 
 use Codeception\Actor;
+use Codeception\Scenario;
 use Faker\Factory;
 
 /**
@@ -38,11 +37,22 @@ class CmsGuiPresentationTester extends Actor
     protected $localizedFakeData;
 
     /**
+     * @param \Codeception\Scenario $scenario
+     */
+    public function __construct(Scenario $scenario)
+    {
+        parent::__construct($scenario);
+
+        $this->amZed();
+        $this->amLoggedInUser();
+    }
+
+    /**
      * @param string $date
      *
      * @return $this
      */
-    public function setValidFrom(string $date)
+    public function setValidFrom($date)
     {
         $date = $this->adaptDateInputForBrowser($date);
         $this->fillField('//*[@id="cms_page_validFrom"]', $date);
@@ -65,7 +75,7 @@ class CmsGuiPresentationTester extends Actor
      *
      * @return $this
      */
-    public function setValidTo(string $date)
+    public function setValidTo($date)
     {
         $date = $this->adaptDateInputForBrowser($date);
         $this->fillField('//*[@id="cms_page_validTo"]', $date);
@@ -80,7 +90,7 @@ class CmsGuiPresentationTester extends Actor
      *
      * @return $this
      */
-    public function fillLocalizedUrlForm(int $formIndex, string $name, string $url)
+    public function fillLocalizedUrlForm($formIndex, $name, $url)
     {
         $nameFieldIdentifier = sprintf('//*[@id="cms_page_pageAttributes_%s_name"]', $formIndex);
         $this->waitForElementVisible($nameFieldIdentifier);
@@ -99,7 +109,7 @@ class CmsGuiPresentationTester extends Actor
      *
      * @return void
      */
-    public function fillPlaceholderContents(int $placeHolderIndex, int $localeIndex, string $contents): void
+    public function fillPlaceholderContents($placeHolderIndex, $localeIndex, $contents): void
     {
         $translationElementId = 'cms_glossary_glossaryAttributes_' . $placeHolderIndex . '_translations_' . $localeIndex . '_translation';
 
@@ -159,7 +169,7 @@ class CmsGuiPresentationTester extends Actor
      */
     public function grabCmsPageId(): int
     {
-        return (int)$this->grabFromCurrentUrl('/id-cms-page=(\d+)/');
+        return $this->grabFromCurrentUrl('/id-cms-page=(\d+)/');
     }
 
     /**

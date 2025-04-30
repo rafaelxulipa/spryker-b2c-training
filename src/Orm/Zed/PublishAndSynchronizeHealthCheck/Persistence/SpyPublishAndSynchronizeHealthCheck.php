@@ -5,11 +5,9 @@
  * For full license information, please view the LICENSE file that was distributed with this source code.
  */
 
-declare(strict_types = 1);
-
 namespace Orm\Zed\PublishAndSynchronizeHealthCheck\Persistence;
 
-use Orm\Zed\PublishAndSynchronizeHealthCheck\Persistence\Base\SpyPublishAndSynchronizeHealthCheck as BaseSpyPublishAndSynchronizeHealthCheck;
+use Spryker\Zed\PublishAndSynchronizeHealthCheck\Persistence\Propel\AbstractSpyPublishAndSynchronizeHealthCheck;
 
 /**
  * Skeleton subclass for representing a row from the 'spy_publish_and_synchronize_health_check' table.
@@ -20,6 +18,6 @@ use Orm\Zed\PublishAndSynchronizeHealthCheck\Persistence\Base\SpyPublishAndSynch
  * application requirements. This class will only be generated as
  * long as it does not already exist in the output directory.
  */
-class SpyPublishAndSynchronizeHealthCheck extends BaseSpyPublishAndSynchronizeHealthCheck
+class SpyPublishAndSynchronizeHealthCheck extends AbstractSpyPublishAndSynchronizeHealthCheck
 {
 }

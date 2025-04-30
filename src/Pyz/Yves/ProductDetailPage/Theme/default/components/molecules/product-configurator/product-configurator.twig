@@ -9,9 +9,7 @@
 
     <div class="grid grid--justify spacing-bottom spacing-bottom--bigger">
         {% widget 'ProductDetailPageReviewWidget' args [data.product.idProductAbstract] use view('pdp-review-rating', 'ProductReviewWidget') only %}{% endwidget %}
-
         {% widget 'CurrentProductPriceVolumeWidget' args [data.product.currentProductPrice] only %}
-        {% elsewidget 'ProductPriceVolumeWidget' args [data.product] only %} {# @deprecated Use CurrentProductPriceVolumeWidget instead. #}
         {% nowidget %}
             <div class="col text-right">
                 {% include molecule('money-price') with {
@@ -52,6 +50,7 @@
                     data: {
                         title: 'cart.item_quantity' | trans,
                         isToggler: false,
+                        targetClass: 'spacing-bottom spacing-bottom--inner spacing-bottom--big',
                     },
                 } only %}
                     {% block contentText %}
@@ -86,42 +85,47 @@
 
             {% widget 'CartAddProductAsSeparateItemWidget' only %}{% endwidget %}
 
-            {% widget 'ProductSocialWidget' only %}{% endwidget %}
+            {% set merchantProductOfferWidget = findWidget('MerchantProductOfferWidget', [data.product]) %}
+            {% set productOffersCount = merchantProductOfferWidget ? merchantProductOfferWidget.productOffers | length : 0 %}
+            {% set isRadioButtonVisible = productOffersCount > 0  %}
+            {% set isChecked = merchantProductOfferWidget ? not merchantProductOfferWidget.productView.productOfferReference : true %}
+            {% set merchantProductWidget = findWidget('MerchantProductWidget', [
+                data.product,
+                isRadioButtonVisible,
+                isChecked
+            ]) %}
+            {% set hasMerchantProduct = merchantProductWidget.merchantProductView is defined %}
 
-            {% include '@ShopUi/components/molecules/social-media-icons/social-media-icons.twig' with {
-                    icons: [
-                        { name: 'facebook', url: 'https://facebook.com' },
-                        { name: 'twitter', url: 'https://twitter.com' },
-                        { name: 'instagram', url: 'https://instagram.com' }
-                    ]
-            } %}
-        {% endblock %}
-    {% endwidget %}
-
-    {% widget 'ComparisonProductTogglerComparisonListWidget' args [data.product.sku, isDisabled] only %}
-        {% block body %}
-            {% include molecule('comparison-product-toggler', 'ProductComparisonPage') with {
-                class: 'spacing-top',
-                modifiers: ['expand', 'hollow'],
+            {% widget merchantProductWidget %}{% endwidget %}
+            {% widget merchantProductOfferWidget with {
                 data: {
-                    sku: data.sku,
-                    isDisabled: data.isDisabled,
-                    maxItems: data.maxItems,
+                    isTitleVisible: not hasMerchantProduct,
                 },
-            } only %}
+                embed: {
+                    hasMerchantProduct: hasMerchantProduct,
+                    productOffersCount: merchantProductOfferWidget.productOffers | length,
+                },
+            } %}
+                {% block content %}
+                    {% set isRadioButtonVisible = embed.productOffersCount > 1 or embed.hasMerchantProduct %}
+
+                    {{ parent() }}
+                {% endblock %}
+            {% endwidget %}
         {% endblock %}
     {% endwidget %}
 
-    {% if not isAvailable and isProductConcrete %}
+    {% set isProductOffer = data.product.productOfferReference is not empty %}
+
+    {% if not isAvailable and isProductConcrete and not isProductOffer %}
         {% widget 'AvailabilityNotificationSubscriptionWidget' args [data.product] only %}{% endwidget %}
     {% endif %}
 
     {% if can('SeeWishlistPermissionPlugin') and isProductAvailable %}
-        {% include molecule('wishlist-selector-for-pdp', 'WishlistWidget') ignore missing with {
+        {% include molecule('wishlist-selector-product-detail-page', 'WishlistWidget') ignore missing with {
             data: {
-                sku: data.product.sku,
-                idProductConcrete: data.product.idProductConcrete | default
-            }
+                product: data.product,
+            },
         } only %}
     {% endif %}
 {% endblock %}

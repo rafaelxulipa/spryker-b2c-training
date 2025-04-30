@@ -5,8 +5,6 @@
  * For full license information, please view the LICENSE file that was distributed with this source code.
  */
 
-declare(strict_types = 1);
-
 namespace Orm\Zed\Stock\Persistence;
 
 use Spryker\Zed\Stock\Persistence\Propel\AbstractSpyStockStoreQuery as BaseSpyStockStoreQuery;

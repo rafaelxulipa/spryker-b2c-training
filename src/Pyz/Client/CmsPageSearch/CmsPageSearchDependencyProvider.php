@@ -5,8 +5,6 @@
  * For full license information, please view the LICENSE file that was distributed with this source code.
  */
 
-declare(strict_types = 1);
-
 namespace Pyz\Client\CmsPageSearch;
 
 use Spryker\Client\CmsPageSearch\CmsPageSearchDependencyProvider as SprykerCmsPageSearchDependencyProvider;
@@ -23,7 +21,7 @@ use Spryker\Client\SearchElasticsearch\Plugin\QueryExpander\StoreQueryExpanderPl
 class CmsPageSearchDependencyProvider extends SprykerCmsPageSearchDependencyProvider
 {
     /**
-     * @return array<\Spryker\Client\SearchExtension\Dependency\Plugin\QueryExpanderPluginInterface>|array<\Spryker\Client\Search\Dependency\Plugin\QueryExpanderPluginInterface>
+     * @return array<\Spryker\Client\Search\Dependency\Plugin\QueryExpanderPluginInterface>|array<\Spryker\Client\SearchExtension\Dependency\Plugin\QueryExpanderPluginInterface>
      */
     protected function createCmsPageSearchQueryExpanderPlugins(): array
     {
@@ -52,7 +50,7 @@ class CmsPageSearchDependencyProvider extends SprykerCmsPageSearchDependencyProv
     }
 
     /**
-     * @return array<\Spryker\Client\SearchExtension\Dependency\Plugin\QueryExpanderPluginInterface>|array<\Spryker\Client\Search\Dependency\Plugin\QueryExpanderPluginInterface>
+     * @return array<\Spryker\Client\Search\Dependency\Plugin\QueryExpanderPluginInterface>|array<\Spryker\Client\SearchExtension\Dependency\Plugin\QueryExpanderPluginInterface>
      */
     protected function createCmsPageSearchCountQueryExpanderPlugins(): array
     {

@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types = 1);
-
 use Generated\Shared\Transfer\AddPaymentMethodTransfer;
 use Generated\Shared\Transfer\AddReviewsTransfer;
 use Generated\Shared\Transfer\AppConfigUpdatedTransfer;
@@ -14,6 +12,7 @@ use Generated\Shared\Transfer\ConfigureTaxAppTransfer;
 use Generated\Shared\Transfer\DeletePaymentMethodTransfer;
 use Generated\Shared\Transfer\DeleteTaxAppTransfer;
 use Generated\Shared\Transfer\InitializeProductExportTransfer;
+use Generated\Shared\Transfer\MerchantAppOnboardingStatusChangedTransfer;
 use Generated\Shared\Transfer\OrderStatusChangedTransfer;
 use Generated\Shared\Transfer\PaymentAuthorizationFailedTransfer;
 use Generated\Shared\Transfer\PaymentAuthorizedTransfer;
@@ -29,11 +28,11 @@ use Generated\Shared\Transfer\ProductCreatedTransfer;
 use Generated\Shared\Transfer\ProductDeletedTransfer;
 use Generated\Shared\Transfer\ProductExportedTransfer;
 use Generated\Shared\Transfer\ProductUpdatedTransfer;
+use Generated\Shared\Transfer\ReadyForMerchantAppOnboardingTransfer;
 use Generated\Shared\Transfer\RefundPaymentTransfer;
 use Generated\Shared\Transfer\SearchEndpointAvailableTransfer;
 use Generated\Shared\Transfer\SearchEndpointRemovedTransfer;
 use Generated\Shared\Transfer\SubmitPaymentTaxInvoiceTransfer;
-use Generated\Shared\Transfer\UpdatePaymentMethodTransfer;
 use Monolog\Logger;
 use Pyz\Shared\Console\ConsoleConstants;
 use Pyz\Shared\Scheduler\SchedulerConfig;
@@ -47,6 +46,7 @@ use Spryker\Glue\Log\Plugin\Log\GlueSecurityAuditLoggerConfigPlugin;
 use Spryker\Service\FlysystemAws3v3FileSystem\Plugin\Flysystem\Aws3v3FilesystemBuilderPlugin;
 use Spryker\Service\FlysystemLocalFileSystem\Plugin\Flysystem\LocalFilesystemBuilderPlugin;
 use Spryker\Shared\Acl\AclConstants;
+use Spryker\Shared\AgentSecurityBlockerMerchantPortal\AgentSecurityBlockerMerchantPortalConstants;
 use Spryker\Shared\AppCatalogGui\AppCatalogGuiConstants;
 use Spryker\Shared\Application\ApplicationConstants;
 use Spryker\Shared\Application\Log\Config\SprykerLoggerConfig;
@@ -70,9 +70,9 @@ use Spryker\Shared\GlueStorefrontApiApplication\GlueStorefrontApiApplicationCons
 use Spryker\Shared\Http\HttpConstants;
 use Spryker\Shared\Kernel\KernelConstants;
 use Spryker\Shared\KernelApp\KernelAppConstants;
-use Spryker\Shared\Locale\LocaleConstants;
 use Spryker\Shared\Log\LogConstants;
 use Spryker\Shared\Mail\MailConstants;
+use Spryker\Shared\MerchantPortalApplication\MerchantPortalConstants;
 use Spryker\Shared\MessageBroker\MessageBrokerConstants;
 use Spryker\Shared\MessageBrokerAws\MessageBrokerAwsConstants;
 use Spryker\Shared\Monitoring\MonitoringConstants;
@@ -94,7 +94,6 @@ use Spryker\Shared\PropelReplicationCache\PropelReplicationCacheConstants;
 use Spryker\Shared\PushNotificationWebPushPhp\PushNotificationWebPushPhpConstants;
 use Spryker\Shared\Queue\QueueConfig;
 use Spryker\Shared\Queue\QueueConstants;
-use Spryker\Shared\Quote\QuoteConstants;
 use Spryker\Shared\RabbitMq\RabbitMqEnv;
 use Spryker\Shared\Router\RouterConstants;
 use Spryker\Shared\Sales\SalesConstants;
@@ -105,6 +104,7 @@ use Spryker\Shared\SearchElasticsearch\SearchElasticsearchConstants;
 use Spryker\Shared\SearchHttp\SearchHttpConstants;
 use Spryker\Shared\SecurityBlocker\SecurityBlockerConstants;
 use Spryker\Shared\SecurityBlockerBackoffice\SecurityBlockerBackofficeConstants;
+use Spryker\Shared\SecurityBlockerMerchantPortal\SecurityBlockerMerchantPortalConstants;
 use Spryker\Shared\SecurityBlockerStorefrontAgent\SecurityBlockerStorefrontAgentConstants;
 use Spryker\Shared\SecurityBlockerStorefrontCustomer\SecurityBlockerStorefrontCustomerConstants;
 use Spryker\Shared\SecuritySystemUser\SecuritySystemUserConstants;
@@ -124,6 +124,7 @@ use Spryker\Shared\User\UserConstants;
 use Spryker\Shared\ZedRequest\ZedRequestConstants;
 use Spryker\Yves\Log\Plugin\Log\YvesSecurityAuditLoggerConfigPlugin;
 use Spryker\Yves\Log\Plugin\YvesLoggerConfigPlugin;
+use Spryker\Zed\Log\Communication\Plugin\Log\MerchantPortalSecurityAuditLoggerConfigPlugin;
 use Spryker\Zed\Log\Communication\Plugin\Log\ZedSecurityAuditLoggerConfigPlugin;
 use Spryker\Zed\Log\Communication\Plugin\ZedLoggerConfigPlugin;
 use Spryker\Zed\MessageBrokerAws\MessageBrokerAwsConfig;
@@ -132,8 +133,6 @@ use Spryker\Zed\Payment\PaymentConfig;
 use Spryker\Zed\Propel\PropelConfig;
 use SprykerShop\Shared\CustomerPage\CustomerPageConstants;
 use SprykerShop\Shared\ShopUi\ShopUiConstants;
-use SprykerShop\Shared\StorageRouter\StorageRouterConstants;
-use SprykerShop\Shared\StoreWidget\StoreWidgetConstants;
 use Symfony\Component\HttpFoundation\Cookie;
 
 // ############################################################################
@@ -171,12 +170,6 @@ $config[RouterConstants::YVES_SSL_EXCLUDED_ROUTE_NAMES] = [
 $config[RouterConstants::ZED_SSL_EXCLUDED_ROUTE_NAMES] = [
     'healthCheck' => 'health-check/index',
 ];
-
-$config[RouterConstants::IS_STORE_ROUTING_ENABLED]
-    = $config[StoreWidgetConstants::IS_STORE_ROUTING_ENABLED]
-    = $config[StorageRouterConstants::IS_STORE_ROUTING_ENABLED]
-    = $config[ShopUiConstants::IS_STORE_ROUTING_ENABLED]
-    = $config[LocaleConstants::IS_STORE_ROUTING_ENABLED] = (bool)getenv('SPRYKER_DYNAMIC_STORE_MODE');
 
 // >>> DEV TOOLS
 
@@ -249,9 +242,9 @@ $config[HttpConstants::ZED_HTTP_STRICT_TRANSPORT_SECURITY_CONFIG]
     'preload' => true,
 ];
 
-$config[CustomerConstants::CUSTOMER_SECURED_PATTERN] = '(^/login_check$|^(/[A-Z]{2})?(/en|/de)?/customer($|/)|^(/[A-Z]{2})?(/en|/de)?/wishlist($|/)|^(/[A-Z]{2})?(/en|/de)?/shopping-list($|/)|^(/[A-Z]{2})?(/en|/de)?/quote-request($|/)|^(/[A-Z]{2})?(/en|/de)?/comment($|/)|^(/[A-Z]{2})?(/en|/de)?/company(?!/register)($|/)|^(/[A-Z]{2})?(/en|/de)?/multi-cart($|/)|^(/[A-Z]{2})?(/en|/de)?/shared-cart($|/)|^(/en|/de)?/cart(?!/add)($|/)|^(/en|/de)?/checkout($|/))|^(/en|/de)?/cart-reorder($|/)|^(/en|/de)?/order-amendment($|/)';
+$config[CustomerConstants::CUSTOMER_SECURED_PATTERN] = '(^/login_check$|^(/en|/de)?/customer($|/)|^(/en|/de)?/wishlist($|/)|^(/en|/de)?/shopping-list($|/)|^(/en|/de)?/quote-request($|/)|^(/en|/de)?/comment($|/)|^(/en|/de)?/company(?!/register)($|/)|^(/en|/de)?/multi-cart($|/)|^(/en|/de)?/shared-cart($|/)|^(/en|/de)?/cart(?!/add)($|/)|^(/en|/de)?/checkout($|/))';
 $config[CustomerConstants::CUSTOMER_ANONYMOUS_PATTERN] = '^/.*';
-$config[CustomerPageConstants::CUSTOMER_REMEMBER_ME_SECRET] = getenv('SPRYKER_CUSTOMER_REMEMBER_ME_SECRET');
+$config[CustomerPageConstants::CUSTOMER_REMEMBER_ME_SECRET] = 'hundnase';
 $config[CustomerPageConstants::CUSTOMER_REMEMBER_ME_LIFETIME] = 31536000;
 
 $config[LogConstants::LOG_SANITIZE_FIELDS] = [
@@ -280,7 +273,7 @@ $config[OauthConstants::PUBLIC_KEY_PATH]
         getenv('SPRYKER_OAUTH_KEY_PUBLIC') ?: '',
     ) ?: null;
 $config[OauthConstants::ENCRYPTION_KEY] = getenv('SPRYKER_OAUTH_ENCRYPTION_KEY') ?: null;
-$config[OauthConstants::OAUTH_CLIENT_CONFIGURATION] = getenv('SPRYKER_OAUTH_CLIENT_CONFIGURATION') ? json_decode(getenv('SPRYKER_OAUTH_CLIENT_CONFIGURATION'), true) : [];
+$config[OauthConstants::OAUTH_CLIENT_CONFIGURATION] = json_decode(getenv('SPRYKER_OAUTH_CLIENT_CONFIGURATION'), true) ?: [];
 
 // >> ZED REQUEST
 
@@ -316,6 +309,12 @@ $config[AclConstants::ACL_DEFAULT_CREDENTIALS] = [
 // ACL: Allow or disallow of urls for Zed Admin GUI for ALL users
 $config[AclConstants::ACL_DEFAULT_RULES] = [
     [
+        'bundle' => 'security-merchant-portal-gui',
+        'controller' => '*',
+        'action' => '*',
+        'type' => 'allow',
+    ],
+    [
         'bundle' => 'security-gui',
         'controller' => '*',
         'action' => '*',
@@ -336,6 +335,12 @@ $config[AclConstants::ACL_DEFAULT_RULES] = [
     [
         'bundle' => 'api',
         'controller' => 'rest',
+        'action' => '*',
+        'type' => 'allow',
+    ],
+    [
+        'bundle' => 'agent-security-merchant-portal-gui',
+        'controller' => '*',
         'action' => '*',
         'type' => 'allow',
     ],
@@ -382,14 +387,13 @@ $config[SearchElasticsearchConstants::FULL_TEXT_BOOSTED_BOOSTING_VALUE] = 3;
 
 // >>> STORAGE
 
-$keyValueRegionNamespaces = json_decode(getenv('SPRYKER_KEY_VALUE_REGION_NAMESPACES') ?: '[]', true);
-$config[StorageConstants::STORAGE_KV_SOURCE] = getenv('SPRYKER_KEY_VALUE_STORE_ENGINE') ? strtolower(getenv('SPRYKER_KEY_VALUE_STORE_ENGINE')) : 'redis';
+$config[StorageConstants::STORAGE_KV_SOURCE] = strtolower(getenv('SPRYKER_KEY_VALUE_STORE_ENGINE')) ?: 'redis';
 $config[StorageRedisConstants::STORAGE_REDIS_PERSISTENT_CONNECTION] = true;
 $config[StorageRedisConstants::STORAGE_REDIS_SCHEME] = getenv('SPRYKER_KEY_VALUE_STORE_PROTOCOL') ?: 'tcp';
 $config[StorageRedisConstants::STORAGE_REDIS_HOST] = getenv('SPRYKER_KEY_VALUE_STORE_HOST');
 $config[StorageRedisConstants::STORAGE_REDIS_PORT] = getenv('SPRYKER_KEY_VALUE_STORE_PORT');
 $config[StorageRedisConstants::STORAGE_REDIS_PASSWORD] = getenv('SPRYKER_KEY_VALUE_STORE_PASSWORD');
-$config[StorageRedisConstants::STORAGE_REDIS_DATABASE] = getenv('SPRYKER_KEY_VALUE_STORE_NAMESPACE') ?: $keyValueRegionNamespaces[APPLICATION_CODE_BUCKET] ?? 1;
+$config[StorageRedisConstants::STORAGE_REDIS_DATABASE] = getenv('SPRYKER_KEY_VALUE_STORE_NAMESPACE') ?: 1;
 $config[StorageRedisConstants::STORAGE_REDIS_DATA_SOURCE_NAMES] = json_decode(getenv('SPRYKER_KEY_VALUE_STORE_SOURCE_NAMES') ?: '[]', true) ?: [];
 $config[StorageRedisConstants::STORAGE_REDIS_CONNECTION_OPTIONS] = json_decode(getenv('SPRYKER_KEY_VALUE_STORE_CONNECTION_OPTIONS') ?: '[]', true) ?: [];
 
@@ -469,6 +473,11 @@ $config[SecurityBlockerBackofficeConstants::BACKOFFICE_USER_BLOCKING_TTL] = 900;
 $config[SecurityBlockerBackofficeConstants::BACKOFFICE_USER_BLOCK_FOR_SECONDS] = 360;
 $config[SecurityBlockerBackofficeConstants::BACKOFFICE_USER_BLOCKING_NUMBER_OF_ATTEMPTS] = 9;
 
+// >>> Security Blocker MerchantPortal user
+$config[SecurityBlockerMerchantPortalConstants::MERCHANT_PORTAL_USER_BLOCK_FOR_SECONDS] = 360;
+$config[SecurityBlockerMerchantPortalConstants::MERCHANT_PORTAL_USER_BLOCKING_TTL] = 900;
+$config[SecurityBlockerMerchantPortalConstants::MERCHANT_PORTAL_USER_BLOCKING_NUMBER_OF_ATTEMPTS] = 9;
+
 // >>> LOGGING
 
 // Due to some deprecation notices we silence all deprecations for the time being
@@ -491,6 +500,9 @@ $config[LogConstants::AUDIT_LOGGER_CONFIG_PLUGINS_GLUE] = [
 ];
 $config[LogConstants::AUDIT_LOGGER_CONFIG_PLUGINS_GLUE_BACKEND] = [
     GlueBackendSecurityAuditLoggerConfigPlugin::class,
+];
+$config[LogConstants::AUDIT_LOGGER_CONFIG_PLUGINS_MERCHANT_PORTAL] = [
+    MerchantPortalSecurityAuditLoggerConfigPlugin::class,
 ];
 
 $config[LogConstants::LOG_QUEUE_NAME] = 'log-queue';
@@ -653,6 +665,17 @@ $config[ApplicationConstants::BASE_URL_ZED] = sprintf(
 );
 
 // ----------------------------------------------------------------------------
+// ------------------------------ MERCHANT PORTAL -----------------------------
+// ----------------------------------------------------------------------------
+
+$merchantPortalPort = (int)(getenv('SPRYKER_MP_PORT')) ?: 80;
+$config[MerchantPortalConstants::BASE_URL_MP] = sprintf(
+    'http://%s%s',
+    getenv('SPRYKER_MP_HOST'),
+    $merchantPortalPort !== 80 ? ':' . $merchantPortalPort : '',
+);
+
+// ----------------------------------------------------------------------------
 // ------------------------------ FRONTEND ------------------------------------
 // ----------------------------------------------------------------------------
 
@@ -711,14 +734,15 @@ $config[OmsConstants::PROCESS_LOCATION] = [
     APPLICATION_ROOT_DIR . '/vendor/spryker/sales-payment/config/Zed/Oms',
 ];
 $config[OmsConstants::ACTIVE_PROCESSES] = [
-    'ForeignPaymentB2CStateMachine01',
+    'ForeignPaymentStateMachine01',
 ];
 $config[SalesConstants::PAYMENT_METHOD_STATEMACHINE_MAPPING] = [
-    PaymentConfig::PAYMENT_FOREIGN_PROVIDER => 'ForeignPaymentB2CStateMachine01',
+    PaymentConfig::PAYMENT_FOREIGN_PROVIDER => 'ForeignPaymentStateMachine01',
 ];
 
-// ---------- Guest cart
-$config[QuoteConstants::GUEST_QUOTE_LIFETIME] = 'P01M';
+// ----------------------------------------------------------------------------
+// ------------------------------ PAYMENTS ------------------------------------
+// ----------------------------------------------------------------------------
 
 // >>> Taxes
 $config[TaxConstants::DEFAULT_TAX_RATE] = 19;
@@ -726,6 +750,11 @@ $config[TaxConstants::DEFAULT_TAX_RATE] = 19;
 // >>> Category
 $config[CategoryConstants::CATEGORY_READ_CHUNK] = 10000;
 $config[CategoryConstants::CATEGORY_IS_CLOSURE_TABLE_EVENTS_ENABLED] = false;
+
+// >>> Security Blocker MerchantPortal agent
+$config[AgentSecurityBlockerMerchantPortalConstants::AGENT_MERCHANT_PORTAL_BLOCK_FOR_SECONDS] = 360;
+$config[AgentSecurityBlockerMerchantPortalConstants::AGENT_MERCHANT_PORTAL_BLOCKING_TTL] = 900;
+$config[AgentSecurityBlockerMerchantPortalConstants::AGENT_MERCHANT_PORTAL_BLOCKING_NUMBER_OF_ATTEMPTS] = 9;
 
 // >>> Product Label
 $config[ProductLabelConstants::PRODUCT_LABEL_TO_DE_ASSIGN_CHUNK_SIZE] = 1000;
@@ -738,6 +767,7 @@ $config[CartsRestApiConstants::IS_QUOTE_RELOAD_ENABLED] = true;
 // ----------------------------------------------------------------------------
 // ------------------------------ ACP -----------------------------------------
 // ----------------------------------------------------------------------------
+
 $aopApplicationConfiguration = json_decode(html_entity_decode((string)getenv('SPRYKER_AOP_APPLICATION')), true);
 $config[KernelConstants::DOMAIN_WHITELIST] = array_merge(
     $config[KernelConstants::DOMAIN_WHITELIST],
@@ -763,9 +793,7 @@ $config[SearchHttpConstants::TENANT_IDENTIFIER]
 
 $config[MessageBrokerConstants::MESSAGE_TO_CHANNEL_MAP] =
 $config[MessageBrokerAwsConstants::MESSAGE_TO_CHANNEL_MAP] = [
-    AppConfigUpdatedTransfer::class => 'app-events',
     AddPaymentMethodTransfer::class => 'payment-method-commands',
-    UpdatePaymentMethodTransfer::class => 'payment-method-commands',
     DeletePaymentMethodTransfer::class => 'payment-method-commands',
     CancelPaymentTransfer::class => 'payment-commands',
     CapturePaymentTransfer::class => 'payment-commands',
@@ -778,8 +806,6 @@ $config[MessageBrokerAwsConstants::MESSAGE_TO_CHANNEL_MAP] = [
     PaymentRefundFailedTransfer::class => 'payment-events',
     PaymentCanceledTransfer::class => 'payment-events',
     PaymentCancellationFailedTransfer::class => 'payment-events',
-    PaymentCreatedTransfer::class => 'payment-events',
-    PaymentUpdatedTransfer::class => 'payment-events',
     AssetAddedTransfer::class => 'asset-commands',
     AssetUpdatedTransfer::class => 'asset-commands',
     AssetDeletedTransfer::class => 'asset-commands',
@@ -795,15 +821,22 @@ $config[MessageBrokerAwsConstants::MESSAGE_TO_CHANNEL_MAP] = [
     ConfigureTaxAppTransfer::class => 'tax-commands',
     DeleteTaxAppTransfer::class => 'tax-commands',
     SubmitPaymentTaxInvoiceTransfer::class => 'payment-tax-invoice-commands',
+    PaymentCreatedTransfer::class => 'payment-events',
+    PaymentUpdatedTransfer::class => 'payment-events',
+    ReadyForMerchantAppOnboardingTransfer::class => 'merchant-app-events',
+    MerchantAppOnboardingStatusChangedTransfer::class => 'merchant-app-events',
+    AppConfigUpdatedTransfer::class => 'app-events',
 ];
 
 $config[MessageBrokerConstants::CHANNEL_TO_RECEIVER_TRANSPORT_MAP] = [
-    'payment-events' => MessageBrokerAwsConfig::HTTP_CHANNEL_TRANSPORT,
-    'payment-method-commands' => MessageBrokerAwsConfig::HTTP_CHANNEL_TRANSPORT,
     'asset-commands' => MessageBrokerAwsConfig::HTTP_CHANNEL_TRANSPORT,
     'app-events' => MessageBrokerAwsConfig::HTTP_CHANNEL_TRANSPORT,
-    'product-review-commands' => MessageBrokerAwsConfig::HTTP_CHANNEL_TRANSPORT,
+    'merchant-app-events' => MessageBrokerAwsConfig::HTTP_CHANNEL_TRANSPORT,
+    'merchant-commands' => MessageBrokerAwsConfig::HTTP_CHANNEL_TRANSPORT,
+    'payment-events' => MessageBrokerAwsConfig::HTTP_CHANNEL_TRANSPORT,
+    'payment-method-commands' => MessageBrokerAwsConfig::HTTP_CHANNEL_TRANSPORT,
     'product-commands' => MessageBrokerAwsConfig::HTTP_CHANNEL_TRANSPORT,
+    'product-review-commands' => MessageBrokerAwsConfig::HTTP_CHANNEL_TRANSPORT,
     'search-commands' => MessageBrokerAwsConfig::HTTP_CHANNEL_TRANSPORT,
     'tax-commands' => MessageBrokerAwsConfig::HTTP_CHANNEL_TRANSPORT,
 ];
@@ -829,32 +862,40 @@ $config[ProductConstants::PUBLISHING_TO_MESSAGE_BROKER_ENABLED] = $config[Messag
 // ----------------------------------------------------------------------------
 // ------------------------------ OAUTH ---------------------------------------
 // ----------------------------------------------------------------------------
-$config[OauthClientConstants::OAUTH_PROVIDER_NAME_FOR_MESSAGE_BROKER]
+
+$config[OauthClientConstants::OAUTH_PROVIDER_NAME_FOR_MESSAGE_BROKER] = OauthAuth0Config::PROVIDER_NAME;
+$config[OauthClientConstants::OAUTH_GRANT_TYPE_FOR_MESSAGE_BROKER] = OauthAuth0Config::GRANT_TYPE_CLIENT_CREDENTIALS;
+$config[OauthClientConstants::OAUTH_OPTION_AUDIENCE_FOR_MESSAGE_BROKER] = 'aop-event-platform';
+
+$config[AppCatalogGuiConstants::OAUTH_PROVIDER_NAME]
     = $config[OauthClientConstants::OAUTH_PROVIDER_NAME_FOR_ACP]
+    = $config[OauthClientConstants::OAUTH_PROVIDER_NAME_FOR_MESSAGE_BROKER]
     = $config[OauthClientConstants::OAUTH_PROVIDER_NAME_FOR_PAYMENT_AUTHORIZE]
-    = $config[AppCatalogGuiConstants::OAUTH_PROVIDER_NAME]
     = $config[TaxAppConstants::OAUTH_PROVIDER_NAME]
     = OauthAuth0Config::PROVIDER_NAME;
 
-$config[OauthClientConstants::OAUTH_GRANT_TYPE_FOR_MESSAGE_BROKER]
+$config[AppCatalogGuiConstants::OAUTH_GRANT_TYPE]
     = $config[OauthClientConstants::OAUTH_GRANT_TYPE_FOR_ACP]
+    = $config[OauthClientConstants::OAUTH_GRANT_TYPE_FOR_MESSAGE_BROKER]
     = $config[OauthClientConstants::OAUTH_GRANT_TYPE_FOR_PAYMENT_AUTHORIZE]
-    = $config[TaxAppConstants::OAUTH_GRANT_TYPE]
-    = $config[AppCatalogGuiConstants::OAUTH_GRANT_TYPE]
     = OauthAuth0Config::GRANT_TYPE_CLIENT_CREDENTIALS;
-
-$config[OauthClientConstants::OAUTH_OPTION_AUDIENCE_FOR_ACP]
-    = $config[OauthClientConstants::OAUTH_OPTION_AUDIENCE_FOR_PAYMENT_AUTHORIZE]
-    = $config[TaxAppConstants::OAUTH_OPTION_AUDIENCE]
-    = 'aop-app';
-
-$config[OauthClientConstants::OAUTH_OPTION_AUDIENCE_FOR_MESSAGE_BROKER] = 'aop-event-platform';
 
 $config[AppCatalogGuiConstants::OAUTH_OPTION_AUDIENCE] = 'aop-atrs';
 
+$config[OauthClientConstants::OAUTH_PROVIDER_NAME_FOR_PAYMENT_AUTHORIZE] = OauthAuth0Config::PROVIDER_NAME;
+$config[OauthClientConstants::OAUTH_GRANT_TYPE_FOR_PAYMENT_AUTHORIZE] = OauthAuth0Config::GRANT_TYPE_CLIENT_CREDENTIALS;
+$config[TaxAppConstants::OAUTH_PROVIDER_NAME] = OauthAuth0Config::PROVIDER_NAME;
+$config[TaxAppConstants::OAUTH_GRANT_TYPE] = OauthAuth0Config::GRANT_TYPE_CLIENT_CREDENTIALS;
+
+$config[OauthClientConstants::OAUTH_OPTION_AUDIENCE_FOR_ACP]
+    = $config[TaxAppConstants::OAUTH_OPTION_AUDIENCE]
+    = $config[OauthClientConstants::OAUTH_OPTION_AUDIENCE_FOR_PAYMENT_AUTHORIZE]
+    = 'aop-app';
+
 // ----------------------------------------------------------------------------
-// ------------------------------ Product Configuration ---------------------------------------
+// -------------------------- Product Configuration ---------------------------
 // ----------------------------------------------------------------------------
+
 $config[ProductConfigurationConstants::SPRYKER_PRODUCT_CONFIGURATOR_ENCRYPTION_KEY] = getenv('SPRYKER_PRODUCT_CONFIGURATOR_ENCRYPTION_KEY') ?: 'change123';
 $config[ProductConfigurationConstants::SPRYKER_PRODUCT_CONFIGURATOR_HEX_INITIALIZATION_VECTOR] = getenv('SPRYKER_PRODUCT_CONFIGURATOR_HEX_INITIALIZATION_VECTOR') ?: '0c1ffefeebdab4a3d839d0e52590c9a2';
 $config[KernelConstants::DOMAIN_WHITELIST][] = getenv('SPRYKER_PRODUCT_CONFIGURATOR_HOST');
@@ -886,6 +927,7 @@ $sprykerGlueStorefrontHost = getenv('SPRYKER_GLUE_STOREFRONT_HOST');
 $config[GlueStorefrontApiApplicationConstants::GLUE_STOREFRONT_API_HOST] = $sprykerGlueStorefrontHost;
 $gluePort = (int)(getenv('SPRYKER_API_PORT')) ?: 443;
 $protocol = $gluePort === 443 ? 'https' : 'http';
+
 $config[GlueJsonApiConventionConstants::GLUE_DOMAIN] = sprintf(
     '%s://%s',
     $protocol,

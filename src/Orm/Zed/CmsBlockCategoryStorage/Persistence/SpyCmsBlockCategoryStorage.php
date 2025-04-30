@@ -5,8 +5,6 @@
  * For full license information, please view the LICENSE file that was distributed with this source code.
  */
 
-declare(strict_types = 1);
-
 namespace Orm\Zed\CmsBlockCategoryStorage\Persistence;
 
 use Spryker\Zed\CmsBlockCategoryStorage\Persistence\Propel\AbstractSpyCmsBlockCategoryStorage;

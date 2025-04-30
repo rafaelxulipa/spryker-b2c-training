@@ -5,14 +5,12 @@
  * For full license information, please view the LICENSE file that was distributed with this source code.
  */
 
-declare(strict_types = 1);
-
 namespace Orm\Zed\Locale\Persistence;
 
 use Spryker\Zed\Locale\Persistence\Propel\AbstractSpyLocaleStoreQuery as BaseSpyLocaleStoreQuery;
 
 /**
- * Skeleton subclass for representing a row from the 'spy_locale_store' table.
+ * Skeleton subclass for performing query and update operations on the 'spy_locale_store' table.
  *
  *
  *

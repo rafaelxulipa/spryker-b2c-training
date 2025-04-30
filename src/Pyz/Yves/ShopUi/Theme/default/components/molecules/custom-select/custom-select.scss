@@ -206,6 +206,14 @@
                 }
             }
         }
+
+        /* stylelint-disable selector-max-class */
+        &.select2-container--disabled {
+            .select2-selection--single {
+                cursor: not-allowed;
+            }
+        }
+        /* stylelint-enable */
     }
 }
 

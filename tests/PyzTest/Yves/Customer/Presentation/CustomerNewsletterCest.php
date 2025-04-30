@@ -5,8 +5,6 @@
  * For full license information, please view the LICENSE file that was distributed with this source code.
  */
 
-declare(strict_types = 1);
-
 namespace PyzTest\Yves\Customer\Presentation;
 
 use Codeception\Stub;
@@ -27,16 +25,6 @@ use Spryker\Zed\Newsletter\NewsletterDependencyProvider;
  */
 class CustomerNewsletterCest
 {
-    /**
-     * @param \PyzTest\Yves\Customer\CustomerPresentationTester $i
-     *
-     * @return void
-     */
-    public function _before(CustomerPresentationTester $i): void
-    {
-        $i->amYves();
-    }
-
     /**
      * @param \PyzTest\Yves\Customer\CustomerPresentationTester $i
      *

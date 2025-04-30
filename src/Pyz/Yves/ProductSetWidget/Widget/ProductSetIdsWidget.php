@@ -5,8 +5,6 @@
  * For full license information, please view the LICENSE file that was distributed with this source code.
  */
 
-declare(strict_types = 1);
-
 namespace Pyz\Yves\ProductSetWidget\Widget;
 
 use Generated\Shared\Transfer\ProductSetDataStorageTransfer;
@@ -70,7 +68,7 @@ class ProductSetIdsWidget extends AbstractWidget
     }
 
     /**
-     * @param array<int> $productSetIds
+     * @param list<int> $productSetIds
      *
      * @return array<mixed>
      */
@@ -147,7 +145,7 @@ class ProductSetIdsWidget extends AbstractWidget
     /**
      * @param int $idProductAbstract
      *
-     * @return array<mixed>
+     * @return array<int, mixed>
      */
     protected function getSelectedAttributes(int $idProductAbstract): array
     {

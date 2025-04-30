@@ -5,8 +5,6 @@
  * For full license information, please view the LICENSE file that was distributed with this source code.
  */
 
-declare(strict_types = 1);
-
 namespace Pyz\Client\Catalog;
 
 use Spryker\Client\Catalog\CatalogDependencyProvider as SprykerCatalogDependencyProvider;
@@ -28,6 +26,7 @@ use Spryker\Client\CatalogPriceProductConnector\Plugin\ProductPriceQueryExpander
 use Spryker\Client\CategoryStorage\Plugin\Catalog\ResultFormatter\CategorySuggestionsSearchHttpResultFormatterPlugin;
 use Spryker\Client\CategoryStorage\Plugin\Catalog\ResultFormatter\CategoryTreeFilterSearchHttpResultFormatterPlugin;
 use Spryker\Client\CategoryStorage\Plugin\Elasticsearch\ResultFormatter\CategoryTreeFilterPageSearchResultFormatterPlugin;
+use Spryker\Client\MerchantProductOfferSearch\Plugin\Search\MerchantReferenceQueryExpanderPlugin;
 use Spryker\Client\ProductLabelStorage\Plugin\Catalog\ProductLabelSearchHttpFacetConfigTransferBuilderPlugin;
 use Spryker\Client\ProductLabelStorage\Plugin\ProductLabelFacetConfigTransferBuilderPlugin;
 use Spryker\Client\ProductListSearch\Plugin\Search\ProductListQueryExpanderPlugin;
@@ -107,7 +106,7 @@ class CatalogDependencyProvider extends SprykerCatalogDependencyProvider
     }
 
     /**
-     * @return array<\Spryker\Client\SearchExtension\Dependency\Plugin\QueryExpanderPluginInterface>|array<\Spryker\Client\Search\Dependency\Plugin\QueryExpanderPluginInterface>
+     * @return array<\Spryker\Client\Search\Dependency\Plugin\QueryExpanderPluginInterface|\Spryker\Client\SearchExtension\Dependency\Plugin\QueryExpanderPluginInterface>
      */
     protected function createCatalogSearchQueryExpanderPlugins(): array
     {
@@ -126,10 +125,13 @@ class CatalogDependencyProvider extends SprykerCatalogDependencyProvider
              * FacetQueryExpanderPlugin needs to be after other query expanders which filters down the results.
              */
             new FacetQueryExpanderPlugin(),
+            new MerchantReferenceQueryExpanderPlugin(),
         ];
     }
 
     /**
+     * @phpstan-return array<\Spryker\Client\SearchExtension\Dependency\Plugin\ResultFormatterPluginInterface>
+     *
      * @return array<\Spryker\Client\Search\Dependency\Plugin\ResultFormatterPluginInterface|\Spryker\Client\SearchExtension\Dependency\Plugin\ResultFormatterPluginInterface>
      */
     protected function createCatalogSearchResultFormatterPlugins(): array
@@ -158,6 +160,7 @@ class CatalogDependencyProvider extends SprykerCatalogDependencyProvider
             new SuggestionByTypeQueryExpanderPlugin(),
             new IsActiveQueryExpanderPlugin(),
             new IsActiveInDateRangeQueryExpanderPlugin(),
+            new MerchantReferenceQueryExpanderPlugin(),
         ];
     }
 
@@ -177,7 +180,7 @@ class CatalogDependencyProvider extends SprykerCatalogDependencyProvider
     }
 
     /**
-     * @return array<\Spryker\Client\SearchExtension\Dependency\Plugin\QueryExpanderPluginInterface>|array<\Spryker\Client\Search\Dependency\Plugin\QueryExpanderPluginInterface>
+     * @return array<\Spryker\Client\Search\Dependency\Plugin\QueryExpanderPluginInterface|\Spryker\Client\SearchExtension\Dependency\Plugin\QueryExpanderPluginInterface>
      */
     protected function createCatalogSearchCountQueryExpanderPlugins(): array
     {
@@ -203,7 +206,7 @@ class CatalogDependencyProvider extends SprykerCatalogDependencyProvider
     }
 
     /**
-     * @return array<\Spryker\Client\SearchExtension\Dependency\Plugin\QueryExpanderPluginInterface>|array<\Spryker\Client\Search\Dependency\Plugin\QueryExpanderPluginInterface>
+     * @return array<\Spryker\Client\Search\Dependency\Plugin\QueryExpanderPluginInterface|\Spryker\Client\SearchExtension\Dependency\Plugin\QueryExpanderPluginInterface>
      */
     protected function getProductConcreteCatalogSearchQueryExpanderPlugins(): array
     {

@@ -5,8 +5,6 @@
  * For full license information, please view the LICENSE file that was distributed with this source code.
  */
 
-declare(strict_types = 1);
-
 namespace Pyz\Glue\EventDispatcher;
 
 use Spryker\Glue\EventBehavior\Plugin\EventDispatcher\EventBehaviorEventDispatcherPlugin;
@@ -52,8 +50,8 @@ class EventDispatcherDependencyProvider extends SprykerEventDispatcherDependency
             new ResponseListenerEventDispatcherPlugin(),
             new ResponseSecurityHeadersEventDispatcherPlugin(),
             new StrictTransportSecurityHeaderEventDispatcherPlugin(),
-            new EventBehaviorEventDispatcherPlugin(),
             new CacheControlHeaderEventDispatcherPlugin(),
+            new EventBehaviorEventDispatcherPlugin(),
         ];
     }
 

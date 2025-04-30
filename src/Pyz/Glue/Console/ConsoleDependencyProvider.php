@@ -5,8 +5,6 @@
  * For full license information, please view the LICENSE file that was distributed with this source code.
  */
 
-declare(strict_types = 1);
-
 namespace Pyz\Glue\Console;
 
 use Spryker\Glue\Console\ConsoleDependencyProvider as SprykerConsoleDependencyProvider;
@@ -24,7 +22,7 @@ class ConsoleDependencyProvider extends SprykerConsoleDependencyProvider
      *
      * @return array<\Symfony\Component\Console\Command\Command>
      */
-    protected function getConsoleCommands(Container $container): array // phpcs:ignore SlevomatCodingStandard.Functions.UnusedParameter
+    protected function getConsoleCommands(Container $container): array
     {
         return [
             new ApiGenerateDocumentationConsole(),

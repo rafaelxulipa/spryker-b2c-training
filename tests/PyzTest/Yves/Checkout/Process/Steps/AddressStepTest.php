@@ -5,8 +5,6 @@
  * For full license information, please view the LICENSE file that was distributed with this source code.
  */
 
-declare(strict_types = 1);
-
 namespace PyzTest\Yves\Checkout\Process\Steps;
 
 use Codeception\Test\Unit;
@@ -372,7 +370,7 @@ class AddressStepTest extends Unit
         }
 
         $addressStepMock = $this->getMockBuilder(AddressStep::class)
-            ->addMethods(['getDataClass'])
+            ->setMethods(['getDataClass'])
             ->setConstructorArgs([
                 $this->createCalculationClientMock(),
                 $this->createAddressStepExecutorMock($customerClientMock),
@@ -395,7 +393,9 @@ class AddressStepTest extends Unit
      */
     protected function createCalculationClientMock(): CheckoutPageToCalculationClientInterface
     {
-        return $this->getMockBuilder(CheckoutPageToCalculationClientInterface::class)->getMock();
+        $calculationMock = $this->getMockBuilder(CheckoutPageToCalculationClientInterface::class)->getMock();
+
+        return $calculationMock;
     }
 
     /**
@@ -490,9 +490,9 @@ class AddressStepTest extends Unit
     }
 
     /**
-     * @return array<\SprykerShop\Yves\CheckoutPageExtension\Dependency\Plugin\CheckoutAddressStepPostExecutePluginInterface>
+     * @return list<\SprykerShop\Yves\CheckoutPageExtension\Dependency\Plugin\CheckoutAddressStepPostExecutePluginInterface>
      */
-    public function getCheckoutAddressStepPostExecutePlugins(): array
+    protected function getCheckoutAddressStepPostExecutePlugins(): array
     {
         return [];
     }

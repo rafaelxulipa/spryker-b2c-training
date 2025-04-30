@@ -1,19 +1,27 @@
 {% extends molecule('return-create-form', '@SprykerShop:SalesReturnPage') %}
 
+{% block body %}
+    {% set returnCreateStateTogglerJsClass = 'js-return-create__trigger-state-toggler' %}
+
+    {{ parent() }}
+{% endblock %}
+
 {% block salesReturnOrderInfoSeparator %}{% endblock %}
 
 {% block salesReturnProducts %}
     {% set salesReturnProductItemClass = 'grid grid--justify' %}
 
-    {% include molecule('checkbox-select-all') with {
-        modifiers: ['big'],
-        data: {
-            label: 'return_page.create_return.select_all_checkbox' | trans,
-        },
-        attributes: {
-            'target-class-name': 'js-return-create__trigger-state-toggler',
-        },
-    } only %}
+    {% block checkboxSelectAll %}
+        {% include molecule('checkbox-select-all') with {
+            modifiers: ['big'],
+            data: {
+                label: 'return_page.create_return.select_all_checkbox' | trans,
+            },
+            attributes: {
+                'target-class-name': returnCreateStateTogglerJsClass,
+            },
+        } only %}
+    {% endblock %}
 
     {{ parent() }}
 {% endblock %}
@@ -29,19 +37,21 @@
         },
         embed: {
             returnItem: returnItem,
+            returnCreateStateTogglerJsClass: returnCreateStateTogglerJsClass,
         },
     } only %}
         {% block checkboxColumn %}
-            <div class="grid grid--no-wrap col">
+            <div class="grid grid--nowrap col">
                 <div class="col col--middle spacing-right spacing-right--inner">
                     {{ form_row(embed.returnItem.isReturnable, {
                         label: ' ',
                         attr: {
-                            class: 'js-return-create__trigger-state-toggler',
+                            class: embed.returnCreateStateTogglerJsClass,
                         },
                         disabled: not data.item.isReturnable,
                         attributes: {
                             additionalModifier: 'big',
+                            'is-returnable': data.item.isReturnable,
                         },
                     }) }}
                 </div>
@@ -94,6 +104,7 @@
     {% widget 'OrderItemsProductBundleWidget' args [data.form.vars.value.productBundleItems] with {
         embed: {
             form: data.form,
+            returnCreateStateTogglerJsClass: returnCreateStateTogglerJsClass,
         },
     } only %}
         {% block bundle %}
@@ -105,6 +116,7 @@
                 },
                 embed: {
                     form: embed.form,
+                    returnCreateStateTogglerJsClass: embed.returnCreateStateTogglerJsClass,
                 },
             } only %}
                 {% block contentWrapper %}
@@ -119,18 +131,19 @@
                 {% endblock %}
 
                 {% block imageWrapper %}
-                    <div class="grid grid--no-wrap col">
+                    <div class="grid grid--nowrap col">
                         <div class="col col--middle spacing-right spacing-right--inner">
                             {% for key, productBundle in embed.form.productBundles %}
                                 {% if key == data.productBundle.bundleProduct.bundleItemIdentifier %}
                                     {{ form_row(productBundle.isReturnable, {
                                         label: ' ',
                                         attr: {
-                                            class: 'js-return-create__trigger-state-toggler',
+                                            class: embed.returnCreateStateTogglerJsClass,
                                         },
                                         disabled: not isReturnable,
                                         attributes: {
                                             additionalModifier: 'big',
+                                            'is-returnable': isReturnable,
                                         },
                                     }) }}
                                 {% endif %}
@@ -190,9 +203,10 @@
          args [orderItems]
          use view('order-returnable-items-configured-bundle-widget', 'SalesConfigurableBundleWidget')
          with {
-           embed: {
-               form: data.form,
-           },
+             embed: {
+                 form: data.form,
+                 returnCreateStateTogglerJsClass: returnCreateStateTogglerJsClass,
+             },
      } only %}
          {% block bundleItem %}
              {% embed molecule('ordered-configured-bundle', 'SalesConfigurableBundleWidget') ignore missing with {
@@ -203,6 +217,7 @@
                  },
                  embed: {
                      form: embed.form,
+                     returnCreateStateTogglerJsClass: embed.returnCreateStateTogglerJsClass,
                  },
              } only %}
                  {% block bundleProductItem %}
@@ -215,6 +230,7 @@
                          },
                          embed: {
                              form: embed.form,
+                             returnCreateStateTogglerJsClass: embed.returnCreateStateTogglerJsClass,
                          },
                      } only %}
                          {% block checkbox %}
@@ -223,11 +239,12 @@
                                      {{ form_row(returnItem.isReturnable, {
                                          label: ' ',
                                          attr: {
-                                             class: 'js-return-create__trigger-state-toggler',
+                                             class: embed.returnCreateStateTogglerJsClass,
                                          },
                                          disabled: not data.product.isReturnable,
                                          attributes: {
                                              additionalModifier: 'big',
+                                             'is-returnable': data.product.isReturnable,
                                          },
                                      }) }}
                                  {% endif %}

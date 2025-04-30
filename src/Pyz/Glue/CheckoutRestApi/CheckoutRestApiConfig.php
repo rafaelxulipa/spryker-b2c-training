@@ -5,10 +5,9 @@
  * For full license information, please view the LICENSE file that was distributed with this source code.
  */
 
-declare(strict_types = 1);
-
 namespace Pyz\Glue\CheckoutRestApi;
 
+use Generated\Shared\Transfer\RestCustomerTransfer;
 use Spryker\Glue\CheckoutRestApi\CheckoutRestApiConfig as SprykerCheckoutRestApiConfig;
 
 class CheckoutRestApiConfig extends SprykerCheckoutRestApiConfig
@@ -17,7 +16,6 @@ class CheckoutRestApiConfig extends SprykerCheckoutRestApiConfig
      * @var array<string, array<string>>
      */
     protected const PAYMENT_METHOD_REQUIRED_FIELDS = [
-        'dummyPaymentInvoice' => ['dummyPaymentInvoice.dateOfBirth'],
         'dummyPaymentCreditCard' => [
             'dummyPaymentCreditCard.cardType',
             'dummyPaymentCreditCard.cardNumber',
@@ -36,25 +34,11 @@ class CheckoutRestApiConfig extends SprykerCheckoutRestApiConfig
     protected const DUMMY_PAYMENT_PROVIDER_NAME = 'DummyPayment';
 
     /**
-     * @uses \Spryker\Shared\DummyPayment\DummyPaymentConfig::PAYMENT_METHOD_NAME_INVOICE
-     *
-     * @var string
-     */
-    protected const DUMMY_PAYMENT_PAYMENT_METHOD_NAME_INVOICE = 'Invoice';
-
-    /**
      * @uses \Spryker\Shared\DummyPayment\DummyPaymentConfig::PAYMENT_METHOD_NAME_CREDIT_CARD
      *
      * @var string
      */
     protected const DUMMY_PAYMENT_PAYMENT_METHOD_NAME_CREDIT_CARD = 'Credit Card';
-
-    /**
-     * @uses \Spryker\Shared\DummyPayment\DummyPaymentConfig::PAYMENT_METHOD_INVOICE
-     *
-     * @var string
-     */
-    protected const PAYMENT_METHOD_INVOICE = 'dummyPaymentInvoice';
 
     /**
      * @uses \Spryker\Shared\DummyPayment\DummyPaymentConfig::PAYMENT_METHOD_CREDIT_CARD
@@ -76,7 +60,6 @@ class CheckoutRestApiConfig extends SprykerCheckoutRestApiConfig
         return [
             static::DUMMY_PAYMENT_PROVIDER_NAME => [
                 static::DUMMY_PAYMENT_PAYMENT_METHOD_NAME_CREDIT_CARD => static::PAYMENT_METHOD_CREDIT_CARD,
-                static::DUMMY_PAYMENT_PAYMENT_METHOD_NAME_INVOICE => static::PAYMENT_METHOD_INVOICE,
             ],
         ];
     }
@@ -103,5 +86,16 @@ class CheckoutRestApiConfig extends SprykerCheckoutRestApiConfig
     public function isAddressesMappedToAttributes(): bool
     {
         return false;
+    }
+
+    /**
+     * @return list<string>
+     */
+    public function getRequiredCustomerRequestDataForGuestCheckout(): array
+    {
+        return array_merge(parent::getRequiredCustomerRequestDataForGuestCheckout(), [
+            RestCustomerTransfer::FIRST_NAME,
+            RestCustomerTransfer::LAST_NAME,
+        ]);
     }
 }

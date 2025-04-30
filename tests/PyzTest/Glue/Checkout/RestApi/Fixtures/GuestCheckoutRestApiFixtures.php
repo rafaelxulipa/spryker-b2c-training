@@ -5,11 +5,11 @@
  * For full license information, please view the LICENSE file that was distributed with this source code.
  */
 
-declare(strict_types = 1);
-
 namespace PyzTest\Glue\Checkout\RestApi\Fixtures;
 
 use Generated\Shared\Transfer\CustomerTransfer;
+use Generated\Shared\Transfer\MerchantProfileTransfer;
+use Generated\Shared\Transfer\MerchantTransfer;
 use Generated\Shared\Transfer\ProductConcreteTransfer;
 use Generated\Shared\Transfer\QuoteTransfer;
 use Generated\Shared\Transfer\ShipmentMethodTransfer;
@@ -111,7 +111,16 @@ class GuestCheckoutRestApiFixtures implements FixturesBuilderInterface, Fixtures
         $I->truncateSalesOrderThresholds();
 
         $this->guestCustomerReference = $I->createGuestCustomerReference();
-        $this->productConcreteTransfer = $I->haveProductWithStock();
+
+        $merchantTransfer = $I->haveMerchant([
+            MerchantTransfer::IS_ACTIVE => true,
+            MerchantTransfer::STATUS => CheckoutApiTester::MERCHANT_STATUS_APPROVED,
+            MerchantTransfer::MERCHANT_PROFILE => new MerchantProfileTransfer(),
+        ]);
+
+        $this->productConcreteTransfer = $I->haveFullProduct();
+        $this->productConcreteTransfer->addOffer($I->createProductOfferWithStock($merchantTransfer, $this->productConcreteTransfer));
+
         $this->guestCustomerTransfer = $I->createCustomerTransfer([
             CustomerTransfer::CUSTOMER_REFERENCE => static::ANONYMOUS_PREFIX . $this->guestCustomerReference,
         ]);

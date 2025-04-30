@@ -5,8 +5,6 @@
  * For full license information, please view the LICENSE file that was distributed with this source code.
  */
 
-declare(strict_types = 1);
-
 namespace Pyz\Zed\Cms;
 
 use Spryker\Zed\Cms\CmsDependencyProvider as SprykerCmsDependencyProvider;
@@ -24,7 +22,7 @@ class CmsDependencyProvider extends SprykerCmsDependencyProvider
      *
      * @return array<\Spryker\Zed\CmsExtension\Dependency\Plugin\CmsVersionPostSavePluginInterface>
      */
-    protected function getPostSavePlugins(Container $container): array // phpcs:ignore SlevomatCodingStandard.Functions.UnusedParameter
+    protected function getPostSavePlugins(Container $container): array
     {
         return [
             new UserCmsVersionPostSavePlugin(),
@@ -36,7 +34,7 @@ class CmsDependencyProvider extends SprykerCmsDependencyProvider
      *
      * @return array<\Spryker\Zed\CmsExtension\Dependency\Plugin\CmsVersionTransferExpanderPluginInterface>
      */
-    protected function getTransferExpanderPlugins(Container $container): array // phpcs:ignore SlevomatCodingStandard.Functions.UnusedParameter
+    protected function getTransferExpanderPlugins(Container $container): array
     {
         return [
             new UserCmsVersionTransferExpanderPlugin(),

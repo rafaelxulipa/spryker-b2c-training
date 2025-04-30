@@ -5,8 +5,6 @@
  * For full license information, please view the LICENSE file that was distributed with this source code.
  */
 
-declare(strict_types = 1);
-
 namespace Pyz\Zed\DataImport\Business\Model\Product\Repository;
 
 use Generated\Shared\Transfer\PaginationTransfer;
@@ -46,7 +44,7 @@ class ProductRepository implements ProductRepositoryInterface
      *
      * @return int
      */
-    public function getIdProductByConcreteSku(string $sku): int
+    public function getIdProductByConcreteSku($sku): int
     {
         if (!isset(static::$resolved[$sku])) {
             $this->resolveProductByConcreteSku($sku);
@@ -60,7 +58,7 @@ class ProductRepository implements ProductRepositoryInterface
      *
      * @return string
      */
-    public function getAbstractSkuByConcreteSku(string $sku): string
+    public function getAbstractSkuByConcreteSku($sku): string
     {
         if (!isset(static::$resolved[$sku])) {
             $this->resolveProductByConcreteSku($sku);
@@ -74,7 +72,7 @@ class ProductRepository implements ProductRepositoryInterface
      *
      * @return int
      */
-    public function getIdProductAbstractByAbstractSku(string $sku): int
+    public function getIdProductAbstractByAbstractSku($sku): int
     {
         if (!isset(static::$resolved[$sku])) {
             $this->resolveProductByAbstractSku($sku);
@@ -139,7 +137,7 @@ class ProductRepository implements ProductRepositoryInterface
      *
      * @return void
      */
-    private function resolveProductByConcreteSku(string $sku): void
+    private function resolveProductByConcreteSku($sku): void
     {
         $productEntity = SpyProductQuery::create()
             ->joinWithSpyProductAbstract()
@@ -162,7 +160,7 @@ class ProductRepository implements ProductRepositoryInterface
      *
      * @return void
      */
-    private function resolveProductByAbstractSku(string $sku): void
+    private function resolveProductByAbstractSku($sku): void
     {
         $productAbstractEntity = SpyProductAbstractQuery::create()
             ->findOneBySku($sku);
@@ -194,7 +192,7 @@ class ProductRepository implements ProductRepositoryInterface
      *
      * @return void
      */
-    public function addProductConcrete(SpyProduct $productEntity, ?string $abstractSku = null): void
+    public function addProductConcrete(SpyProduct $productEntity, $abstractSku = null): void
     {
         static::$resolved[$productEntity->getSku()] = [
             static::ID_PRODUCT => $productEntity->getIdProduct(),

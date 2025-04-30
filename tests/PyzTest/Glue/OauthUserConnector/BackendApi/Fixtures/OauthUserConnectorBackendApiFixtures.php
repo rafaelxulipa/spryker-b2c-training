@@ -5,10 +5,10 @@
  * For full license information, please view the LICENSE file that was distributed with this source code.
  */
 
-declare(strict_types = 1);
-
 namespace PyzTest\Glue\OauthUserConnector\BackendApi\Fixtures;
 
+use Generated\Shared\Transfer\MerchantProfileTransfer;
+use Generated\Shared\Transfer\MerchantTransfer;
 use Generated\Shared\Transfer\UserTransfer;
 use PyzTest\Glue\OauthUserConnector\OauthUserConnectorBackendApiTester;
 use SprykerTest\Shared\Testify\Fixtures\FixturesBuilderInterface;
@@ -22,9 +22,19 @@ class OauthUserConnectorBackendApiFixtures implements FixturesBuilderInterface, 
     protected const TEST_PASSWORD = 'change123';
 
     /**
+     * @var string
+     */
+    protected const MERCHANT_STATUS_APPROVED = 'approved';
+
+    /**
      * @var \Generated\Shared\Transfer\UserTransfer
      */
     protected $backofficeUserTransfer;
+
+    /**
+     * @var \Generated\Shared\Transfer\UserTransfer
+     */
+    protected $merchantUserTransfer;
 
     /**
      * @var \Generated\Shared\Transfer\UserTransfer
@@ -38,6 +48,7 @@ class OauthUserConnectorBackendApiFixtures implements FixturesBuilderInterface, 
      */
     public function buildFixtures(OauthUserConnectorBackendApiTester $I): FixturesContainerInterface
     {
+        $this->merchantUserTransfer = $this->createMerchantUserTransfer($I);
         $this->backofficeUserTransfer = $this->createBackofficeUserTransfer($I);
         $this->warehouseUserTransfer = $this->createWarehouseUserTransfer($I);
 
@@ -50,6 +61,14 @@ class OauthUserConnectorBackendApiFixtures implements FixturesBuilderInterface, 
     public function getBackofficeUserTransfer(): UserTransfer
     {
         return $this->backofficeUserTransfer;
+    }
+
+    /**
+     * @return \Generated\Shared\Transfer\UserTransfer
+     */
+    public function getMerchantUserTransfer(): UserTransfer
+    {
+        return $this->merchantUserTransfer;
     }
 
     /**
@@ -70,6 +89,27 @@ class OauthUserConnectorBackendApiFixtures implements FixturesBuilderInterface, 
         $userTransfer = $I->haveUser([
             UserTransfer::PASSWORD => static::TEST_PASSWORD,
         ]);
+
+        return $userTransfer->setPassword(static::TEST_PASSWORD);
+    }
+
+    /**
+     * @param \PyzTest\Glue\OauthUserConnector\OauthUserConnectorBackendApiTester $I
+     *
+     * @return \Generated\Shared\Transfer\UserTransfer
+     */
+    protected function createMerchantUserTransfer(OauthUserConnectorBackendApiTester $I): UserTransfer
+    {
+        $userTransfer = $I->haveUser([
+            UserTransfer::PASSWORD => static::TEST_PASSWORD,
+        ]);
+
+        $merchantTransfer = $I->haveMerchant([
+            MerchantTransfer::IS_ACTIVE => true,
+            MerchantTransfer::STATUS => static::MERCHANT_STATUS_APPROVED,
+            MerchantTransfer::MERCHANT_PROFILE => new MerchantProfileTransfer(),
+        ]);
+        $I->haveMerchantUser($merchantTransfer, $userTransfer);
 
         return $userTransfer->setPassword(static::TEST_PASSWORD);
     }

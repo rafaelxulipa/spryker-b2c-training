@@ -5,14 +5,12 @@
  * For full license information, please view the LICENSE file that was distributed with this source code.
  */
 
-declare(strict_types = 1);
-
 namespace PyzTest\Glue\OauthUserConnector\BackendApi;
 
 use Codeception\Util\HttpCode;
 use PyzTest\Glue\OauthUserConnector\BackendApi\Fixtures\OauthUserConnectorBackendApiFixtures;
 use PyzTest\Glue\OauthUserConnector\OauthUserConnectorBackendApiTester;
-use Spryker\Glue\PushNotificationsBackendApi\PushNotificationsBackendApiConfig;
+use Spryker\Glue\ServicePointsBackendApi\ServicePointsBackendApiConfig;
 
 /**
  * Auto-generated group annotations
@@ -52,14 +50,14 @@ class BackofficeUserScopeAuthorizeBackendApiCest
      *
      * @return void
      */
-    public function requestPushNotificationProvidersForBackofficeUserAllowed(OauthUserConnectorBackendApiTester $I): void
+    public function requestServicePointsForBackofficeUserAllowed(OauthUserConnectorBackendApiTester $I): void
     {
         $backendOauthResponseTransfer = $I->havePasswordAuthorizationToBackendApi($this->fixtures->getBackofficeUserTransfer());
         $I->amBearerAuthenticated($backendOauthResponseTransfer->getAccessToken());
 
         //Act
         $I->sendJsonApiGet(
-            $I->formatFullUrl(PushNotificationsBackendApiConfig::RESOURCE_PUSH_NOTIFICATION_PROVIDERS),
+            $I->formatFullUrl(ServicePointsBackendApiConfig::RESOURCE_SERVICE_POINTS),
         );
 
         //Assert

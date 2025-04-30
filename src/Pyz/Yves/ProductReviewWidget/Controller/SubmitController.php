@@ -5,8 +5,6 @@
  * For full license information, please view the LICENSE file that was distributed with this source code.
  */
 
-declare(strict_types = 1);
-
 namespace Pyz\Yves\ProductReviewWidget\Controller;
 
 use Generated\Shared\Transfer\CustomerTransfer;
@@ -121,7 +119,7 @@ class SubmitController extends SprykerSubmitController
     /**
      * @param \Symfony\Component\HttpFoundation\Request $request
      *
-     * @return array<mixed>
+     * @return array<string, mixed>
      */
     protected function executeIndexAction(Request $request): array
     {

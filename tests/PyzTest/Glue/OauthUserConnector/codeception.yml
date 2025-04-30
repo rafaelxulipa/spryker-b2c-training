@@ -31,6 +31,9 @@ suites:
                 - \SprykerTest\Shared\AuthenticationOauth\Helper\AuthenticationOauthHelper
                 - \SprykerTest\Shared\Store\Helper\StoreDataHelper
                 - \SprykerTest\Shared\User\Helper\UserDataHelper
+                - \SprykerTest\Zed\Merchant\Helper\MerchantHelper
+                - \SprykerTest\Zed\MerchantUser\Helper\MerchantUserHelper
+                - \SprykerTest\Zed\MerchantProfile\Helper\MerchantProfileHelper
                 - \SprykerTest\Zed\WarehouseUser\Helper\WarehouseUserHelper
                 - \SprykerTest\Shared\Stock\Helper\StockDataHelper
             config:

@@ -5,8 +5,6 @@
  * For full license information, please view the LICENSE file that was distributed with this source code.
  */
 
-declare(strict_types = 1);
-
 namespace PyzTest\Yves\Newsletter\Presentation;
 
 use Generated\Shared\DataBuilder\CustomerBuilder;
@@ -28,16 +26,6 @@ use PyzTest\Yves\Newsletter\PageObject\NewsletterSubscriptionHomePage;
  */
 class NewsletterSubscriptionCest
 {
-    /**
-     * @param \PyzTest\Yves\Newsletter\NewsletterPresentationTester $i
-     *
-     * @return void
-     */
-    public function _before(NewsletterPresentationTester $i): void
-    {
-        $i->amYves();
-    }
-
     /**
      * @param \PyzTest\Yves\Newsletter\NewsletterPresentationTester $i
      *
@@ -139,6 +127,8 @@ class NewsletterSubscriptionCest
      */
     protected function buildCustomerTransfer()
     {
-        return (new CustomerBuilder())->build();
+        $customerTransfer = (new CustomerBuilder())->build();
+
+        return $customerTransfer;
     }
 }

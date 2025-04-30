@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types = 1);
-
 use Monolog\Logger;
 use Spryker\Shared\AppCatalogGui\AppCatalogGuiConstants;
 use Spryker\Shared\Application\ApplicationConstants;
@@ -18,6 +16,7 @@ use Spryker\Shared\GlueBackendApiApplication\GlueBackendApiApplicationConstants;
 use Spryker\Shared\GlueStorefrontApiApplication\GlueStorefrontApiApplicationConstants;
 use Spryker\Shared\Kernel\KernelConstants;
 use Spryker\Shared\Log\LogConstants;
+use Spryker\Shared\MerchantPortalApplication\MerchantPortalConstants;
 use Spryker\Shared\Newsletter\NewsletterConstants;
 use Spryker\Shared\OauthClient\OauthClientConstants;
 use Spryker\Shared\ProductManagement\ProductManagementConstants;
@@ -119,6 +118,17 @@ if (!getenv('SPRYKER_SSL_ENABLE')) {
     );
 
 // ----------------------------------------------------------------------------
+// ------------------------------ MERCHANT PORTAL -----------------------------
+// ----------------------------------------------------------------------------
+
+    $merchantPortalPort = (int)(getenv('SPRYKER_MP_PORT')) ?: 80;
+    $config[MerchantPortalConstants::BASE_URL_MP] = sprintf(
+        'http://%s%s',
+        getenv('SPRYKER_MP_HOST'),
+        $merchantPortalPort !== 80 ? ':' . $merchantPortalPort : '',
+    );
+
+// ----------------------------------------------------------------------------
 // ------------------------------ FRONTEND ------------------------------------
 // ----------------------------------------------------------------------------
 
@@ -163,6 +173,7 @@ require 'common/config_oms-development.php';
 $config[OauthClientConstants::OAUTH_PROVIDER_NAME_FOR_MESSAGE_BROKER] = OauthDummyConfig::PROVIDER_NAME;
 $config[OauthClientConstants::OAUTH_PROVIDER_NAME_FOR_PAYMENT_AUTHORIZE] = OauthDummyConfig::PROVIDER_NAME;
 $config[AppCatalogGuiConstants::OAUTH_PROVIDER_NAME] = OauthDummyConfig::PROVIDER_NAME;
+$config[OauthClientConstants::OAUTH_PROVIDER_NAME_FOR_ACP] = OauthDummyConfig::PROVIDER_NAME;
 
 // ----------------------------------------------------------------------------
 // ------------------------------ Glue Backend API -------------------------------

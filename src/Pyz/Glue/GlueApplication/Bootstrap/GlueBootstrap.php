@@ -5,8 +5,6 @@
  * For full license information, please view the LICENSE file that was distributed with this source code.
  */
 
-declare(strict_types = 1);
-
 namespace Pyz\Glue\GlueApplication\Bootstrap;
 
 use Spryker\Glue\GlueApplication\Bootstrap\GlueBootstrap as SprykerGlueBootstrap;
@@ -20,7 +18,7 @@ class GlueBootstrap extends SprykerGlueBootstrap
      *
      * @return \Spryker\Shared\Application\ApplicationInterface
      */
-    public function boot(array $glueApplicationBootstrapPluginClassNames = []): ApplicationInterface // phpcs:ignore SlevomatCodingStandard.Functions.UnusedParameter
+    public function boot(array $glueApplicationBootstrapPluginClassNames = []): ApplicationInterface
     {
         return parent::boot([FallbackStorefrontApiGlueApplicationBootstrapPlugin::class]);
     }

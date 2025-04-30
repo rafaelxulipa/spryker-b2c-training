@@ -5,8 +5,6 @@
  * For full license information, please view the LICENSE file that was distributed with this source code.
  */
 
-declare(strict_types = 1);
-
 namespace Pyz\Yves\ProductDetailPage\Controller;
 
 use Generated\Shared\Transfer\ItemTransfer;
@@ -23,7 +21,7 @@ class ProductController extends SprykerShopProductController
      * @param array<mixed> $productData
      * @param \Symfony\Component\HttpFoundation\Request $request
      *
-     * @return array<mixed>
+     * @return array<string, mixed>
      */
     protected function executeDetailAction(array $productData, Request $request): array
     {

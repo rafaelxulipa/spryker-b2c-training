@@ -12,6 +12,7 @@
                         '%total%': loop.length,
                     }) }}
                 </h3>
+                {% widget 'MerchantOrderReferenceForItemsWidget' args [shipmentGroup.items] only %}{% endwidget %}
 
                 {% for item in shipmentGroup.cartItems %}
                     {% set cartItem = item.bundleProduct ?? item %}
@@ -30,7 +31,6 @@
                             embed: {
                                 order: data.order,
                                 bundleItems: item.bundleItems | default([]),
-                                reorderSelectionClassName: data.reorderSelectionClassName,
                             },
                         } only %}
                             {% import _self as component %}
@@ -38,23 +38,11 @@
                                 <div class="grid grid--middle col">
                                     {% if embed.order is not empty %}
                                         <span class="spacing-right">
-                                            {% if data.productItem.bundleItemIdentifier ?? false %}
-                                                {% widget 'CustomerReorderBundleItemCheckboxWidget' args [data.productItem] with {
-                                                    data: {
-                                                        checkboxClasses: embed.reorderSelectionClassName,
-                                                        additionalModifiers: ['big'],
-                                                    },
-                                                } only %}
-                                                {% endwidget %}
-                                            {% else %}
-                                                {% widget 'CustomerReorderItemCheckboxWidget' args [data.productItem] with {
-                                                    data: {
-                                                        checkboxClasses: embed.reorderSelectionClassName,
-                                                        additionalModifiers: ['big'],
-                                                    },
-                                                } only %}
-                                                {% endwidget %}
-                                            {% endif %}
+                                            {% widget 'CustomerReorderItemCheckboxWidget' args [data.productItem] with {
+                                                data: {
+                                                    additionalModifiers: ['big'],
+                                                },
+                                            } only %}{% endwidget %}
                                         </span>
                                     {% endif %}
 

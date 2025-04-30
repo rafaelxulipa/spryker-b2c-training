@@ -5,14 +5,12 @@
  * For full license information, please view the LICENSE file that was distributed with this source code.
  */
 
-declare(strict_types = 1);
-
 namespace Orm\Zed\ExampleStateMachine\Persistence;
 
 use Orm\Zed\ExampleStateMachine\Persistence\Base\ExampleStateMachineItem as BaseExampleStateMachineItem;
 
 /**
- * Skeleton subclass for representing a row from the 'example_state_machine_item' table.
+ * Skeleton subclass for representing a row from the 'pyz_example_state_machine_item' table.
  *
  *
  *

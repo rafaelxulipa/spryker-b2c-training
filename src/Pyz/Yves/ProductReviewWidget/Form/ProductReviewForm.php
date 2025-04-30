@@ -5,8 +5,6 @@
  * For full license information, please view the LICENSE file that was distributed with this source code.
  */
 
-declare(strict_types = 1);
-
 namespace Pyz\Yves\ProductReviewWidget\Form;
 
 use Generated\Shared\Transfer\ProductReviewRequestTransfer;
@@ -78,11 +76,11 @@ class ProductReviewForm extends AbstractType
 
     /**
      * @param \Symfony\Component\Form\FormBuilderInterface $builder
-     * @param array<mixed> $options
+     * @param array<string, mixed> $options
      *
      * @return void
      */
-    public function buildForm(FormBuilderInterface $builder, array $options): void // phpcs:ignore SlevomatCodingStandard.Functions.UnusedParameter
+    public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $this
             ->addSummaryField($builder)
@@ -134,7 +132,7 @@ class ProductReviewForm extends AbstractType
      *  [-1 => 'none', 1 => 1, 2 => 2]
      * @see ProductReviewForm::UNSELECTED_RATING
      *
-     * @return array<mixed>
+     * @return array<int, int|string>
      */
     protected function getRatingFieldChoices(): array
     {

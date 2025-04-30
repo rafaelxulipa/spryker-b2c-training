@@ -11,6 +11,7 @@
         width: rem(16);
         height: rem(16);
         margin-right: rem(7);
+        border: rem(1) solid $setting-color-gray-3;
     }
 
     &__label {
@@ -18,8 +19,17 @@
     }
 
     &__input:checked + #{$name}__box {
-        border: rem(1) solid $setting-color-main;
-        background-color: $setting-color-main;
+        &::before {
+            content: '';
+            position: absolute;
+            left: rem(4);
+            top: rem(4);
+            height: rem(8);
+            width: rem(8);
+            z-index: $setting-zi-element;
+            background-color: $setting-color-black;
+            border-radius: rem(4);
+        }
     }
 
     &--with-bg,
@@ -89,6 +99,29 @@
             color: $setting-color-black;
             margin-top: rem(2);
             display: inline-block;
+        }
+    }
+
+    &--big {
+        #{$name}__box {
+            width: rem(20);
+            height: rem(20);
+        }
+
+        #{$name}__label {
+            font-size: rem(16);
+            line-height: rem(20);
+            vertical-align: top;
+        }
+
+        #{$name}__input:checked + #{$name}__box {
+            &::before {
+                left: rem(5);
+                top: rem(5);
+                height: rem(10);
+                width: rem(10);
+                border-radius: rem(5);
+            }
         }
     }
 }

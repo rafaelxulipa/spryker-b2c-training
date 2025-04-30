@@ -5,8 +5,6 @@
  * For full license information, please view the LICENSE file that was distributed with this source code.
  */
 
-declare(strict_types = 1);
-
 namespace PyzTest\Glue\Customer\RestApi;
 
 use Codeception\Example;
@@ -56,8 +54,8 @@ class CustomerUpdateCest
 
         $this->customerTransfer = $I->haveCustomer(
             [
-                CustomerTransfer::NEW_PASSWORD => 'Change!23456',
-                CustomerTransfer::PASSWORD => 'Change!23456',
+                CustomerTransfer::NEW_PASSWORD => 'change123',
+                CustomerTransfer::PASSWORD => 'change123',
             ],
         );
         $I->confirmCustomer($this->customerTransfer);
@@ -140,8 +138,8 @@ class CustomerUpdateCest
         // Arrange
         $firstCustomerTransfer = $I->haveCustomer(
             [
-                CustomerTransfer::NEW_PASSWORD => 'Change!23456',
-                CustomerTransfer::PASSWORD => 'Change!23456',
+                CustomerTransfer::NEW_PASSWORD => 'change123',
+                CustomerTransfer::PASSWORD => 'change123',
             ],
         );
 
@@ -188,8 +186,8 @@ class CustomerUpdateCest
         // Arrange
         $firstCustomerTransfer = $I->haveCustomer(
             [
-                CustomerTransfer::NEW_PASSWORD => 'Change!23456',
-                CustomerTransfer::PASSWORD => 'Change!23456',
+                CustomerTransfer::NEW_PASSWORD => 'change123',
+                CustomerTransfer::PASSWORD => 'change123',
             ],
         );
 
@@ -276,8 +274,8 @@ class CustomerUpdateCest
     {
         // Arrange
         $restCustomersAttributesTransfer = (new RestCustomersAttributesTransfer())
-            ->setPassword('Change!23456')
-            ->setConfirmPassword('Change!234564')
+            ->setPassword('change123')
+            ->setConfirmPassword('change1234')
             ->setGender($this->customerTransfer->getGender())
             ->setSalutation($this->customerTransfer->getSalutation());
 
@@ -347,9 +345,9 @@ class CustomerUpdateCest
         $I->seeResponseMatchesOpenApiSchema();
 
         foreach ($example['errors'] as $index => $error) {
-            $I->seeResponseErrorsHaveCode($error[RestErrorMessageTransfer::CODE], (string)$index);
-            $I->seeResponseErrorsHaveStatus($error[RestErrorMessageTransfer::STATUS], (string)$index);
-            $I->seeResponseErrorsHaveDetail($error[RestErrorMessageTransfer::DETAIL], (string)$index);
+            $I->seeResponseErrorsHaveCode($error[RestErrorMessageTransfer::CODE], $index);
+            $I->seeResponseErrorsHaveStatus($error[RestErrorMessageTransfer::STATUS], $index);
+            $I->seeResponseErrorsHaveDetail($error[RestErrorMessageTransfer::DETAIL], $index);
         }
     }
 
@@ -361,8 +359,8 @@ class CustomerUpdateCest
         return [
             [
                 'attributes' => [
-                    RestCustomersAttributesTransfer::PASSWORD => 'Change!23456pqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuioppqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwert',
-                    RestCustomersAttributesTransfer::CONFIRM_PASSWORD => 'Change!23456pqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuioppqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwert',
+                    RestCustomersAttributesTransfer::PASSWORD => 'qwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiop',
+                    RestCustomersAttributesTransfer::CONFIRM_PASSWORD => 'qwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiopqwertyuiop',
                     RestCustomersAttributesTransfer::GENDER => 'Male',
                     RestCustomersAttributesTransfer::SALUTATION => 'Mr',
                 ],
@@ -371,12 +369,12 @@ class CustomerUpdateCest
                     [
                         RestErrorMessageTransfer::CODE => RestRequestValidatorConfig::RESPONSE_CODE_REQUEST_INVALID,
                         RestErrorMessageTransfer::STATUS => Response::HTTP_UNPROCESSABLE_ENTITY,
-                        RestErrorMessageTransfer::DETAIL => 'password => This value is too long. It should have 128 characters or less.',
+                        RestErrorMessageTransfer::DETAIL => 'password => This value is too long. It should have 64 characters or less.',
                     ],
                     [
                         RestErrorMessageTransfer::CODE => RestRequestValidatorConfig::RESPONSE_CODE_REQUEST_INVALID,
                         RestErrorMessageTransfer::STATUS => Response::HTTP_UNPROCESSABLE_ENTITY,
-                        RestErrorMessageTransfer::DETAIL => 'confirmPassword => This value is too long. It should have 128 characters or less.',
+                        RestErrorMessageTransfer::DETAIL => 'confirmPassword => This value is too long. It should have 64 characters or less.',
                     ],
                 ],
             ],
@@ -392,17 +390,12 @@ class CustomerUpdateCest
                     [
                         RestErrorMessageTransfer::CODE => RestRequestValidatorConfig::RESPONSE_CODE_REQUEST_INVALID,
                         RestErrorMessageTransfer::STATUS => Response::HTTP_UNPROCESSABLE_ENTITY,
-                        RestErrorMessageTransfer::DETAIL => 'password => This value is too short. It should have 12 characters or more.',
+                        RestErrorMessageTransfer::DETAIL => 'password => This value is too short. It should have 8 characters or more.',
                     ],
                     [
                         RestErrorMessageTransfer::CODE => RestRequestValidatorConfig::RESPONSE_CODE_REQUEST_INVALID,
                         RestErrorMessageTransfer::STATUS => Response::HTTP_UNPROCESSABLE_ENTITY,
-                        RestErrorMessageTransfer::DETAIL => 'password => Your password must include at least one uppercase letter, one lowercase letter, one number, and one special character from the following list: !@#$%^&*()_-+=[]{}|;:<>.,/?\~. Non-Latin and other special characters are not allowed.',
-                    ],
-                    [
-                        RestErrorMessageTransfer::CODE => RestRequestValidatorConfig::RESPONSE_CODE_REQUEST_INVALID,
-                        RestErrorMessageTransfer::STATUS => Response::HTTP_UNPROCESSABLE_ENTITY,
-                        RestErrorMessageTransfer::DETAIL => 'confirmPassword => This value is too short. It should have 12 characters or more.',
+                        RestErrorMessageTransfer::DETAIL => 'confirmPassword => This value is too short. It should have 8 characters or more.',
                     ],
                 ],
             ],

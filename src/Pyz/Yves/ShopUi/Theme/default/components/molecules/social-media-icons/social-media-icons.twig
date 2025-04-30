@@ -1,9 +1,0 @@
-{% block social_media_icons %}
-    <div class="social-media-icons">
-        {% for icon in icons %}
-            <a href="{{ icon.url }}" target="_blank" rel="noopener noreferrer" class="social-media-icons__icon--{{ icon.name }}">
-                {% include '@ShopUi/components/molecules/social-media-icons/icons/' ~ icon.name ~ '.svg.twig' %}
-            </a>
-        {% endfor %}
-    </div>
-{% endblock %}

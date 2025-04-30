@@ -301,7 +301,6 @@ $config[OmsConstants::ACTIVE_PROCESSES] = [
 ];
 
 $config[SalesConstants::PAYMENT_METHOD_STATEMACHINE_MAPPING] = [
-    DummyPaymentConfig::PAYMENT_METHOD_INVOICE => 'DummyPayment01',
     DummyPaymentConfig::PAYMENT_METHOD_CREDIT_CARD => 'DummyPayment01',
 ];
 
@@ -316,7 +315,6 @@ $config[SalesConstants::PAYMENT_METHOD_STATEMACHINE_MAPPING] = [
  *
  */
 $config[QueueConstants::QUEUE_ADAPTER_CONFIGURATION] = [];
-
 
 $config[PropelConstants::ZED_DB_ENGINE] = $config[PropelConstants::ZED_DB_ENGINE]
     = $config[PropelQueryBuilderConstants::ZED_DB_ENGINE]

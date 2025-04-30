@@ -13,9 +13,6 @@ sections:
         router-cache-warmup-backoffice:
             command: 'vendor/bin/console router:cache:warm-up:backoffice'
 
-        oms-process-cache-warmup:
-            command: 'vendor/bin/console oms:process-cache:warm-up'
-
         router-cache-warmup-backend-gateway:
             command: 'vendor/bin/console router:cache:warm-up:backend-gateway'
 
@@ -106,6 +103,9 @@ sections:
 
         import-eu-region-demodata:
             command: 'vendor/bin/console data:import --config=data/import/local/full_EU.yml'
+
+        apply-scheduled-prices:
+            command: 'vendor/bin/console price-product-schedule:apply'
 
         setup-search-create-sources:
             command: 'vendor/bin/console search:setup:sources'

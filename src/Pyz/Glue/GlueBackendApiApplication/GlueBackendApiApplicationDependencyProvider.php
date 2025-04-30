@@ -5,8 +5,6 @@
  * For full license information, please view the LICENSE file that was distributed with this source code.
  */
 
-declare(strict_types = 1);
-
 namespace Pyz\Glue\GlueBackendApiApplication;
 
 use Spryker\Glue\DynamicEntityBackendApi\Plugin\GlueApplication\DynamicEntityRouteProviderPlugin;
@@ -31,6 +29,11 @@ use Spryker\Glue\PickingListsBackendApi\Plugin\GlueBackendApiApplication\Picking
 use Spryker\Glue\PushNotificationsBackendApi\Plugin\GlueBackendApiApplication\PushNotificationProvidersBackendResourcePlugin;
 use Spryker\Glue\PushNotificationsBackendApi\Plugin\GlueBackendApiApplication\PushNotificationSubscriptionsBackendResourcePlugin;
 use Spryker\Glue\Router\Plugin\Application\RouterApplicationPlugin;
+use Spryker\Glue\ServicePointsBackendApi\Plugin\GlueBackendApiApplication\ServicePointAddressesBackendResourcePlugin;
+use Spryker\Glue\ServicePointsBackendApi\Plugin\GlueBackendApiApplication\ServicePointsBackendResourcePlugin;
+use Spryker\Glue\ServicePointsBackendApi\Plugin\GlueBackendApiApplication\ServicesBackendResourcePlugin;
+use Spryker\Glue\ServicePointsBackendApi\Plugin\GlueBackendApiApplication\ServiceTypesBackendResourcePlugin;
+use Spryker\Glue\ShipmentTypesBackendApi\Plugin\GlueBackendApiApplication\ShipmentTypesBackendResourcePlugin;
 use Spryker\Glue\StoresApi\Plugin\GlueBackendApiApplication\StoreApplicationPlugin as ClientStoreApplicationPlugin;
 use Spryker\Glue\StoresBackendApi\Plugin\GlueBackendApiApplication\StoreApplicationPlugin;
 use Spryker\Glue\TestifyBackendApi\Plugin\GlueBackendApiApplication\DynamicFixturesBackendResourcePlugin;
@@ -120,6 +123,11 @@ class GlueBackendApiApplicationDependencyProvider extends SprykerGlueBackendApiA
             new PickingListStartPickingBackendResourcePlugin(),
             new PickingListItemsBackendResourcePlugin(),
             new WarehouseUserAssignmentsBackendResourcePlugin(),
+            new ServicePointsBackendResourcePlugin(),
+            new ServicePointAddressesBackendResourcePlugin(),
+            new ServiceTypesBackendResourcePlugin(),
+            new ServicesBackendResourcePlugin(),
+            new ShipmentTypesBackendResourcePlugin(),
         ];
 
         if (class_exists(DynamicFixturesBackendResourcePlugin::class)) {

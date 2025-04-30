@@ -5,11 +5,9 @@
  * For full license information, please view the LICENSE file that was distributed with this source code.
  */
 
-declare(strict_types = 1);
-
 namespace Pyz\Glue\GlueStorefrontApiApplication;
 
-use Spryker\Glue\EventDispatcher\Plugin\Application\EventDispatcherApplicationPlugin;
+use Spryker\Glue\EventDispatcher\Plugin\GlueStorefrontApiApplication\EventDispatcherApplicationPlugin;
 use Spryker\Glue\GlueStorefrontApiApplication\GlueStorefrontApiApplicationDependencyProvider as SprykerGlueStorefrontApiApplicationDependencyProvider;
 use Spryker\Glue\GlueStorefrontApiApplication\Plugin\GlueApplication\ApplicationIdentifierRequestBuilderPlugin;
 use Spryker\Glue\GlueStorefrontApiApplication\Plugin\GlueApplication\LocaleRequestBuilderPlugin;

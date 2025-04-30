@@ -5,11 +5,10 @@
  * For full license information, please view the LICENSE file that was distributed with this source code.
  */
 
-declare(strict_types = 1);
-
 namespace PyzTest\Zed\ProductRelation;
 
 use Codeception\Actor;
+use Codeception\Scenario;
 use Orm\Zed\ProductRelation\Persistence\SpyProductRelation;
 use Orm\Zed\ProductRelation\Persistence\SpyProductRelationQuery;
 
@@ -74,11 +73,22 @@ class ProductRelationPresentationTester extends Actor
     protected $numberOfRulesSelected = 0;
 
     /**
+     * @param \Codeception\Scenario $scenario
+     */
+    public function __construct(Scenario $scenario)
+    {
+        parent::__construct($scenario);
+
+        $this->amZed();
+        $this->amLoggedInUser();
+    }
+
+    /**
      * @param string $type
      *
      * @return $this
      */
-    public function selectRelationType(string $type)
+    public function selectRelationType($type)
     {
         $this->waitForElement(static::PRODUCT_RELATION_TYPE_SELECTOR, static::ELEMENT_TIMEOUT);
         $this->selectOption(static::PRODUCT_RELATION_TYPE_SELECTOR, $type);
@@ -91,7 +101,7 @@ class ProductRelationPresentationTester extends Actor
      *
      * @return $this
      */
-    public function filterProductsByName(string $name)
+    public function filterProductsByName($name)
     {
         $this->waitForElement(static::PRODUCT_TABLE_BODY_XPATH, static::ELEMENT_TIMEOUT);
         $this->fillField(static::PRODUCT_TABLE_FILTER_LABEL_INPUT_SELECTOR, $name);
@@ -104,7 +114,7 @@ class ProductRelationPresentationTester extends Actor
      *
      * @return $this
      */
-    public function selectProduct(string $sku)
+    public function selectProduct($sku)
     {
         $this->waitForElement(static::PRODUCT_TABLE_BODY_XPATH, static::ELEMENT_TIMEOUT);
         $buttonElementId = sprintf('//*[@id="select-product-%s"]', $sku);
@@ -135,7 +145,7 @@ class ProductRelationPresentationTester extends Actor
      *
      * @return $this
      */
-    public function selectProductRule(string $ruleName, string $operator, string $value)
+    public function selectProductRule($ruleName, $operator, $value)
     {
         $ruleSelectorBaseId = sprintf('[@id="builder_rule_%d"]', $this->numberOfRulesSelected);
 

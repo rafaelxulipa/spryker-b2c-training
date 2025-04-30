@@ -5,8 +5,6 @@
  * For full license information, please view the LICENSE file that was distributed with this source code.
  */
 
-declare(strict_types = 1);
-
 namespace Pyz\Zed\ExampleStateMachine\Communication\Plugin;
 
 use Generated\Shared\Transfer\StateMachineItemTransfer;
@@ -78,7 +76,7 @@ class TestStateMachineHandlerPlugin extends AbstractPlugin implements StateMachi
      *
      * @return string
      */
-    public function getInitialStateForProcess($processName): string // phpcs:ignore
+    public function getInitialStateForProcess($processName): string
     {
         switch ($processName) {
             case 'Invoice01':

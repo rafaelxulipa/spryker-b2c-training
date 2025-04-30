@@ -5,8 +5,6 @@
  * For full license information, please view the LICENSE file that was distributed with this source code.
  */
 
-declare(strict_types = 1);
-
 namespace PyzTest\Glue\Urls\RestApi;
 
 use Codeception\Util\HttpCode;
@@ -111,11 +109,9 @@ class UrlsRestApiCest
         // Arrange
         $localizedUrl = '';
         foreach ($this->fixtures->getProductUrlTransfer()->getUrls() as $localizedUrlTransfer) {
-            if ($localizedUrlTransfer->getLocale()->getLocaleName() !== static::DEFAULT_LOCALE) {
-                continue;
+            if ($localizedUrlTransfer->getLocale()->getLocaleName() === static::DEFAULT_LOCALE) {
+                $localizedUrl = $localizedUrlTransfer->getUrl();
             }
-
-            $localizedUrl = $localizedUrlTransfer->getUrl();
         }
 
         // Act

@@ -5,12 +5,12 @@
  * For full license information, please view the LICENSE file that was distributed with this source code.
  */
 
-declare(strict_types = 1);
-
 namespace Pyz\Client\SecurityBlocker;
 
+use Spryker\Client\AgentSecurityBlockerMerchantPortal\Plugin\SecurityBlocker\AgentMerchantPortalSecurityBlockerConfigurationSettingsExpanderPlugin;
 use Spryker\Client\SecurityBlocker\SecurityBlockerDependencyProvider as SprykerSecurityBlockerDependencyProvider;
 use Spryker\Client\SecurityBlockerBackoffice\Plugin\SecurityBlocker\BackofficeUserSecurityBlockerConfigurationSettingsExpanderPlugin;
+use Spryker\Client\SecurityBlockerMerchantPortal\Plugin\SecurityBlocker\MerchantPortalUserSecurityBlockerConfigurationSettingsExpanderPlugin;
 use Spryker\Client\SecurityBlockerStorefrontAgent\Plugin\SecurityBlocker\AgentSecurityBlockerConfigurationSettingsExpanderPlugin;
 use Spryker\Client\SecurityBlockerStorefrontCustomer\Plugin\SecurityBlocker\CustomerSecurityBlockerConfigurationSettingsExpanderPlugin;
 
@@ -26,8 +26,10 @@ class SecurityBlockerDependencyProvider extends SprykerSecurityBlockerDependency
     {
         return [
             new BackofficeUserSecurityBlockerConfigurationSettingsExpanderPlugin(),
+            new MerchantPortalUserSecurityBlockerConfigurationSettingsExpanderPlugin(),
             new AgentSecurityBlockerConfigurationSettingsExpanderPlugin(),
             new CustomerSecurityBlockerConfigurationSettingsExpanderPlugin(),
+            new AgentMerchantPortalSecurityBlockerConfigurationSettingsExpanderPlugin(),
         ];
     }
 }

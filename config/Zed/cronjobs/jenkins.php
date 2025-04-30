@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types = 1);
-
 /**
  * Notes:
  *
@@ -82,10 +80,10 @@ $jobs[] = [
 ];
 
 $jobs[] = [
-    'name' => 'event-trigger-timeout',
-    'command' => '$PHP_BIN vendor/bin/console event:trigger:timeout -vvv',
-    'schedule' => '*/5 * * * *',
-    'enable' => true,
+  'name' => 'event-trigger-timeout',
+  'command' => '$PHP_BIN vendor/bin/console event:trigger:timeout -vvv',
+  'schedule' => '*/5 * * * *',
+  'enable' => true,
 ];
 
 $jobs[] = [

@@ -9,10 +9,10 @@
 
         &__link {
             display: block;
-            width: rem(150);
+            width: rem(180);
 
             @include helper-breakpoint-media-min($md-min) {
-                width: rem(180);
+                width: rem(210);
             }
         }
 

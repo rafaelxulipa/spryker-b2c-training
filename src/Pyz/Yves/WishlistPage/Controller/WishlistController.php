@@ -5,8 +5,6 @@
  * For full license information, please view the LICENSE file that was distributed with this source code.
  */
 
-declare(strict_types = 1);
-
 namespace Pyz\Yves\WishlistPage\Controller;
 
 use Generated\Shared\Transfer\WishlistResponseTransfer;
@@ -61,7 +59,6 @@ class WishlistController extends SprykerWishlistController
         $wishlistItemTransfer = $this->getFactory()
             ->getWishlistClient()
             ->addItem($wishlistItemTransfer);
-
         if (!$wishlistItemTransfer->getIdWishlistItem()) {
             if ($wishlistResponseTransfer->getWishlist()) {
                 $this->getFactory()->getWishlistClient()->removeWishlistByName($wishlistResponseTransfer->getWishlist());
@@ -72,14 +69,19 @@ class WishlistController extends SprykerWishlistController
             return $this->redirectResponseInternal(WishlistPageRouteProviderPlugin::ROUTE_NAME_WISHLIST_OVERVIEW, [
                 'wishlistName' => $wishlistItemTransfer->getWishlistName(),
             ]);
+        } else {
+            $this->addSuccessMessage('cart.add.items.success');
         }
 
         if ($request->headers->has(static::REQUEST_HEADER_REFERER)) {
             return $this->redirectResponseExternal($request->headers->get(static::REQUEST_HEADER_REFERER));
         }
 
-        return $this->redirectResponseInternal(WishlistPageRouteProviderPlugin::ROUTE_NAME_WISHLIST_DETAILS, [
-            'wishlistName' => $wishlistItemTransfer->getWishlistName(),
-        ]);
+        return $this->redirectResponseInternal(
+            WishlistPageRouteProviderPlugin::ROUTE_NAME_WISHLIST_DETAILS,
+            [
+                'wishlistName' => $wishlistItemTransfer->getWishlistName(),
+            ],
+        );
     }
 }

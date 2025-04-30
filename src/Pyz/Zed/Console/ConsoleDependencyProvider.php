@@ -5,8 +5,6 @@
  * For full license information, please view the LICENSE file that was distributed with this source code.
  */
 
-declare(strict_types = 1);
-
 namespace Pyz\Zed\Console;
 
 use Pyz\Zed\DataImport\DataImportConfig;
@@ -77,7 +75,6 @@ use Spryker\Zed\Oauth\Communication\Console\ScopeCacheCollectorConsole;
 use Spryker\Zed\Oms\Communication\Console\CheckConditionConsole as OmsCheckConditionConsole;
 use Spryker\Zed\Oms\Communication\Console\CheckTimeoutConsole as OmsCheckTimeoutConsole;
 use Spryker\Zed\Oms\Communication\Console\ClearLocksConsole as OmsClearLocksConsole;
-use Spryker\Zed\Oms\Communication\Console\ProcessCacheWarmUpConsole as OmsProcessCacheWarmUpConsole;
 use Spryker\Zed\OrderMatrix\Communication\Console\OrderMatrixConsole;
 use Spryker\Zed\PaymentDataImport\PaymentDataImportConfig;
 use Spryker\Zed\PriceProduct\Communication\Console\PriceProductStoreOptimizeConsole;
@@ -164,7 +161,6 @@ use Spryker\Zed\StateMachine\Communication\Console\CheckTimeoutConsole as StateM
 use Spryker\Zed\StateMachine\Communication\Console\ClearLocksConsole as StateMachineClearLocksConsole;
 use Spryker\Zed\StockDataImport\StockDataImportConfig;
 use Spryker\Zed\Storage\Communication\Console\StorageDeleteAllConsole;
-use Spryker\Zed\StorageRedis\Communication\Console\StorageRedisDataReSaveConsole;
 use Spryker\Zed\StorageRedis\Communication\Console\StorageRedisExportRdbConsole;
 use Spryker\Zed\StorageRedis\Communication\Console\StorageRedisImportRdbConsole;
 use Spryker\Zed\StoreContextDataImport\StoreContextDataImportConfig;
@@ -223,7 +219,6 @@ class ConsoleDependencyProvider extends SprykerConsoleDependencyProvider
             new OmsCheckConditionConsole(),
             new OmsCheckTimeoutConsole(),
             new OmsClearLocksConsole(),
-            new OmsProcessCacheWarmUpConsole(),
             new StateMachineCheckTimeoutConsole(),
             new StateMachineCheckConditionConsole(),
             new StateMachineClearLocksConsole(),
@@ -412,7 +407,6 @@ class ConsoleDependencyProvider extends SprykerConsoleDependencyProvider
             new SendPushNotificationConsole(),
             new OrderMatrixConsole(),
             new AclEntitySynchronizeConsole(),
-            new StorageRedisDataReSaveConsole(),
         ];
 
         $propelCommands = $container->getLocator()->propel()->facade()->getConsoleCommands();
@@ -480,7 +474,7 @@ class ConsoleDependencyProvider extends SprykerConsoleDependencyProvider
      *
      * @return array<\Spryker\Zed\Console\Dependency\Plugin\ConsolePostRunHookPluginInterface>
      */
-    public function getConsolePostRunHookPlugins(Container $container): array // phpcs:ignore SlevomatCodingStandard.Functions.UnusedParameter
+    public function getConsolePostRunHookPlugins(Container $container): array
     {
         return [
             new EventBehaviorPostHookPlugin(),

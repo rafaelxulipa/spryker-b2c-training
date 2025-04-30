@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types = 1);
-
 use Spryker\Shared\Propel\PropelConstants;
 use Spryker\Shared\StorageDatabase\StorageDatabaseConfig;
 use Spryker\Shared\StorageDatabase\StorageDatabaseConstants;

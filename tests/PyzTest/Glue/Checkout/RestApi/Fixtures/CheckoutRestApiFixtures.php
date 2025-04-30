@@ -5,12 +5,12 @@
  * For full license information, please view the LICENSE file that was distributed with this source code.
  */
 
-declare(strict_types = 1);
-
 namespace PyzTest\Glue\Checkout\RestApi\Fixtures;
 
 use Generated\Shared\Transfer\AddressTransfer;
 use Generated\Shared\Transfer\CustomerTransfer;
+use Generated\Shared\Transfer\MerchantProfileTransfer;
+use Generated\Shared\Transfer\MerchantTransfer;
 use Generated\Shared\Transfer\QuoteTransfer;
 use Generated\Shared\Transfer\ShipmentMethodTransfer;
 use PyzTest\Glue\Checkout\CheckoutApiTester;
@@ -145,8 +145,18 @@ class CheckoutRestApiFixtures implements FixturesBuilderInterface, FixturesConta
         ]);
 
         $this->customerTransfer = $I->confirmCustomer($customerTransfer);
+
+        $merchantTransfer = $I->haveMerchant([
+            MerchantTransfer::IS_ACTIVE => true,
+            MerchantTransfer::STATUS => CheckoutApiTester::MERCHANT_STATUS_APPROVED,
+            MerchantTransfer::MERCHANT_PROFILE => new MerchantProfileTransfer(),
+        ]);
+
         for ($i = 0; $i < static::PRODUCT_CONCRETES_GENERATE_NUMBER; $i++) {
-            $this->productConcreteTransfers[] = $I->haveProductWithStock();
+            $productConcreteTransfer = $I->haveFullProduct();
+            $productConcreteTransfer->addOffer($I->createProductOfferWithStock($merchantTransfer, $productConcreteTransfer));
+
+            $this->productConcreteTransfers[] = $productConcreteTransfer;
         }
 
         $customerTransferWithPersistedAddress = $I->haveCustomerWithPersistentAddress([

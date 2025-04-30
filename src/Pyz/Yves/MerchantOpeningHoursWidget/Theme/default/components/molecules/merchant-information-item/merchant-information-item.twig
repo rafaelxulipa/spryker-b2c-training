@@ -1,0 +1,20 @@
+{% extends molecule('information-item', '@SprykerShop:MerchantOpeningHoursWidget') %}
+{% import _self as component %}
+
+{% define config = {
+    name: 'merchant-information-item',
+} %}
+
+{% block class %}
+    {{- component.renderClass(config.name, modifiers, class) -}}
+{% endblock %}
+
+{% block title %}
+    <strong class="{{ config.name }}__title">{{ data.title }}</strong>
+{% endblock %}
+
+{% block text %}
+    {% if data.text | trim %}
+        <div class="{{ config.name }}__text">{{ data.text }}</div>
+    {% endif %}
+{% endblock %}

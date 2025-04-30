@@ -1,7 +1,1 @@
-// Import custom SCSS styles
 import './page-layout-main.scss';
-
-// Import Font Awesome SCSS
-import '@fortawesome/fontawesome-free/scss/fontawesome.scss';
-import '@fortawesome/fontawesome-free/scss/solid.scss';
-import '@fortawesome/fontawesome-free/scss/brands.scss';

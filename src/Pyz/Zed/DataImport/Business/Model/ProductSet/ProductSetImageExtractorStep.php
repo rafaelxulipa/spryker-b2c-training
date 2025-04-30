@@ -5,8 +5,6 @@
  * For full license information, please view the LICENSE file that was distributed with this source code.
  */
 
-declare(strict_types = 1);
-
 namespace Pyz\Zed\DataImport\Business\Model\ProductSet;
 
 use Spryker\Zed\DataImport\Business\Model\DataImportStep\DataImportStepInterface;
@@ -43,24 +41,20 @@ class ProductSetImageExtractorStep implements DataImportStepInterface
     {
         $imageSets = [];
         foreach ($dataSet as $key => $value) {
-            if (!preg_match('/' . static::IMAGE_SET_KEY_PREFIX . '(\d+)/', $key, $match)) {
-                continue;
+            if (preg_match('/' . static::IMAGE_SET_KEY_PREFIX . '(\d+)/', $key, $match)) {
+                $imageSets[$match[1]] = [
+                    'image_set' => $value,
+                    'images' => [],
+                ];
             }
-
-            $imageSets[$match[1]] = [
-                'image_set' => $value,
-                'images' => [],
-            ];
         }
         foreach ($dataSet as $key => $value) {
             if (preg_match('/' . static::IMAGE_SMALL_KEY_PREFIX . '(\d+).(\d+)/', $key, $match)) {
                 $imageSets[$match[1]]['images'][$match[2]]['image_small'] = $value;
             }
-            if (!preg_match('/' . static::IMAGE_LARGE_KEY_PREFIX . '(\d+).(\d+)/', $key, $match)) {
-                continue;
+            if (preg_match('/' . static::IMAGE_LARGE_KEY_PREFIX . '(\d+).(\d+)/', $key, $match)) {
+                $imageSets[$match[1]]['images'][$match[2]]['image_large'] = $value;
             }
-
-            $imageSets[$match[1]]['images'][$match[2]]['image_large'] = $value;
         }
 
         $dataSet[static::KEY_TARGET] = $imageSets;

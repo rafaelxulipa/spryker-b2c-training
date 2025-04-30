@@ -3,7 +3,6 @@
 
     <transfer name="RestPayment">
         <property name="dummyPayment" type="DummyPayment"/>
-        <property name="dummyPaymentInvoice" type="DummyPayment"/>
         <property name="dummyPaymentCreditCard" type="DummyPayment"/>
     </transfer>
 

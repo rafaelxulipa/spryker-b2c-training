@@ -25,6 +25,10 @@ actions:
     source: data/import/common/DE/store_context.csv
   - data_entity: context-store
     source: data/import/common/AT/store_context.csv
+  - data_entity: context-store
+    source: data/import/common/DE/store_context.csv
+  - data_entity: context-store
+    source: data/import/common/AT/store_context.csv
   - data_entity: customer
     source: data/import/common/common/customer.csv
   - data_entity: glossary

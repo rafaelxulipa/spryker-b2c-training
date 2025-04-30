@@ -11,6 +11,7 @@ node_modules
 .docker-sync
 /.nvmrc
 /.scrutinizer.yml
+/.travis.yml
 /newrelic.ini
 
 /docker

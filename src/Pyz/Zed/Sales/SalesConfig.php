@@ -5,8 +5,6 @@
  * For full license information, please view the LICENSE file that was distributed with this source code.
  */
 
-declare(strict_types = 1);
-
 namespace Pyz\Zed\Sales;
 
 use Spryker\Zed\Sales\SalesConfig as SprykerSalesConfig;
@@ -65,14 +63,6 @@ class SalesConfig extends SprykerSalesConfig
      * @return bool
      */
     public function shouldPersistModifiedOrderItemProperties(): bool
-    {
-        return true;
-    }
-
-    /**
-     * @return bool
-     */
-    public function useUniqueRandomIdOrderReferenceGenerator(): bool
     {
         return true;
     }

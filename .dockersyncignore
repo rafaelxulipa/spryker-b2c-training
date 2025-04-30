@@ -3,6 +3,7 @@
 .DS_Store
 /.nvmrc
 /.scrutinizer.yml
+/.travis.yml
 /newrelic.ini
 
 .unison*

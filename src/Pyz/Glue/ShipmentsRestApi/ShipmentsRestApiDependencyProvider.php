@@ -5,12 +5,12 @@
  * For full license information, please view the LICENSE file that was distributed with this source code.
  */
 
-declare(strict_types = 1);
-
 namespace Pyz\Glue\ShipmentsRestApi;
 
 use Spryker\Glue\CustomersRestApi\Plugin\ShipmentsRestApi\CustomerAddressSourceCheckerPlugin;
 use Spryker\Glue\ShipmentsRestApi\ShipmentsRestApiDependencyProvider as SprykerShipmentsRestApiDependencyProvider;
+use Spryker\Glue\ShipmentTypeServicePointsRestApi\Plugin\ShipmentsRestApi\MultiShipmentTypeServicePointShippingAddressValidationStrategyPlugin;
+use Spryker\Glue\ShipmentTypeServicePointsRestApi\Plugin\ShipmentsRestApi\SingleShipmentTypeServicePointShippingAddressValidationStrategyPlugin;
 
 class ShipmentsRestApiDependencyProvider extends SprykerShipmentsRestApiDependencyProvider
 {
@@ -21,6 +21,17 @@ class ShipmentsRestApiDependencyProvider extends SprykerShipmentsRestApiDependen
     {
         return [
             new CustomerAddressSourceCheckerPlugin(),
+        ];
+    }
+
+    /**
+     * @return list<\Spryker\Glue\ShipmentsRestApiExtension\Dependency\Plugin\ShippingAddressValidationStrategyPluginInterface>
+     */
+    protected function getShippingAddressValidationStrategyPlugins(): array
+    {
+        return [
+            new MultiShipmentTypeServicePointShippingAddressValidationStrategyPlugin(),
+            new SingleShipmentTypeServicePointShippingAddressValidationStrategyPlugin(),
         ];
     }
 }

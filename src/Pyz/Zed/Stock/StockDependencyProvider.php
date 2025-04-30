@@ -5,8 +5,6 @@
  * For full license information, please view the LICENSE file that was distributed with this source code.
  */
 
-declare(strict_types = 1);
-
 namespace Pyz\Zed\Stock;
 
 use Spryker\Zed\Availability\Communication\Plugin\Stock\AvailabilityStockUpdateHandlerPlugin;
@@ -24,7 +22,7 @@ class StockDependencyProvider extends SprykerStockDependencyProvider
      *
      * @return array<\Spryker\Zed\StockExtension\Dependency\Plugin\StockUpdateHandlerPluginInterface>
      */
-    protected function getStockUpdateHandlerPlugins(Container $container): array // phpcs:ignore SlevomatCodingStandard.Functions.UnusedParameter
+    protected function getStockUpdateHandlerPlugins(Container $container): array
     {
         return [
             new AvailabilityStockUpdateHandlerPlugin(),

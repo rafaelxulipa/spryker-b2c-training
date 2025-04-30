@@ -5,8 +5,6 @@
  * For full license information, please view the LICENSE file that was distributed with this source code.
  */
 
-declare(strict_types = 1);
-
 namespace PyzTest\Glue\Checkout\RestApi\Fixtures;
 
 use Generated\Shared\Transfer\PaymentMethodTransfer;
@@ -36,27 +34,14 @@ class PaymentMethodsFixtures implements FixturesBuilderInterface, FixturesContai
     public function buildFixtures(CheckoutApiTester $I): FixturesContainerInterface
     {
         $paymentProviderTransfer = $I->havePaymentProvider([
-            PaymentProviderTransfer::PAYMENT_PROVIDER_KEY => 'DummyPayment',
-            PaymentProviderTransfer::NAME => 'dummyPayment',
+            PaymentProviderTransfer::PAYMENT_PROVIDER_KEY => 'DummyMarketplacePayment',
+            PaymentProviderTransfer::NAME => 'Dummy Marketplace Payment',
         ]);
         $I->havePaymentMethodWithStore([
             PaymentMethodTransfer::IS_ACTIVE => true,
-            PaymentMethodTransfer::PAYMENT_METHOD_KEY => 'dummyPaymentInvoice',
-            PaymentMethodTransfer::NAME => 'Invoice',
+            PaymentMethodTransfer::PAYMENT_METHOD_KEY => 'dummyMarketplacePaymentInvoice',
+            PaymentMethodTransfer::NAME => 'Invoice (Marketplace)',
             PaymentMethodTransfer::ID_PAYMENT_PROVIDER => $paymentProviderTransfer->getIdPaymentProvider(),
-        ]);
-        $I->havePaymentMethodWithStore([
-            PaymentMethodTransfer::IS_ACTIVE => true,
-            PaymentMethodTransfer::PAYMENT_METHOD_KEY => 'dummyPaymentCreditCard',
-            PaymentMethodTransfer::NAME => 'Credit Card',
-            PaymentMethodTransfer::ID_PAYMENT_PROVIDER => $paymentProviderTransfer->getIdPaymentProvider(),
-        ]);
-        $I->havePaymentMethodWithStore([
-            PaymentMethodTransfer::IS_ACTIVE => true,
-            PaymentMethodTransfer::PAYMENT_METHOD_KEY => 'foreignPaymentCreditCard',
-            PaymentMethodTransfer::NAME => 'Foreign Credit Card',
-            PaymentMethodTransfer::ID_PAYMENT_PROVIDER => $paymentProviderTransfer->getIdPaymentProvider(),
-            PaymentMethodTransfer::IS_FOREIGN => true,
         ]);
 
         return $this;

@@ -5,8 +5,6 @@
  * For full license information, please view the LICENSE file that was distributed with this source code.
  */
 
-declare(strict_types = 1);
-
 namespace Orm\Zed\Quote\Persistence;
 
 use Spryker\Zed\Quote\Persistence\Propel\AbstractSpyQuote as BaseSpyQuote;

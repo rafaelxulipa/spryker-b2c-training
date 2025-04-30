@@ -5,8 +5,6 @@
  * For full license information, please view the LICENSE file that was distributed with this source code.
  */
 
-declare(strict_types = 1);
-
 namespace Orm\Zed\DynamicEntity\Persistence;
 
 use Spryker\Zed\DynamicEntity\Persistence\Propel\AbstractSpyDynamicEntityConfiguration as BaseSpyDynamicEntityConfiguration;
