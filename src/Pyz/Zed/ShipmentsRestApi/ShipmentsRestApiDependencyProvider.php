@@ -9,8 +9,11 @@ declare(strict_types = 1);
 
 namespace Pyz\Zed\ShipmentsRestApi;
 
+use Spryker\Glue\ProductBundleCartsRestApi\Plugin\ShipmentsRestApi\CopyShipmentToProductBundleQuoteItemExpanderPlugin;
 use Spryker\Zed\CustomersRestApi\Communication\Plugin\ShipmentsRestApi\CustomerAddressProviderStrategyPlugin;
+use Spryker\Zed\MerchantShipmentsRestApi\Communication\Plugin\ShipmentsRestApi\MerchantReferenceQuoteItemExpanderPlugin;
 use Spryker\Zed\ShipmentsRestApi\ShipmentsRestApiDependencyProvider as SprykerShipmentsRestApiDependencyProvider;
+use Spryker\Zed\ShipmentTypesRestApi\Communication\Plugin\ShipmentsRestApi\ShipmentTypeQuoteItemExpanderPlugin;
 
 /**
  * @method \Spryker\Zed\ShipmentsRestApi\ShipmentsRestApiConfig getConfig()
@@ -24,6 +27,18 @@ class ShipmentsRestApiDependencyProvider extends SprykerShipmentsRestApiDependen
     {
         return [
             new CustomerAddressProviderStrategyPlugin(),
+        ];
+    }
+
+    /**
+     * @return list<\Spryker\Zed\ShipmentsRestApiExtension\Dependency\Plugin\QuoteItemExpanderPluginInterface>
+     */
+    protected function getQuoteItemExpanderPlugins(): array
+    {
+        return [
+            new ShipmentTypeQuoteItemExpanderPlugin(),
+            new MerchantReferenceQuoteItemExpanderPlugin(),
+            new CopyShipmentToProductBundleQuoteItemExpanderPlugin(),
         ];
     }
 }

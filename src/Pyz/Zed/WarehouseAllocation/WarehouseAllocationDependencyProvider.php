@@ -9,6 +9,7 @@ declare(strict_types = 1);
 
 namespace Pyz\Zed\WarehouseAllocation;
 
+use Spryker\Zed\ProductOfferWarehouseAllocationExample\Communication\Plugin\WarehouseAllocation\ProductOfferSalesOrderWarehouseAllocationPlugin;
 use Spryker\Zed\ProductWarehouseAllocationExample\Communication\Plugin\WarehouseAllocation\ProductSalesOrderWarehouseAllocationPlugin;
 use Spryker\Zed\WarehouseAllocation\WarehouseAllocationDependencyProvider as SprykerWarehouseAllocationDependencyProvider;
 
@@ -20,6 +21,7 @@ class WarehouseAllocationDependencyProvider extends SprykerWarehouseAllocationDe
     protected function getSalesOrderWarehouseAllocationPlugins(): array
     {
         return [
+            new ProductOfferSalesOrderWarehouseAllocationPlugin(),
             new ProductSalesOrderWarehouseAllocationPlugin(),
         ];
     }

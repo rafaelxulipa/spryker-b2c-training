@@ -12,6 +12,7 @@ namespace Pyz\Zed\MessageBroker;
 use Spryker\Zed\Asset\Communication\Plugin\MessageBroker\AssetMessageHandlerPlugin;
 use Spryker\Zed\KernelApp\Communication\Plugin\MessageBroker\ActiveAppFilterMessageChannelPlugin;
 use Spryker\Zed\KernelApp\Communication\Plugin\MessageBroker\AppConfigMessageHandlerPlugin;
+use Spryker\Zed\MerchantApp\Communication\Plugin\MessageBroker\MerchantAppOnboardingMessageHandlerPlugin;
 use Spryker\Zed\MessageBroker\Communication\Plugin\MessageBroker\CorrelationIdMessageAttributeProviderPlugin;
 use Spryker\Zed\MessageBroker\Communication\Plugin\MessageBroker\TenantActorMessageAttributeProviderPlugin;
 use Spryker\Zed\MessageBroker\Communication\Plugin\MessageBroker\TimestampMessageAttributeProviderPlugin;
@@ -28,8 +29,12 @@ use Spryker\Zed\ProductReview\Communication\Plugin\MessageBroker\ProductReviewAd
 use Spryker\Zed\SalesPaymentDetail\Communication\Plugin\MessageBroker\SalesPaymentDetailMessageHandlerPlugin;
 use Spryker\Zed\SearchHttp\Communication\Plugin\MessageBroker\SearchEndpointMessageHandlerPlugin;
 use Spryker\Zed\Session\Communication\Plugin\MessageBroker\SessionTrackingIdMessageAttributeProviderPlugin;
+use Spryker\Zed\Store\Communication\Plugin\MessageBroker\CurrentStoreReferenceMessageAttributeProviderPlugin;
 use Spryker\Zed\TaxApp\Communication\Plugin\MessageBroker\TaxAppMessageHandlerPlugin;
 
+/**
+ * @method \Pyz\Zed\MessageBroker\MessageBrokerConfig getConfig()
+ */
 class MessageBrokerDependencyProvider extends SprykerMessageBrokerDependencyProvider
 {
     /**
@@ -67,6 +72,7 @@ class MessageBrokerDependencyProvider extends SprykerMessageBrokerDependencyProv
             new TaxAppMessageHandlerPlugin(),
             new PaymentOperationsMessageHandlerPlugin(),
             new SalesPaymentDetailMessageHandlerPlugin(),
+            new MerchantAppOnboardingMessageHandlerPlugin(),
         ];
     }
 
@@ -82,6 +88,7 @@ class MessageBrokerDependencyProvider extends SprykerMessageBrokerDependencyProv
             new TransactionIdMessageAttributeProviderPlugin(),
             new SessionTrackingIdMessageAttributeProviderPlugin(),
             new TenantActorMessageAttributeProviderPlugin(),
+            new CurrentStoreReferenceMessageAttributeProviderPlugin(),
         ];
     }
 
@@ -93,6 +100,14 @@ class MessageBrokerDependencyProvider extends SprykerMessageBrokerDependencyProv
         return [
             new ValidationMiddlewarePlugin(),
         ];
+    }
+
+    /**
+     * @return array<\Spryker\Zed\MessageBrokerExtension\Dependency\Plugin\MessageValidatorPluginInterface>
+     */
+    public function getExternalValidatorPlugins(): array
+    {
+        return [];
     }
 
     /**

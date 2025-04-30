@@ -11,6 +11,7 @@ namespace Pyz\Zed\ShipmentGui;
 
 use Spryker\Zed\Kernel\Communication\Form\FormTypeInterface;
 use Spryker\Zed\Kernel\Container;
+use Spryker\Zed\MerchantShipmentGui\Communication\ShipmentGui\MerchantShipmentOrderItemTemplatePlugin;
 use Spryker\Zed\MoneyGui\Communication\Plugin\Form\MoneyCollectionFormTypePlugin;
 use Spryker\Zed\ShipmentGui\ShipmentGuiDependencyProvider as SprykerShipmentGuiDependencyProvider;
 use Spryker\Zed\Store\Communication\Plugin\Form\StoreRelationToggleFormTypePlugin;
@@ -33,5 +34,15 @@ class ShipmentGuiDependencyProvider extends SprykerShipmentGuiDependencyProvider
     protected function getStoreRelationFormTypePlugin(): FormTypeInterface
     {
         return new StoreRelationToggleFormTypePlugin();
+    }
+
+    /**
+     * @return array<\Spryker\Zed\ShipmentGuiExtension\Dependency\Plugin\ShipmentOrderItemTemplatePluginInterface>
+     */
+    protected function getShipmentOrderItemTemplatePlugins(): array
+    {
+        return [
+            new MerchantShipmentOrderItemTemplatePlugin(),
+        ];
     }
 }

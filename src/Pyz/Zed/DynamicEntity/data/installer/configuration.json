@@ -28,6 +28,16 @@
                     }
                 },
                 {
+                    "fieldName": "approval_status",
+                    "fieldVisibleName": "approval_status",
+                    "isCreatable": true,
+                    "isEditable": true,
+                    "type": "string",
+                    "validation": {
+                        "isRequired": false
+                    }
+                },
+                {
                     "fieldName": "attributes",
                     "fieldVisibleName": "attributes",
                     "isCreatable": true,
@@ -2152,6 +2162,16 @@
                     "type": "boolean",
                     "validation": {
                         "isRequired": false
+                    }
+                },
+                {
+                    "fieldName": "key",
+                    "fieldVisibleName": "key",
+                    "isCreatable": true,
+                    "isEditable": true,
+                    "type": "string",
+                    "validation": {
+                        "isRequired": true
                     }
                 },
                 {

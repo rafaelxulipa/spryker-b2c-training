@@ -18,9 +18,6 @@ use Spryker\Zed\DataImport\Business\Model\DataImportStep\DataImportStepInterface
 use Spryker\Zed\DataImport\Business\Model\DataSet\DataSetInterface;
 use Spryker\Zed\Discount\DiscountConfig;
 
-/**
- * @SuppressWarnings(PHPMD.CountInLoopExpression)
- */
 class DiscountVoucherWriterStep implements DataImportStepInterface
 {
     /**
@@ -165,7 +162,7 @@ class DiscountVoucherWriterStep implements DataImportStepInterface
     {
         $replacementString = $this->discountConfig->getVoucherPoolTemplateReplacementString();
 
-        if (!$customCode) {
+        if ($customCode === '') {
             return $code;
         }
 

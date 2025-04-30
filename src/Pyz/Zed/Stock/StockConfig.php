@@ -14,7 +14,7 @@ use Spryker\Zed\Stock\StockConfig as SprykerStockConfig;
 class StockConfig extends SprykerStockConfig
 {
     /**
-     * @return array<string, list<string>>
+     * @return array<string, array<int, string>>
      */
     public function getStoreToWarehouseMapping(): array
     {

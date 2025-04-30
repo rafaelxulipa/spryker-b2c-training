@@ -9,11 +9,22 @@ declare(strict_types = 1);
 
 namespace Pyz\Zed\ProductPageSearch;
 
+use Spryker\Shared\MerchantProductOfferSearch\MerchantProductOfferSearchConfig;
+use Spryker\Shared\MerchantProductSearch\MerchantProductSearchConfig;
 use Spryker\Shared\ProductLabelSearch\ProductLabelSearchConfig;
 use Spryker\Shared\ProductListSearch\ProductListSearchConfig;
 use Spryker\Shared\ProductPageSearch\ProductPageSearchConfig;
 use Spryker\Shared\ProductReviewSearch\ProductReviewSearchConfig;
 use Spryker\Zed\Availability\Communication\Plugin\ProductPageSearch\AvailabilityProductAbstractAddToCartPlugin;
+use Spryker\Zed\MerchantProductOfferSearch\Communication\Plugin\ProductPageSearch\MerchantNamesProductAbstractMapExpanderPlugin;
+use Spryker\Zed\MerchantProductOfferSearch\Communication\Plugin\ProductPageSearch\MerchantProductPageDataExpanderPlugin;
+use Spryker\Zed\MerchantProductOfferSearch\Communication\Plugin\ProductPageSearch\MerchantProductPageDataLoaderPlugin;
+use Spryker\Zed\MerchantProductOfferSearch\Communication\Plugin\ProductPageSearch\MerchantReferencesProductAbstractsMapExpanderPlugin;
+use Spryker\Zed\MerchantProductSearch\Communication\Plugin\ProductPageSearch\MerchantProductAbstractMapExpanderPlugin;
+use Spryker\Zed\MerchantProductSearch\Communication\Plugin\ProductPageSearch\MerchantProductPageDataExpanderPlugin as MerchantMerchantProductPageDataExpanderPlugin;
+use Spryker\Zed\MerchantProductSearch\Communication\Plugin\ProductPageSearch\MerchantProductPageDataLoaderPlugin as MerchantMerchantProductPageDataLoaderPlugin;
+use Spryker\Zed\ProductApproval\Communication\Plugin\ProductPageSearch\ProductApprovalProductConcreteCollectionFilterPlugin;
+use Spryker\Zed\ProductApproval\Communication\Plugin\ProductPageSearch\ProductApprovalProductPageSearchCollectionFilterPlugin;
 use Spryker\Zed\ProductCategorySearch\Communication\Plugin\ProductPageSearch\Elasticsearch\ProductCategoryMapExpanderPlugin;
 use Spryker\Zed\ProductCategorySearch\Communication\Plugin\ProductPageSearch\ProductCategoryPageDataExpanderPlugin;
 use Spryker\Zed\ProductCategorySearch\Communication\Plugin\ProductPageSearch\ProductCategoryPageDataLoaderPlugin;
@@ -53,6 +64,8 @@ class ProductPageSearchDependencyProvider extends SprykerProductPageSearchDepend
         $dataExpanderPlugins[ProductPageSearchConfig::PLUGIN_PRODUCT_CATEGORY_PAGE_DATA] = new ProductCategoryPageDataExpanderPlugin();
         $dataExpanderPlugins[ProductPageSearchConfig::PLUGIN_PRODUCT_PRICE_PAGE_DATA] = new PricePageDataLoaderExpanderPlugin();
         $dataExpanderPlugins[ProductPageSearchConfig::PLUGIN_PRODUCT_IMAGE_PAGE_DATA] = new ProductImagePageDataLoaderExpanderPlugin();
+        $dataExpanderPlugins[MerchantProductOfferSearchConfig::PLUGIN_PRODUCT_MERCHANT_DATA] = new MerchantProductPageDataExpanderPlugin();
+        $dataExpanderPlugins[MerchantProductSearchConfig::PLUGIN_MERCHANT_PRODUCT_DATA] = new MerchantMerchantProductPageDataExpanderPlugin();
 
         return $dataExpanderPlugins;
     }
@@ -69,6 +82,8 @@ class ProductPageSearchDependencyProvider extends SprykerProductPageSearchDepend
             new ProductLabelDataLoaderPlugin(),
             new ProductReviewPageDataLoaderPlugin(),
             new ProductListDataLoaderPlugin(),
+            new MerchantProductPageDataLoaderPlugin(),
+            new MerchantMerchantProductPageDataLoaderPlugin(),
         ];
     }
 
@@ -106,6 +121,9 @@ class ProductPageSearchDependencyProvider extends SprykerProductPageSearchDepend
             new ProductLabelMapExpanderPlugin(),
             new ProductReviewMapExpanderPlugin(),
             new ProductListMapExpanderPlugin(),
+            new MerchantNamesProductAbstractMapExpanderPlugin(),
+            new MerchantReferencesProductAbstractsMapExpanderPlugin(),
+            new MerchantProductAbstractMapExpanderPlugin(),
         ];
     }
 
@@ -116,6 +134,26 @@ class ProductPageSearchDependencyProvider extends SprykerProductPageSearchDepend
     {
         return [
             new AvailabilityProductAbstractAddToCartPlugin(),
+        ];
+    }
+
+    /**
+     * @return array<\Spryker\Zed\ProductPageSearchExtension\Dependency\Plugin\ProductPageSearchCollectionFilterPluginInterface>
+     */
+    protected function getProductPageSearchCollectionFilterPlugins(): array
+    {
+        return [
+            new ProductApprovalProductPageSearchCollectionFilterPlugin(),
+        ];
+    }
+
+    /**
+     * @return array<\Spryker\Zed\ProductPageSearchExtension\Dependency\Plugin\ProductConcreteCollectionFilterPluginInterface>
+     */
+    protected function getProductConcreteCollectionFilterPlugins(): array
+    {
+        return [
+            new ProductApprovalProductConcreteCollectionFilterPlugin(),
         ];
     }
 }

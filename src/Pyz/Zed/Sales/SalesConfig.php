@@ -64,6 +64,14 @@ class SalesConfig extends SprykerSalesConfig
     /**
      * @return bool
      */
+    public function shouldPersistModifiedOrderItemProperties(): bool
+    {
+        return true;
+    }
+
+    /**
+     * @return bool
+     */
     public function useUniqueRandomIdOrderReferenceGenerator(): bool
     {
         return true;

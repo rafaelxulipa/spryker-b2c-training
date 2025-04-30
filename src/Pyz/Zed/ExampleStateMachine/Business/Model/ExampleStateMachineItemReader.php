@@ -48,6 +48,7 @@ class ExampleStateMachineItemReader
      */
     public function getStateMachineItems(): array
     {
+        /** @var \Propel\Runtime\Collection\ObjectCollection<\Orm\Zed\ExampleStateMachine\Persistence\ExampleStateMachineItem> $exampleStateMachineItems */
         $exampleStateMachineItems = $this->exampleStateMachineQueryContainer
             ->queryAllStateMachineItems();
 
@@ -55,8 +56,6 @@ class ExampleStateMachineItemReader
     }
 
     /**
-     * @psalm-suppress TooManyTemplateParams
-     *
      * @param \Propel\Runtime\Collection\ObjectCollection<\Orm\Zed\ExampleStateMachine\Persistence\ExampleStateMachineItem> $exampleStateMachineItems
      *
      * @return array<\Generated\Shared\Transfer\StateMachineItemTransfer>

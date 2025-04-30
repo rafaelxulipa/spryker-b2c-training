@@ -21,14 +21,18 @@ interface ExampleProductSalePageQueryContainerInterface
     /**
      * @api
      *
+     * @psalm-suppress TooManyTemplateParams
+     *
      * @param string $labelName
      *
-     * @return \Orm\Zed\ProductLabel\Persistence\SpyProductLabelQuery
+     * @return \Orm\Zed\ProductLabel\Persistence\SpyProductLabelQuery<\Orm\Zed\ProductLabel\Persistence\SpyProductLabel>
      */
     public function queryProductLabelByName(string $labelName): SpyProductLabelQuery;
 
     /**
      * @api
+     *
+     * @psalm-suppress TooManyTemplateParams
      *
      * @param int $idProductLabel
      * @param string $priceMode
@@ -39,6 +43,8 @@ interface ExampleProductSalePageQueryContainerInterface
 
     /**
      * @api
+     *
+     * @psalm-suppress TooManyTemplateParams
      *
      * @param int $idProductLabel
      * @param int $currentStoreId

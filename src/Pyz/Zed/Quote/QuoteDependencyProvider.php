@@ -11,9 +11,11 @@ namespace Pyz\Zed\Quote;
 
 use Spryker\Zed\Currency\Communication\Plugin\Quote\DefaultCurrencyQuoteExpandBeforeCreatePlugin;
 use Spryker\Zed\Currency\Communication\Plugin\Quote\QuoteCurrencyValidatorPlugin;
+use Spryker\Zed\MerchantShipment\Communication\Plugin\Quote\MerchantShipmentQuoteExpanderPlugin;
 use Spryker\Zed\OrderCustomReference\Communication\Plugin\Quote\OrderCustomReferenceQuoteFieldsAllowedForSavingProviderPlugin;
 use Spryker\Zed\Price\Communication\Plugin\Quote\QuotePriceModeValidatorPlugin;
 use Spryker\Zed\Quote\QuoteDependencyProvider as SprykerQuoteDependencyProvider;
+use Spryker\Zed\ShipmentTypeCart\Communication\Plugin\Quote\ShipmentTypeQuoteExpanderPlugin;
 use Spryker\Zed\Store\Communication\Plugin\Quote\QuoteStoreValidatorPlugin;
 
 class QuoteDependencyProvider extends SprykerQuoteDependencyProvider
@@ -47,6 +49,17 @@ class QuoteDependencyProvider extends SprykerQuoteDependencyProvider
     {
         return [
             new OrderCustomReferenceQuoteFieldsAllowedForSavingProviderPlugin(),
+        ];
+    }
+
+    /**
+     * @return array<\Spryker\Zed\QuoteExtension\Dependency\Plugin\QuoteExpanderPluginInterface>
+     */
+    protected function getQuoteExpanderPlugins(): array
+    {
+        return [
+            new MerchantShipmentQuoteExpanderPlugin(),
+            new ShipmentTypeQuoteExpanderPlugin(),
         ];
     }
 }

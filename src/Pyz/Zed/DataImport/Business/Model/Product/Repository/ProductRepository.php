@@ -88,12 +88,15 @@ class ProductRepository implements ProductRepositoryInterface
      */
     public function getSkuProductAbstractList(): array
     {
-        /** @var \Propel\Runtime\Collection\ArrayCollection $productAbstractEntities */
-        $productAbstractEntities = SpyProductAbstractQuery::create()
+        /** @var \Propel\Runtime\Collection\ObjectCollection $collection */
+        $collection = SpyProductAbstractQuery::create()
             ->select([SpyProductAbstractTableMap::COL_SKU])
             ->find();
 
-        return $productAbstractEntities->toArray();
+        /** @var array<string> $skuList */
+        $skuList = $collection->toArray();
+
+        return $skuList;
     }
 
     /**
@@ -101,12 +104,15 @@ class ProductRepository implements ProductRepositoryInterface
      */
     public function getSkuProductConcreteList(): array
     {
-        /** @var \Propel\Runtime\Collection\ArrayCollection $productEntities */
-        $productEntities = SpyProductQuery::create()
+        /** @var \Propel\Runtime\Collection\ObjectCollection<string> $collection */
+        $collection = SpyProductQuery::create()
             ->select([SpyProductTableMap::COL_SKU])
             ->find();
 
-        return $productEntities->toArray();
+        /** @var array<string> $skuList */
+        $skuList = $collection->toArray();
+
+        return $skuList;
     }
 
     /**

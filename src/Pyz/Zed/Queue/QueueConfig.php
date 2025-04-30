@@ -37,7 +37,7 @@ class QueueConfig extends SprykerQueueConfig
     }
 
     /**
-     * @return array<string, mixed>
+     * @return array<array<string, mixed>>
      */
     protected function getQueueReceiverOptions(): array
     {
@@ -55,7 +55,7 @@ class QueueConfig extends SprykerQueueConfig
     }
 
     /**
-     * @return array<string, mixed>
+     * @return array<array<string, mixed>>
      */
     protected function getMessageCheckOptions(): array
     {

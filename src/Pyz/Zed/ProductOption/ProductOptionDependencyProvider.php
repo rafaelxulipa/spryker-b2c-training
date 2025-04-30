@@ -11,6 +11,9 @@ namespace Pyz\Zed\ProductOption;
 
 use Spryker\Zed\Kernel\Communication\Form\FormTypeInterface;
 use Spryker\Zed\Kernel\Container;
+use Spryker\Zed\MerchantGui\Communication\Plugin\ProductOptionGui\MerchantProductOptionListActionViewDataExpanderPlugin;
+use Spryker\Zed\MerchantProductOption\Communication\Plugin\ProductOption\MerchantProductOptionGroupExpanderPlugin;
+use Spryker\Zed\MerchantProductOptionGui\Communication\Plugin\ProductOptionGui\MerchantProductOptionListTableQueryCriteriaExpanderPlugin;
 use Spryker\Zed\MoneyGui\Communication\Plugin\Form\MoneyCollectionFormTypePlugin;
 use Spryker\Zed\ProductOption\ProductOptionDependencyProvider as SprykerProductOptionDependencyProvider;
 
@@ -24,5 +27,35 @@ class ProductOptionDependencyProvider extends SprykerProductOptionDependencyProv
     protected function createMoneyCollectionFormTypePlugin(Container $container): FormTypeInterface // phpcs:ignore SlevomatCodingStandard.Functions.UnusedParameter
     {
         return new MoneyCollectionFormTypePlugin();
+    }
+
+    /**
+     * @return array<\Spryker\Zed\ProductOptionGuiExtension\Dependency\Plugin\ProductOptionListActionViewDataExpanderPluginInterface>
+     */
+    protected function getProductOptionListActionViewDataExpanderPlugins(): array
+    {
+        return [
+            new MerchantProductOptionListActionViewDataExpanderPlugin(),
+        ];
+    }
+
+    /**
+     * @return array<\Spryker\Zed\ProductOptionGuiExtension\Dependency\Plugin\ProductOptionListTableQueryCriteriaExpanderPluginInterface>
+     */
+    protected function getProductOptionListTableQueryCriteriaExpanderPlugins(): array
+    {
+        return [
+            new MerchantProductOptionListTableQueryCriteriaExpanderPlugin(),
+        ];
+    }
+
+    /**
+     * @return array<\Spryker\Zed\ProductOptionExtension\Dependency\Plugin\ProductOptionGroupExpanderPluginInterface>
+     */
+    protected function getProductOptionGroupExpanderPlugins(): array
+    {
+        return [
+            new MerchantProductOptionGroupExpanderPlugin(),
+        ];
     }
 }

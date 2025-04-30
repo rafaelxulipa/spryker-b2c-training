@@ -37,7 +37,7 @@ class TaxSetNameToIdTaxSetStep implements DataImportStepInterface
     protected $target;
 
     /**
-     * @var array<int|string, int|string>
+     * @var array<string, int>
      */
     protected $resolved = [];
 
@@ -68,11 +68,13 @@ class TaxSetNameToIdTaxSetStep implements DataImportStepInterface
             ));
         }
 
-        if (!isset($this->resolved[$dataSet[$this->source]])) {
-            $this->resolved[$dataSet[$this->source]] = $this->resolveIdStock($dataSet[$this->source]);
+        /** @var string $taxSetName */
+        $taxSetName = $dataSet[$this->source];
+        if (!isset($this->resolved[$taxSetName])) {
+            $this->resolved[$taxSetName] = $this->resolveIdStock($taxSetName);
         }
 
-        $dataSet[$this->target] = $this->resolved[$dataSet[$this->source]];
+        $dataSet[$this->target] = $this->resolved[$taxSetName];
     }
 
     /**

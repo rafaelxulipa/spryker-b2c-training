@@ -9,6 +9,14 @@ declare(strict_types = 1);
 
 namespace Pyz\Zed\Wishlist;
 
+use Spryker\Zed\Availability\Communication\Plugin\Wishlist\AvailabilityWishlistItemExpanderPlugin;
+use Spryker\Zed\Availability\Communication\Plugin\Wishlist\SellableWishlistItemExpanderPlugin;
+use Spryker\Zed\MerchantProductOfferWishlist\Communication\Plugin\Wishlist\ValidMerchantProductOfferAddItemPreCheckPlugin;
+use Spryker\Zed\MerchantProductOfferWishlist\Communication\Plugin\Wishlist\ValidMerchantProductOfferUpdateItemPreCheckPlugin;
+use Spryker\Zed\MerchantProductOfferWishlist\Communication\Plugin\Wishlist\WishlistProductOfferPreAddItemPlugin;
+use Spryker\Zed\MerchantProductWishlist\Communication\Plugin\Wishlist\WishlistMerchantProductPreAddItemPlugin;
+use Spryker\Zed\PriceProduct\Communication\Plugin\Wishlist\PriceProductWishlistItemExpanderPlugin;
+use Spryker\Zed\PriceProductOffer\Communication\Plugin\Wishlist\PriceProductOfferWishlistItemExpanderPlugin;
 use Spryker\Zed\ProductConfigurationWishlist\Communication\Plugin\Wishlist\ProductConfigurationItemExpanderPlugin;
 use Spryker\Zed\ProductConfigurationWishlist\Communication\Plugin\Wishlist\ProductConfigurationWishlistAddItemPreCheckPlugin;
 use Spryker\Zed\ProductConfigurationWishlist\Communication\Plugin\Wishlist\ProductConfigurationWishlistItemExpanderPlugin;
@@ -38,9 +46,10 @@ class WishlistDependencyProvider extends SprykerWishlistDependencyProvider
     protected function getAddItemPreCheckPlugins(): array
     {
         return [
-            new ProductConfigurationWishlistAddItemPreCheckPlugin(),
-            new ProductDiscontinuedAddItemPreCheckPlugin(),
+            new ProductDiscontinuedAddItemPreCheckPlugin(), #ProductDiscontinuedFeature
+            new ValidMerchantProductOfferAddItemPreCheckPlugin(),
             new WishlistItemAddItemPreCheckPlugin(),
+            new ProductConfigurationWishlistAddItemPreCheckPlugin(),
         ];
     }
 
@@ -60,6 +69,8 @@ class WishlistDependencyProvider extends SprykerWishlistDependencyProvider
     protected function getWishlistPreAddItemPlugins(): array
     {
         return [
+            new WishlistMerchantProductPreAddItemPlugin(),
+            new WishlistProductOfferPreAddItemPlugin(),
             new ProductConfigurationWishlistPreAddItemPlugin(),
         ];
     }
@@ -70,6 +81,10 @@ class WishlistDependencyProvider extends SprykerWishlistDependencyProvider
     protected function getWishlistItemExpanderPlugins(): array
     {
         return [
+            new PriceProductWishlistItemExpanderPlugin(),
+            new PriceProductOfferWishlistItemExpanderPlugin(),
+            new AvailabilityWishlistItemExpanderPlugin(),
+            new SellableWishlistItemExpanderPlugin(),
             new ProductConfigurationWishlistItemExpanderPlugin(),
         ];
     }
@@ -90,6 +105,7 @@ class WishlistDependencyProvider extends SprykerWishlistDependencyProvider
     protected function getUpdateItemPreCheckPlugins(): array
     {
         return [
+            new ValidMerchantProductOfferUpdateItemPreCheckPlugin(),
             new ProductConfigurationWishlistUpdateItemPreCheckPlugin(),
         ];
     }

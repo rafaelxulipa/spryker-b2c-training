@@ -11,6 +11,10 @@ namespace Pyz\Zed\TaxApp;
 
 use Spryker\Zed\Calculation\Communication\Plugin\Calculator\ItemTaxAmountFullAggregatorPlugin;
 use Spryker\Zed\Calculation\Communication\Plugin\Calculator\PriceToPayAggregatorPlugin;
+use Spryker\Zed\MerchantProfile\Communication\Plugin\TaxApp\MerchantProfileAddressCalculableObjectTaxAppExpanderPlugin;
+use Spryker\Zed\MerchantProfile\Communication\Plugin\TaxApp\MerchantProfileAddressOrderTaxAppExpanderPlugin;
+use Spryker\Zed\ProductOfferAvailability\Communication\Plugin\TaxApp\ProductOfferAvailabilityCalculableObjectTaxAppExpanderPlugin;
+use Spryker\Zed\ProductOfferAvailability\Communication\Plugin\TaxApp\ProductOfferAvailabilityOrderTaxAppExpanderPlugin;
 use Spryker\Zed\Tax\Communication\Plugin\Calculator\TaxAmountAfterCancellationCalculatorPlugin;
 use Spryker\Zed\Tax\Communication\Plugin\Calculator\TaxAmountCalculatorPlugin;
 use Spryker\Zed\Tax\Communication\Plugin\Calculator\TaxRateAverageAggregatorPlugin;
@@ -18,6 +22,28 @@ use Spryker\Zed\TaxApp\TaxAppDependencyProvider as SprykerTaxAppDependencyProvid
 
 class TaxAppDependencyProvider extends SprykerTaxAppDependencyProvider
 {
+    /**
+     * @return array<\Spryker\Zed\TaxAppExtension\Dependency\Plugin\CalculableObjectTaxAppExpanderPluginInterface>
+     */
+    protected function getCalculableObjectTaxAppExpanderPlugins(): array
+    {
+        return [
+            new MerchantProfileAddressCalculableObjectTaxAppExpanderPlugin(),
+            new ProductOfferAvailabilityCalculableObjectTaxAppExpanderPlugin(),
+        ];
+    }
+
+    /**
+     * @return array<\Spryker\Zed\TaxAppExtension\Dependency\Plugin\OrderTaxAppExpanderPluginInterface>
+     */
+    protected function getOrderTaxAppExpanderPlugins(): array
+    {
+        return [
+            new MerchantProfileAddressOrderTaxAppExpanderPlugin(),
+            new ProductOfferAvailabilityOrderTaxAppExpanderPlugin(),
+        ];
+    }
+
     /**
      * {@inheritDoc}
      *

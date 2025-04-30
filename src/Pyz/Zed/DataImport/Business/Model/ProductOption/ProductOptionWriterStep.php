@@ -39,6 +39,11 @@ class ProductOptionWriterStep extends PublishAwareStep implements DataImportStep
     /**
      * @var string
      */
+    public const KEY_PRODUCT_OPTION_GROUP_KEY = 'product_option_group_key';
+
+    /**
+     * @var string
+     */
     public const KEY_ABSTRACT_PRODUCT_SKUS = 'abstract_product_skus';
 
     /**
@@ -84,10 +89,11 @@ class ProductOptionWriterStep extends PublishAwareStep implements DataImportStep
     public function execute(DataSetInterface $dataSet): void
     {
         $productOptionGroupEntity = SpyProductOptionGroupQuery::create()
-            ->filterByName($dataSet[self::KEY_GROUP_NAME_TRANSLATION_KEY])
+            ->filterByKey($dataSet[self::KEY_PRODUCT_OPTION_GROUP_KEY])
             ->findOneOrCreate();
 
         $productOptionGroupEntity
+            ->setName($dataSet[static::KEY_OPTION_NAME_TRANSLATION_KEY])
             ->setActive($this->isActive($dataSet, $productOptionGroupEntity))
             ->setFkTaxSet($dataSet[TaxSetNameToIdTaxSetStep::KEY_TARGET])
             ->save();
@@ -122,6 +128,10 @@ class ProductOptionWriterStep extends PublishAwareStep implements DataImportStep
         }
 
         foreach ($dataSet[ProductLocalizedAttributesExtractorStep::KEY_LOCALIZED_ATTRIBUTES] as $idLocale => $attributes) {
+            if (!isset($attributes[static::KEY_OPTION_NAME])) {
+                continue;
+            }
+
             $this->findOrCreateTranslation($dataSet[static::KEY_OPTION_NAME_TRANSLATION_KEY], $attributes[static::KEY_OPTION_NAME], $idLocale);
             $this->findOrCreateTranslation($dataSet[static::KEY_GROUP_NAME_TRANSLATION_KEY], $attributes[static::KEY_GROUP_NAME], $idLocale);
         }

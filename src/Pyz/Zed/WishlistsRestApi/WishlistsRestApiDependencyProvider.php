@@ -9,6 +9,7 @@ declare(strict_types = 1);
 
 namespace Pyz\Zed\WishlistsRestApi;
 
+use Spryker\Zed\MerchantProductOfferWishlistRestApi\Communication\Plugin\ProductOfferRestWishlistItemsAttributesDeleteStrategyPlugin;
 use Spryker\Zed\ProductConfigurationWishlistsRestApi\Communication\Plugin\WishlistsRestApi\ProductConfigurationRestWishlistItemsAttributesDeleteStrategyPlugin;
 use Spryker\Zed\ProductConfigurationWishlistsRestApi\Communication\Plugin\WishlistsRestApi\ProductConfigurationRestWishlistItemsAttributesUpdateStrategyPlugin;
 use Spryker\Zed\WishlistsRestApi\WishlistsRestApiDependencyProvider as SprykerWishlistsRestApiDependencyProvider;
@@ -21,6 +22,7 @@ class WishlistsRestApiDependencyProvider extends SprykerWishlistsRestApiDependen
     protected function getRestWishlistItemsAttributesDeleteStrategyPlugins(): array
     {
         return [
+            new ProductOfferRestWishlistItemsAttributesDeleteStrategyPlugin(),
             new ProductConfigurationRestWishlistItemsAttributesDeleteStrategyPlugin(),
         ];
     }

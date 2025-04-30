@@ -9,6 +9,8 @@ declare(strict_types = 1);
 
 namespace Pyz\Zed\OauthUserConnector;
 
+use Spryker\Zed\OauthMerchantUser\Communication\Plugin\OauthUserConnector\MerchantUserTypeOauthScopeAuthorizationCheckerPlugin;
+use Spryker\Zed\OauthMerchantUser\Communication\Plugin\OauthUserConnector\MerchantUserTypeOauthScopeProviderPlugin;
 use Spryker\Zed\OauthUserConnector\Communication\Plugin\OauthUserConnector\BackofficeUserOauthScopeAuthorizationCheckerPlugin;
 use Spryker\Zed\OauthUserConnector\OauthUserConnectorDependencyProvider as SprykerOauthUserConnectorDependencyProvider;
 use Spryker\Zed\OauthWarehouseUser\Communication\Plugin\OauthUserConnector\WarehouseUserTypeOauthScopeAuthorizationCheckerPlugin;
@@ -22,6 +24,7 @@ class OauthUserConnectorDependencyProvider extends SprykerOauthUserConnectorDepe
     protected function getUserTypeOauthScopeProviderPlugins(): array
     {
         return [
+            new MerchantUserTypeOauthScopeProviderPlugin(),
             new WarehouseUserTypeOauthScopeProviderPlugin(),
         ];
     }
@@ -32,8 +35,9 @@ class OauthUserConnectorDependencyProvider extends SprykerOauthUserConnectorDepe
     protected function getUserTypeOauthScopeAuthorizationCheckerPlugins(): array
     {
         return [
-            new BackofficeUserOauthScopeAuthorizationCheckerPlugin(),
+            new MerchantUserTypeOauthScopeAuthorizationCheckerPlugin(),
             new WarehouseUserTypeOauthScopeAuthorizationCheckerPlugin(),
+            new BackofficeUserOauthScopeAuthorizationCheckerPlugin(),
         ];
     }
 }

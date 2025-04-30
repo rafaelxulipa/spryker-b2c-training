@@ -22,6 +22,8 @@ use Symfony\Component\HttpFoundation\Request;
 class TestController extends AbstractController
 {
     /**
+     * @return array<string, mixed>
+     *
      * @var string
      */
     public const STATE_MACHINE_NAME = 'Test';

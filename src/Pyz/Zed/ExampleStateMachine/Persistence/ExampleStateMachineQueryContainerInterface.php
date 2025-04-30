@@ -15,29 +15,21 @@ use Propel\Runtime\Collection\ObjectCollection;
 interface ExampleStateMachineQueryContainerInterface
 {
     /**
-     * @psalm-suppress TooManyTemplateParams
-     *
      * @param array<int> $stateIds
      *
-     * @return \Orm\Zed\ExampleStateMachine\Persistence\ExampleStateMachineItemQuery<\Orm\Zed\ExampleStateMachine\Persistence\ExampleStateMachineItem>
+     * @return \Orm\Zed\ExampleStateMachine\Persistence\ExampleStateMachineItemQuery
      */
     public function queryStateMachineItemsByStateIds(array $stateIds = []): ExampleStateMachineItemQuery;
 
     /**
-     * @psalm-suppress TooManyTemplateParams
-     *
      * @return \Propel\Runtime\Collection\ObjectCollection<\Orm\Zed\ExampleStateMachine\Persistence\ExampleStateMachineItem>
      */
     public function queryAllStateMachineItems(): ObjectCollection;
 
     /**
-     * @psalm-suppress TooManyTemplateParams
-     *
      * @param int $idStateMachineItem
      *
-     * @return \Orm\Zed\ExampleStateMachine\Persistence\ExampleStateMachineItemQuery<\Orm\Zed\ExampleStateMachine\Persistence\ExampleStateMachineItem>
+     * @return \Orm\Zed\ExampleStateMachine\Persistence\ExampleStateMachineItemQuery|\Propel\Runtime\Collection\ObjectCollection|array<\Orm\Zed\ExampleStateMachine\Persistence\ExampleStateMachineItem>
      */
-    public function queryExampleStateMachineItemByIdStateMachineItem(
-        int $idStateMachineItem,
-    ): ExampleStateMachineItemQuery;
+    public function queryExampleStateMachineItemByIdStateMachineItem(int $idStateMachineItem);
 }

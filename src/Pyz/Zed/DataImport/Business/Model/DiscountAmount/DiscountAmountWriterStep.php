@@ -44,7 +44,7 @@ class DiscountAmountWriterStep implements DataImportStepInterface
     public const KEY_VALUE_GROSS = 'value_gross';
 
     /**
-     * @var array<\Orm\Zed\Currency\Persistence\SpyCurrency>
+     * @var array<string, \Orm\Zed\Currency\Persistence\SpyCurrency>
      */
     protected static $currencyCache = [];
 
@@ -85,6 +85,7 @@ class DiscountAmountWriterStep implements DataImportStepInterface
             return static::$currencyCache[$currencyCode];
         }
 
+        /** @var \Orm\Zed\Currency\Persistence\SpyCurrency $currencyEntity */
         $currencyEntity = SpyCurrencyQuery::create()
             ->filterByCode($currencyCode)
             ->findOne();

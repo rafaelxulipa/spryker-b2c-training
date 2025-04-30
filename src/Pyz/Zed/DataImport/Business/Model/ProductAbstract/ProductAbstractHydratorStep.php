@@ -206,14 +206,9 @@ class ProductAbstractHydratorStep implements DataImportStepInterface
         $productAbstractEntityTransfer
             ->setColorCode($dataSet[static::COLUMN_COLOR_CODE])
             ->setFkTaxSet($dataSet[static::KEY_ID_TAX_SET])
+            ->setAttributes(json_encode($this->formatMultiSelectProductAttributes($dataSet[static::KEY_ATTRIBUTES] ?? [])))
             ->setNewFrom($dataSet[static::COLUMN_NEW_FROM])
             ->setNewTo($dataSet[static::COLUMN_NEW_TO]);
-
-        $attributes = json_encode($this->formatMultiSelectProductAttributes($dataSet[static::KEY_ATTRIBUTES] ?? []));
-
-        if ($attributes) {
-            $productAbstractEntityTransfer->setAttributes($attributes);
-        }
 
         $dataSet[static::DATA_PRODUCT_ABSTRACT_TRANSFER] = $productAbstractEntityTransfer;
     }
@@ -236,7 +231,7 @@ class ProductAbstractHydratorStep implements DataImportStepInterface
                 ->setMetaDescription($localizedAttributes[static::COLUMN_META_DESCRIPTION])
                 ->setMetaKeywords($localizedAttributes[static::COLUMN_META_KEYWORDS])
                 ->setFkLocale($idLocale)
-                ->setAttributes((string)json_encode($this->formatMultiSelectProductAttributes($localizedAttributes[static::KEY_ATTRIBUTES] ?? [])));
+                ->setAttributes(json_encode($this->formatMultiSelectProductAttributes($localizedAttributes[static::KEY_ATTRIBUTES])));
 
             $localizedAttributeTransfer[] = [
                 static::COLUMN_ABSTRACT_SKU => $dataSet[static::COLUMN_ABSTRACT_SKU],

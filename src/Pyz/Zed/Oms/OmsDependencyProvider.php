@@ -9,6 +9,10 @@ declare(strict_types = 1);
 
 namespace Pyz\Zed\Oms;
 
+use Pyz\Zed\MerchantOms\Communication\Plugin\Oms\CloseMerchantOrderItemCommandPlugin;
+use Pyz\Zed\MerchantOms\Communication\Plugin\Oms\ReturnMerchantOrderItemCommandPlugin;
+use Pyz\Zed\MerchantSalesOrder\Communication\Plugin\Oms\Condition\IsOrderPaidConditionPlugin;
+use Pyz\Zed\MerchantSalesOrder\Communication\Plugin\Oms\CreateMerchantOrdersCommandPlugin;
 use Pyz\Zed\Oms\Communication\Plugin\Oms\InitiationTimeoutProcessorPlugin;
 use Spryker\Zed\Availability\Communication\Plugin\Oms\AvailabilityReservationPostSaveTerminationAwareStrategyPlugin;
 use Spryker\Zed\GiftCard\Communication\Plugin\Oms\Command\CreateGiftCardCommandPlugin;
@@ -22,6 +26,10 @@ use Spryker\Zed\Oms\Communication\Plugin\Oms\ReservationHandler\ReservationVersi
 use Spryker\Zed\Oms\Dependency\Plugin\Command\CommandCollectionInterface;
 use Spryker\Zed\Oms\Dependency\Plugin\Condition\ConditionCollectionInterface;
 use Spryker\Zed\Oms\OmsDependencyProvider as SprykerOmsDependencyProvider;
+use Spryker\Zed\OmsProductOfferReservation\Communication\Plugin\Oms\ProductOfferOmsReservationAggregationPlugin;
+use Spryker\Zed\OmsProductOfferReservation\Communication\Plugin\Oms\ProductOfferOmsReservationReaderStrategyPlugin;
+use Spryker\Zed\OmsProductOfferReservation\Communication\Plugin\Oms\ProductOfferOmsReservationWriterStrategyPlugin;
+use Spryker\Zed\OmsProductOfferReservation\Communication\Plugin\Oms\ProductOfferReservationPostSaveTerminationAwareStrategyPlugin;
 use Spryker\Zed\PickingList\Communication\Plugin\Oms\GeneratePickingListsCommandByOrderPlugin;
 use Spryker\Zed\PickingList\Communication\Plugin\Oms\IsPickingFinishedConditionPlugin;
 use Spryker\Zed\PickingList\Communication\Plugin\Oms\IsPickingListGenerationFinishedConditionPlugin;
@@ -29,9 +37,14 @@ use Spryker\Zed\PickingList\Communication\Plugin\Oms\IsPickingStartedConditionPl
 use Spryker\Zed\ProductBundle\Communication\Plugin\Oms\ProductBundleReservationPostSaveTerminationAwareStrategyPlugin;
 use Spryker\Zed\Refund\Communication\Plugin\Oms\RefundCommandPlugin;
 use Spryker\Zed\SalesInvoice\Communication\Plugin\Oms\GenerateOrderInvoiceCommandPlugin;
+use Spryker\Zed\SalesMerchantCommission\Communication\Plugin\Oms\Command\SalesMerchantCommissionCalculationCommandByOrderPlugin;
 use Spryker\Zed\SalesPayment\Communication\Plugin\Oms\SendCancelPaymentMessageCommandPlugin;
 use Spryker\Zed\SalesPayment\Communication\Plugin\Oms\SendCapturePaymentMessageCommandPlugin;
 use Spryker\Zed\SalesPayment\Communication\Plugin\Oms\SendRefundPaymentMessageCommandPlugin;
+use Spryker\Zed\SalesPaymentMerchant\Communication\Plugin\Oms\Command\MerchantPayoutCommandByOrderPlugin;
+use Spryker\Zed\SalesPaymentMerchant\Communication\Plugin\Oms\Command\MerchantPayoutReverseCommandByOrderPlugin;
+use Spryker\Zed\SalesPaymentMerchant\Communication\Plugin\Oms\Condition\IsMerchantPaidOutConditionPlugin;
+use Spryker\Zed\SalesPaymentMerchant\Communication\Plugin\Oms\Condition\IsMerchantPayoutReversedConditionPlugin;
 use Spryker\Zed\SalesReturn\Communication\Plugin\Oms\Command\StartReturnCommandPlugin;
 use Spryker\Zed\Shipment\Dependency\Plugin\Oms\ShipmentManualEventGrouperPlugin;
 use Spryker\Zed\Shipment\Dependency\Plugin\Oms\ShipmentOrderMailExpanderPlugin;
@@ -99,8 +112,11 @@ class OmsDependencyProvider extends SprykerOmsDependencyProvider
             $commandCollection->add(new SendOrderShippedPlugin(), 'Oms/SendOrderShipped');
             $commandCollection->add(new ShipGiftCardByEmailCommandPlugin(), 'GiftCardMailConnector/ShipGiftCard');
             $commandCollection->add(new CreateGiftCardCommandPlugin(), 'GiftCard/CreateGiftCard');
+            $commandCollection->add(new CreateMerchantOrdersCommandPlugin(), 'MerchantSalesOrder/CreateOrders');
+            $commandCollection->add(new CloseMerchantOrderItemCommandPlugin(), 'MerchantOms/CloseOrderItem');
             $commandCollection->add(new StartReturnCommandPlugin(), 'Return/StartReturn');
             $commandCollection->add(new GenerateOrderInvoiceCommandPlugin(), 'Invoice/Generate');
+            $commandCollection->add(new ReturnMerchantOrderItemCommandPlugin(), 'MerchantOms/ReturnOrderItem');
             $commandCollection->add(new SendOrderStatusChangedMessagePlugin(), 'Order/RequestProductReviews');
             $commandCollection->add(new GeneratePickingListsCommandByOrderPlugin(), 'PickingList/GeneratePickingLists');
             $commandCollection->add(new SalesOrderWarehouseAllocationCommandPlugin(), 'WarehouseAllocation/WarehouseAllocate');
@@ -109,6 +125,9 @@ class OmsDependencyProvider extends SprykerOmsDependencyProvider
             $commandCollection->add(new SendRefundPaymentMessageCommandPlugin(), 'Payment/Refund');
             $commandCollection->add(new SendCancelPaymentMessageCommandPlugin(), 'Payment/Cancel');
             $commandCollection->add(new RefundCommandPlugin(), 'Payment/Refund/Confirm');
+            $commandCollection->add(new SalesMerchantCommissionCalculationCommandByOrderPlugin(), 'MerchantCommission/Calculate');
+            $commandCollection->add(new MerchantPayoutCommandByOrderPlugin(), 'SalesPaymentMerchant/Payout');
+            $commandCollection->add(new MerchantPayoutReverseCommandByOrderPlugin(), 'SalesPaymentMerchant/ReversePayout');
 
             return $commandCollection;
         });
@@ -125,9 +144,12 @@ class OmsDependencyProvider extends SprykerOmsDependencyProvider
     {
         $container->extend(self::CONDITION_PLUGINS, function (ConditionCollectionInterface $conditionCollection) {
             $conditionCollection->add(new IsGiftCardConditionPlugin(), 'GiftCard/IsGiftCard');
+            $conditionCollection->add(new IsOrderPaidConditionPlugin(), 'MerchantSalesOrder/IsOrderPaid');
             $conditionCollection->add(new IsPickingListGenerationFinishedConditionPlugin(), 'PickingList/isPickingListGenerationFinished');
             $conditionCollection->add(new IsPickingStartedConditionPlugin(), 'PickingList/isPickingStarted');
             $conditionCollection->add(new IsPickingFinishedConditionPlugin(), 'PickingList/isPickingFinished');
+            $conditionCollection->add(new IsMerchantPaidOutConditionPlugin(), 'SalesPaymentMerchant/IsMerchantPaidOut');
+            $conditionCollection->add(new IsMerchantPayoutReversedConditionPlugin(), 'SalesPaymentMerchant/IsMerchantPayoutReversed');
 
             return $conditionCollection;
         });
@@ -165,6 +187,7 @@ class OmsDependencyProvider extends SprykerOmsDependencyProvider
     protected function getReservationPostSaveTerminationAwareStrategyPlugins(): array
     {
         return [
+            new ProductOfferReservationPostSaveTerminationAwareStrategyPlugin(),
             new ReservationVersionPostSaveTerminationAwareStrategyPlugin(),
             new AvailabilityReservationPostSaveTerminationAwareStrategyPlugin(),
             new ProductBundleReservationPostSaveTerminationAwareStrategyPlugin(),
@@ -178,6 +201,36 @@ class OmsDependencyProvider extends SprykerOmsDependencyProvider
     {
         return [
             new InitiationTimeoutProcessorPlugin(),
+        ];
+    }
+
+    /**
+     * @return array<\Spryker\Zed\OmsExtension\Dependency\Plugin\OmsReservationAggregationPluginInterface>
+     */
+    protected function getOmsReservationAggregationPlugins(): array
+    {
+        return [
+            new ProductOfferOmsReservationAggregationPlugin(),
+        ];
+    }
+
+    /**
+     * @return array<\Spryker\Zed\OmsExtension\Dependency\Plugin\OmsReservationWriterStrategyPluginInterface>
+     */
+    protected function getOmsReservationWriterStrategyPlugins(): array
+    {
+        return [
+            new ProductOfferOmsReservationWriterStrategyPlugin(),
+        ];
+    }
+
+    /**
+     * @return array<\Spryker\Zed\OmsExtension\Dependency\Plugin\OmsReservationReaderStrategyPluginInterface>
+     */
+    protected function getOmsReservationReaderStrategyPlugins(): array
+    {
+        return [
+            new ProductOfferOmsReservationReaderStrategyPlugin(),
         ];
     }
 

@@ -30,7 +30,11 @@ use Spryker\Zed\CustomerAccessStorage\Communication\Plugin\Synchronization\Custo
 use Spryker\Zed\CustomerStorage\Communication\Plugin\Synchronization\CustomerInvalidatedStorageSynchronizationDataPlugin;
 use Spryker\Zed\FileManagerStorage\Communication\Plugin\Synchronization\FileSynchronizationDataBulkPlugin;
 use Spryker\Zed\GlossaryStorage\Communication\Plugin\Synchronization\GlossarySynchronizationDataRepositoryPlugin;
+use Spryker\Zed\MerchantOpeningHoursStorage\Communication\Plugin\Synchronization\MerchantOpeningHoursSynchronizationDataBulkPlugin;
+use Spryker\Zed\MerchantSearch\Communication\Plugin\Synchronization\MerchantSynchronizationDataBulkRepositoryPlugin;
+use Spryker\Zed\MerchantStorage\Communication\Plugin\Synchronization\MerchantSynchronizationDataPlugin;
 use Spryker\Zed\NavigationStorage\Communication\Plugin\Synchronization\NavigationSynchronizationDataPlugin;
+use Spryker\Zed\PriceProductOfferStorage\Communication\Plugin\Synchronization\PriceProductOfferSynchronizationDataBulkRepositoryPlugin;
 use Spryker\Zed\PriceProductStorage\Communication\Plugin\Synchronization\PriceProductAbstractSynchronizationDataPlugin;
 use Spryker\Zed\PriceProductStorage\Communication\Plugin\Synchronization\PriceProductConcreteSynchronizationDataPlugin;
 use Spryker\Zed\ProductAlternativeStorage\Communication\Plugin\Synchronization\ProductAlternativeSynchronizationDataBulkPlugin;
@@ -47,6 +51,11 @@ use Spryker\Zed\ProductLabelStorage\Communication\Plugin\Synchronization\Product
 use Spryker\Zed\ProductLabelStorage\Communication\Plugin\Synchronization\ProductLabelDictionarySynchronizationDataRepositoryPlugin;
 use Spryker\Zed\ProductListStorage\Communication\Plugin\Synchronization\ProductAbstractProductListSynchronizationDataBulkPlugin;
 use Spryker\Zed\ProductListStorage\Communication\Plugin\Synchronization\ProductConcreteProductListSynchronizationDataBulkPlugin;
+use Spryker\Zed\ProductOfferAvailabilityStorage\Communication\Plugin\Synchronization\ProductOfferAvailabilitySynchronizationDataBulkPlugin;
+use Spryker\Zed\ProductOfferServicePointStorage\Communication\Plugin\Synchronization\ProductOfferServiceSynchronizationDataBulkRepositoryPlugin;
+use Spryker\Zed\ProductOfferShipmentTypeStorage\Communication\Plugin\Synchronization\ProductOfferShipmentTypeSynchronizationDataBulkRepositoryPlugin;
+use Spryker\Zed\ProductOfferStorage\Communication\Plugin\Synchronization\ProductConcreteProductOffersSynchronizationDataBulkRepositoryPlugin;
+use Spryker\Zed\ProductOfferStorage\Communication\Plugin\Synchronization\ProductOfferSynchronizationDataBulkRepositoryPlugin;
 use Spryker\Zed\ProductOptionStorage\Communication\Plugin\Synchronization\ProductOptionSynchronizationDataPlugin;
 use Spryker\Zed\ProductPageSearch\Communication\Plugin\Synchronization\ProductConcretePageSynchronizationDataBulkPlugin;
 use Spryker\Zed\ProductPageSearch\Communication\Plugin\Synchronization\ProductPageSynchronizationDataPlugin;
@@ -61,6 +70,12 @@ use Spryker\Zed\ProductStorage\Communication\Plugin\Synchronization\ProductAbstr
 use Spryker\Zed\ProductStorage\Communication\Plugin\Synchronization\ProductConcreteSynchronizationDataPlugin;
 use Spryker\Zed\SalesReturnSearch\Communication\Plugin\Synchronization\ReturnReasonSynchronizationDataBulkRepositoryPlugin;
 use Spryker\Zed\SearchHttp\Communication\Plugin\Synchronization\SearchHttpSynchronizationDataPlugin;
+use Spryker\Zed\ServicePointSearch\Communication\Plugin\Synchronization\ServicePointSynchronizationDataBulkRepositoryPlugin;
+use Spryker\Zed\ServicePointStorage\Communication\Plugin\Synchronization\ServicePointSynchronizationDataBulkRepositoryPlugin as ServicePointStorageSynchronizationDataBulkRepositoryPlugin;
+use Spryker\Zed\ServicePointStorage\Communication\Plugin\Synchronization\ServiceTypeSynchronizationDataBulkRepositoryPlugin;
+use Spryker\Zed\ShipmentTypeStorage\Communication\Plugin\Synchronization\ShipmentTypeListSynchronizationDataBulkRepositoryPlugin;
+use Spryker\Zed\ShipmentTypeStorage\Communication\Plugin\Synchronization\ShipmentTypeSynchronizationDataBulkRepositoryPlugin;
+use Spryker\Zed\StoreStorage\Communication\Plugin\Synchronization\StoreListSynchronizationDataPlugin;
 use Spryker\Zed\StoreStorage\Communication\Plugin\Synchronization\StoreSynchronizationDataPlugin;
 use Spryker\Zed\Synchronization\Communication\Plugin\Synchronization\SynchronizationDataQueryExpanderWhereBetweenStrategyPlugin;
 use Spryker\Zed\Synchronization\SynchronizationDependencyProvider as SprykerSynchronizationDependencyProvider;
@@ -133,9 +148,24 @@ class SynchronizationDependencyProvider extends SprykerSynchronizationDependency
             new ConfigurableBundleTemplatePageSynchronizationDataBulkPlugin(),
             new ReturnReasonSynchronizationDataBulkRepositoryPlugin(),
             new ProductBundleSynchronizationDataBulkRepositoryPlugin(),
+            new MerchantSynchronizationDataPlugin(),
+            new MerchantSynchronizationDataBulkRepositoryPlugin(),
+            new ProductConcreteProductOffersSynchronizationDataBulkRepositoryPlugin(),
+            new ProductOfferSynchronizationDataBulkRepositoryPlugin(),
+            new PriceProductOfferSynchronizationDataBulkRepositoryPlugin(),
+            new ProductOfferAvailabilitySynchronizationDataBulkPlugin(),
+            new MerchantOpeningHoursSynchronizationDataBulkPlugin(),
             new AssetStorageSynchronizationDataPlugin(),
             new ProductConfigurationSynchronizationDataRepositoryPlugin(),
             new SearchHttpSynchronizationDataPlugin(),
+            new ServicePointSynchronizationDataBulkRepositoryPlugin(),
+            new ServicePointStorageSynchronizationDataBulkRepositoryPlugin(),
+            new ServiceTypeSynchronizationDataBulkRepositoryPlugin(),
+            new ShipmentTypeSynchronizationDataBulkRepositoryPlugin(),
+            new ShipmentTypeListSynchronizationDataBulkRepositoryPlugin(),
+            new ProductOfferServiceSynchronizationDataBulkRepositoryPlugin(),
+            new ProductOfferShipmentTypeSynchronizationDataBulkRepositoryPlugin(),
+            new StoreListSynchronizationDataPlugin(),
         ];
     }
 

@@ -78,18 +78,18 @@ class ProductConfig extends SprykerProductConfig
     }
 
     /**
-     * @return bool
+     * @return int
      */
-    public function isFullLocaleNamesInUrlEnabled(): bool
+    public function getProductPublishToMessageBrokerChunkSize(): int
     {
-        return true;
+        return 3;
     }
 
     /**
      * @return bool
      */
-    public function isRememberMeEnabled(): bool
+    public function isFullLocaleNamesInUrlEnabled(): bool
     {
-        return false;
+        return true;
     }
 }

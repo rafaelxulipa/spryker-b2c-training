@@ -12,6 +12,11 @@ namespace Pyz\Zed\Sales;
 use Spryker\Zed\Currency\Communication\Plugin\Sales\CurrencyOrderExpanderPlugin;
 use Spryker\Zed\Customer\Communication\Plugin\Sales\CustomerOrderHydratePlugin;
 use Spryker\Zed\Discount\Communication\Plugin\Sales\DiscountOrderHydratePlugin;
+use Spryker\Zed\MerchantOmsGui\Communication\Plugin\Sales\MerchantOmsStateOrderItemsTableExpanderPlugin;
+use Spryker\Zed\MerchantProfile\Communication\Plugin\Sales\MerchantDataOrderHydratePlugin;
+use Spryker\Zed\MerchantSalesOrder\Communication\Plugin\Sales\MerchantOrderDataOrderExpanderPlugin;
+use Spryker\Zed\MerchantSalesOrder\Communication\Plugin\Sales\MerchantReferenceOrderItemExpanderPreSavePlugin;
+use Spryker\Zed\MerchantSalesOrder\Communication\Plugin\Sales\MerchantReferencesOrderExpanderPlugin;
 use Spryker\Zed\Oms\Communication\Plugin\Sales\IsCancellableOrderExpanderPlugin;
 use Spryker\Zed\Oms\Communication\Plugin\Sales\IsCancellableSearchOrderExpanderPlugin;
 use Spryker\Zed\Oms\Communication\Plugin\Sales\ItemStateOrderItemExpanderPlugin;
@@ -26,6 +31,7 @@ use Spryker\Zed\ProductBundle\Communication\Plugin\Sales\ProductBundleOptionOrde
 use Spryker\Zed\ProductBundle\Communication\Plugin\Sales\ProductBundleOrderHydratePlugin;
 use Spryker\Zed\ProductBundle\Communication\Plugin\Sales\ProductBundleOrderItemExpanderPlugin;
 use Spryker\Zed\ProductBundle\Communication\Plugin\Sales\UniqueOrderBundleItemsExpanderPlugin;
+use Spryker\Zed\ProductOfferSales\Communication\Plugin\Sales\ProductOfferReferenceOrderItemExpanderPreSavePlugin;
 use Spryker\Zed\ProductOption\Communication\Plugin\Sales\ProductOptionGroupIdHydratorPlugin;
 use Spryker\Zed\ProductOption\Communication\Plugin\Sales\ProductOptionsOrderItemExpanderPlugin;
 use Spryker\Zed\Sales\Communication\Plugin\Sales\CurrencyIsoCodeOrderItemExpanderPlugin;
@@ -33,6 +39,7 @@ use Spryker\Zed\Sales\SalesDependencyProvider as SprykerSalesDependencyProvider;
 use Spryker\Zed\SalesConfigurableBundle\Communication\Plugin\Sales\ConfiguredBundleItemPreTransformerPlugin;
 use Spryker\Zed\SalesConfigurableBundle\Communication\Plugin\Sales\ConfiguredBundleOrderItemExpanderPlugin;
 use Spryker\Zed\SalesConfigurableBundle\Communication\Plugin\Sales\ConfiguredBundlesOrderItemsPostSavePlugin;
+use Spryker\Zed\SalesMerchantCommission\Communication\Plugin\Sales\MerchantCommissionOrderPostCancelPlugin;
 use Spryker\Zed\SalesOms\Communication\Plugin\OrderItemReferenceExpanderPreSavePlugin;
 use Spryker\Zed\SalesPayment\Communication\Plugin\Sales\SalesPaymentOrderExpanderPlugin;
 use Spryker\Zed\SalesProductConfiguration\Communication\Plugin\Sales\ProductConfigurationOrderItemExpanderPlugin;
@@ -47,6 +54,8 @@ use Spryker\Zed\SalesReclamationGui\Communication\Plugin\Sales\ReclamationSalesT
 use Spryker\Zed\SalesReturn\Communication\Plugin\Sales\RemunerationTotalOrderExpanderPlugin;
 use Spryker\Zed\SalesReturn\Communication\Plugin\Sales\UpdateOrderItemIsReturnableByGlobalReturnableNumberOfDaysPlugin;
 use Spryker\Zed\SalesReturn\Communication\Plugin\Sales\UpdateOrderItemIsReturnableByItemStatePlugin;
+use Spryker\Zed\SalesServicePoint\Communication\Plugin\Sales\ServicePointOrderItemExpanderPlugin;
+use Spryker\Zed\SalesServicePoint\Communication\Plugin\Sales\ServicePointOrderItemsPostSavePlugin;
 use Spryker\Zed\Shipment\Communication\Plugin\ShipmentOrderHydratePlugin;
 use Spryker\Zed\WarehouseAllocation\Communication\Plugin\Sales\WarehouseOrderItemExpanderPlugin;
 
@@ -80,6 +89,9 @@ class SalesDependencyProvider extends SprykerSalesDependencyProvider
             new OmsStatesOrderExpanderPlugin(),
             new IsCancellableOrderExpanderPlugin(),
             new CurrencyOrderExpanderPlugin(),
+            new MerchantOrderDataOrderExpanderPlugin(),
+            new MerchantReferencesOrderExpanderPlugin(),
+            new MerchantDataOrderHydratePlugin(),
         ];
     }
 
@@ -91,6 +103,8 @@ class SalesDependencyProvider extends SprykerSalesDependencyProvider
         return [
             new IsQuantitySplittableOrderItemExpanderPreSavePlugin(),
             new OrderItemReferenceExpanderPreSavePlugin(),
+            new MerchantReferenceOrderItemExpanderPreSavePlugin(),
+            new ProductOfferReferenceOrderItemExpanderPreSavePlugin(),
         ];
     }
 
@@ -163,6 +177,7 @@ class SalesDependencyProvider extends SprykerSalesDependencyProvider
             new ItemStateOrderItemExpanderPlugin(),
             new ProductConfigurationOrderItemExpanderPlugin(),
             new WarehouseOrderItemExpanderPlugin(),
+            new ServicePointOrderItemExpanderPlugin(),
         ];
     }
 
@@ -185,8 +200,29 @@ class SalesDependencyProvider extends SprykerSalesDependencyProvider
     {
         return [
             new ConfiguredBundlesOrderItemsPostSavePlugin(),
-            new ProductConfigurationOrderItemsPostSavePlugin(),
             new ItemMetadataOrderItemsPostSavePlugin(),
+            new ProductConfigurationOrderItemsPostSavePlugin(),
+            new ServicePointOrderItemsPostSavePlugin(),
+        ];
+    }
+
+    /**
+     * @return array<\Spryker\Zed\SalesExtension\Dependency\Plugin\OrderItemsTableExpanderPluginInterface>
+     */
+    protected function getOrderItemsTableExpanderPlugins(): array
+    {
+        return [
+            new MerchantOmsStateOrderItemsTableExpanderPlugin(),
+        ];
+    }
+
+    /**
+     * @return list<\Spryker\Zed\SalesExtension\Dependency\Plugin\OrderPostCancelPluginInterface>
+     */
+    protected function getOrderPostCancelPlugins(): array
+    {
+        return [
+            new MerchantCommissionOrderPostCancelPlugin(),
         ];
     }
 }

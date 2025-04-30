@@ -20,42 +20,37 @@ use Spryker\Zed\Kernel\Persistence\AbstractQueryContainer;
 class ExampleStateMachineQueryContainer extends AbstractQueryContainer implements ExampleStateMachineQueryContainerInterface
 {
     /**
-     * @psalm-suppress TooManyTemplateParams
-     *
      * @param array<int> $stateIds
      *
-     * @return \Orm\Zed\ExampleStateMachine\Persistence\ExampleStateMachineItemQuery<\Orm\Zed\ExampleStateMachine\Persistence\ExampleStateMachineItem>
+     * @return \Orm\Zed\ExampleStateMachine\Persistence\ExampleStateMachineItemQuery
      */
     public function queryStateMachineItemsByStateIds(array $stateIds = []): ExampleStateMachineItemQuery
     {
-        return $this->getFactory()
-            ->createExampleStateMachineQuery()
-            ->filterByFkStateMachineItemState($stateIds, Criteria::IN);
+          return $this->getFactory()
+              ->createExampleStateMachineQuery()
+              ->filterByFkStateMachineItemState($stateIds, Criteria::IN);
     }
 
     /**
-     * @psalm-suppress TooManyTemplateParams
-     *
      * @return \Propel\Runtime\Collection\ObjectCollection<\Orm\Zed\ExampleStateMachine\Persistence\ExampleStateMachineItem>
      */
     public function queryAllStateMachineItems(): ObjectCollection
     {
-        /** @phpstan-var \Propel\Runtime\Collection\ObjectCollection<\Orm\Zed\ExampleStateMachine\Persistence\ExampleStateMachineItem> */
-        return $this->getFactory()
-            ->createExampleStateMachineQuery()
-            ->find();
+        /** @var \Propel\Runtime\Collection\ObjectCollection<\Orm\Zed\ExampleStateMachine\Persistence\ExampleStateMachineItem> $stateMachineItems */
+         $stateMachineItems = $this->getFactory()
+             ->createExampleStateMachineQuery()
+             ->find();
+
+         return $stateMachineItems;
     }
 
     /**
-     * @psalm-suppress TooManyTemplateParams
-     *
      * @param int $idStateMachineItem
      *
-     * @return \Orm\Zed\ExampleStateMachine\Persistence\ExampleStateMachineItemQuery<\Orm\Zed\ExampleStateMachine\Persistence\ExampleStateMachineItem>
+     * @return \Orm\Zed\ExampleStateMachine\Persistence\ExampleStateMachineItemQuery|\Propel\Runtime\Collection\ObjectCollection|array<\Orm\Zed\ExampleStateMachine\Persistence\ExampleStateMachineItem>
      */
-    public function queryExampleStateMachineItemByIdStateMachineItem(
-        int $idStateMachineItem,
-    ): ExampleStateMachineItemQuery {
+    public function queryExampleStateMachineItemByIdStateMachineItem(int $idStateMachineItem)
+    {
         return $this->getFactory()
             ->createExampleStateMachineQuery()
             ->filterByIdExampleStateMachineItem($idStateMachineItem);

@@ -26,10 +26,18 @@ use Spryker\Shared\Event\EventConstants;
 use Spryker\Shared\FileManagerStorage\FileManagerStorageConstants;
 use Spryker\Shared\GlossaryStorage\GlossaryStorageConfig;
 use Spryker\Shared\Log\LogConstants;
+use Spryker\Shared\MerchantOpeningHoursStorage\MerchantOpeningHoursStorageConfig;
+use Spryker\Shared\MerchantSearch\MerchantSearchConfig;
+use Spryker\Shared\MerchantStorage\MerchantStorageConfig;
+use Spryker\Shared\PriceProductOfferStorage\PriceProductOfferStorageConfig;
 use Spryker\Shared\PriceProductStorage\PriceProductStorageConfig;
 use Spryker\Shared\PriceProductStorage\PriceProductStorageConstants;
 use Spryker\Shared\ProductConfigurationStorage\ProductConfigurationStorageConfig;
 use Spryker\Shared\ProductImageStorage\ProductImageStorageConfig;
+use Spryker\Shared\ProductOfferAvailabilityStorage\ProductOfferAvailabilityStorageConfig;
+use Spryker\Shared\ProductOfferServicePointStorage\ProductOfferServicePointStorageConfig;
+use Spryker\Shared\ProductOfferShipmentTypeStorage\ProductOfferShipmentTypeStorageConfig;
+use Spryker\Shared\ProductOfferStorage\ProductOfferStorageConfig;
 use Spryker\Shared\ProductPageSearch\ProductPageSearchConfig;
 use Spryker\Shared\ProductPageSearch\ProductPageSearchConstants;
 use Spryker\Shared\ProductStorage\ProductStorageConfig;
@@ -40,6 +48,9 @@ use Spryker\Shared\PublishAndSynchronizeHealthCheckStorage\PublishAndSynchronize
 use Spryker\Shared\Publisher\PublisherConfig;
 use Spryker\Shared\SalesReturnSearch\SalesReturnSearchConfig;
 use Spryker\Shared\SearchHttp\SearchHttpConfig;
+use Spryker\Shared\ServicePointSearch\ServicePointSearchConfig;
+use Spryker\Shared\ServicePointStorage\ServicePointStorageConfig;
+use Spryker\Shared\ShipmentTypeStorage\ShipmentTypeStorageConfig;
 use Spryker\Shared\StoreStorage\StoreStorageConfig;
 use Spryker\Shared\TaxProductStorage\TaxProductStorageConfig;
 use Spryker\Shared\TaxStorage\TaxStorageConfig;
@@ -103,10 +114,21 @@ class QueueDependencyProvider extends SprykerDependencyProvider
             TaxProductStorageConfig::PRODUCT_ABSTRACT_TAX_SET_SYNC_STORAGE_QUEUE => new SynchronizationStorageQueueMessageProcessorPlugin(),
             TaxStorageConfig::TAX_SET_SYNC_STORAGE_QUEUE => new SynchronizationStorageQueueMessageProcessorPlugin(),
             SalesReturnSearchConfig::SYNC_SEARCH_RETURN => new SynchronizationSearchQueueMessageProcessorPlugin(),
+            MerchantStorageConfig::MERCHANT_SYNC_STORAGE_QUEUE => new SynchronizationStorageQueueMessageProcessorPlugin(),
+            MerchantSearchConfig::SYNC_SEARCH_MERCHANT => new SynchronizationSearchQueueMessageProcessorPlugin(),
             StoreStorageConfig::STORE_SYNC_STORAGE_QUEUE => new SynchronizationStorageQueueMessageProcessorPlugin(),
+            PriceProductOfferStorageConfig::PRICE_PRODUCT_OFFER_OFFER_SYNC_STORAGE_QUEUE => new SynchronizationStorageQueueMessageProcessorPlugin(),
+            ProductOfferAvailabilityStorageConfig::PRODUCT_OFFER_AVAILABILITY_SYNC_STORAGE_QUEUE => new SynchronizationStorageQueueMessageProcessorPlugin(),
+            MerchantOpeningHoursStorageConfig::MERCHANT_OPENING_HOURS_SYNC_STORAGE_QUEUE => new SynchronizationStorageQueueMessageProcessorPlugin(),
+            ProductOfferStorageConfig::PRODUCT_OFFER_SYNC_STORAGE_QUEUE => new SynchronizationStorageQueueMessageProcessorPlugin(),
             AssetStorageConfig::ASSET_SYNC_STORAGE_QUEUE => new SynchronizationStorageQueueMessageProcessorPlugin(),
             ProductConfigurationStorageConfig::PRODUCT_CONFIGURATION_SYNC_STORAGE_QUEUE => new SynchronizationStorageQueueMessageProcessorPlugin(),
             SearchHttpConfig::SEARCH_HTTP_CONFIG_SYNC_QUEUE => new SynchronizationStorageQueueMessageProcessorPlugin(),
+            ServicePointSearchConfig::QUEUE_NAME_SYNC_SEARCH_SERVICE_POINT => new SynchronizationSearchQueueMessageProcessorPlugin(),
+            ServicePointStorageConfig::QUEUE_NAME_SYNC_STORAGE_SERVICE_POINT => new SynchronizationStorageQueueMessageProcessorPlugin(),
+            ShipmentTypeStorageConfig::QUEUE_NAME_SYNC_STORAGE_SHIPMENT_TYPE => new SynchronizationStorageQueueMessageProcessorPlugin(),
+            ProductOfferServicePointStorageConfig::QUEUE_NAME_SYNC_STORAGE_PRODUCT_OFFER_SERVICE => new SynchronizationStorageQueueMessageProcessorPlugin(),
+            ProductOfferShipmentTypeStorageConfig::PRODUCT_OFFER_SHIPMENT_TYPE_SYNC_STORAGE_QUEUE => new SynchronizationStorageQueueMessageProcessorPlugin(),
         ];
     }
 

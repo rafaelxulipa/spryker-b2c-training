@@ -92,6 +92,7 @@ class ApplicationDependencyProvider extends SprykerApplicationDependencyProvider
             new NumberFormatterApplicationPlugin(),
             new BackofficeStoreApplicationPlugin(),
         ];
+
         if (class_exists(WebProfilerApplicationPlugin::class)) {
             $plugins[] = new WebProfilerApplicationPlugin();
         }
